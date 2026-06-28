@@ -5,7 +5,7 @@ interface Props {
 }
 
 const { title, description = 'Pear Notes is a secure, private, and offline-first notebook. End-to-end encrypted with peer-to-peer sync across all your devices. No servers, no cloud leaks.' } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <!doctype html>
@@ -62,6 +62,55 @@ const base = import.meta.env.BASE_URL;
       );
 
       document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+      document.querySelectorAll('.feature-list').forEach(list => {
+        const wrap = list.closest('.feature-list-wrap');
+        if (!wrap) return;
+        const check = () => {
+          const atTop = list.scrollTop < 8;
+          const atBottom = list.scrollHeight - list.scrollTop - list.clientHeight < 8;
+          wrap.classList.toggle('scrolled-top', !atTop);
+          wrap.classList.toggle('at-bottom', atBottom);
+        };
+        check();
+        list.addEventListener('scroll', check);
+      });
+
+      document.querySelectorAll('.app-showcase').forEach(section => {
+        const featureItems = section.querySelectorAll('.feature-item');
+        const featureScreens = section.querySelectorAll('.feature-screen');
+        const platformBtns = section.querySelectorAll('.platform-toggle-btn');
+        let activePlatform = 'android';
+
+        function showScreen(featureId: string) {
+          featureScreens.forEach(s => s.classList.remove('active'));
+          const target = section.querySelector(
+            platformBtns.length > 0
+              ? `.feature-screen[data-feature="${featureId}"][data-platform="${activePlatform}"]`
+              : `.feature-screen[data-feature="${featureId}"]`
+          );
+          if (target) target.classList.add('active');
+        }
+
+        featureItems.forEach(item => {
+          item.addEventListener('click', () => {
+            featureItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+            showScreen(item.getAttribute('data-feature')!);
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+        });
+
+        platformBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            platformBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activePlatform = btn.getAttribute('data-platform')!;
+            const activeFeature = section.querySelector('.feature-item.active');
+            if (activeFeature) showScreen(activeFeature.getAttribute('data-feature')!);
+          });
+        });
+      });
     </script>
   </body>
 </html>
