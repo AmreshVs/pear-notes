@@ -1,0 +1,351 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Pear Notes — Private & Encrypted Notes with P2P Sync">
+  <Header />
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <img src={`${base}icon.png`} alt="Pear Notes" class="hero-icon" />
+      <div class="hero-badge">Zero-Knowledge Architecture</div>
+      <h1>
+        Your notes,<br />
+        <span class="gradient-text">truly private.</span>
+      </h1>
+      <p class="hero-subtitle">
+        End-to-end encrypted notes that sync directly between your devices.
+        No servers. No cloud. No compromises.
+      </p>
+      <div class="hero-actions">
+        <a href="#download" class="btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Now
+        </a>
+        <a href="#features" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          Learn More
+        </a>
+      </div>
+      <div class="hero-platforms">
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+          macOS
+        </span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 2H6.477C5.768 2 5 2.768 5 3.477v17.046C5 21.232 5.768 22 6.477 22h11.046c.709 0 1.477-.768 1.477-1.477V3.477C19 2.768 18.232 2 17.523 2zM12 20.5a1 1 0 110-2 1 1 0 010 2zM17 17H7V5h10v12z"/></svg>
+          iOS
+        </span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 2H6.477C5.768 2 5 2.768 5 3.477v17.046C5 21.232 5.768 22 6.477 22h11.046c.709 0 1.477-.768 1.477-1.477V3.477C19 2.768 18.232 2 17.523 2zM12 20.5a1 1 0 110-2 1 1 0 010 2zM17 17H7V5h10v12z"/></svg>
+          Android
+        </span>
+        <span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          Windows
+        </span>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="features-header fade-in">
+        <div class="section-label">Features</div>
+        <h2 class="section-title">Everything you need,<br />nothing you don't.</h2>
+        <p class="section-subtitle">
+          A complete writing experience built around privacy and simplicity.
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-in fade-in-delay-1">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>End-to-End Encrypted</h3>
+          <p>All your notes are encrypted on-device with AES-256. Only you can read them.</p>
+        </div>
+        <div class="feature-card fade-in fade-in-delay-2">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+          </div>
+          <h3>P2P Device Sync</h3>
+          <p>Sync notes directly between your devices. No servers, no middlemen, no leaks.</p>
+        </div>
+        <div class="feature-card fade-in fade-in-delay-3">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Offline First</h3>
+          <p>Works entirely without internet. Your notes are always available, everywhere.</p>
+        </div>
+        <div class="feature-card fade-in fade-in-delay-1">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
+          <h3>Voice Notes</h3>
+          <p>Record, review, and embed voice memos directly inside your notes.</p>
+        </div>
+        <div class="feature-card fade-in fade-in-delay-2">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Cross-Platform</h3>
+          <p>Available on macOS, Windows, iOS, and Android. One experience everywhere.</p>
+        </div>
+        <div class="feature-card fade-in fade-in-delay-3">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3>Document Scanner</h3>
+          <p>Scan physical documents with your camera and save them as digital notes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Desktop Highlight -->
+  <section class="highlight">
+    <div class="container">
+      <div class="highlight-grid">
+        <div class="highlight-visual fade-in">
+          <div class="device-frame">
+            <div class="device-titlebar">
+              <span class="titlebar-dot red"></span>
+              <span class="titlebar-dot yellow"></span>
+              <span class="titlebar-dot green"></span>
+            </div>
+            <div class="device-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              Desktop screenshot coming soon
+            </div>
+          </div>
+        </div>
+        <div class="highlight-content fade-in fade-in-delay-2">
+          <div class="section-label">Desktop App</div>
+          <h2 class="section-title">A professional<br />writing space.</h2>
+          <p class="section-subtitle">
+            Distraction-free writing with elegant typography and full dark mode support.
+          </p>
+          <div class="highlight-features">
+            <div class="highlight-feature">
+              <div class="highlight-feature-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+              </div>
+              <div>
+                <h4>Premium Typography</h4>
+                <p>Choose from curated fonts — Lora, Inter, Outfit, Newsreader, IBM Plex Mono.</p>
+              </div>
+            </div>
+            <div class="highlight-feature">
+              <div class="highlight-feature-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              </div>
+              <div>
+                <h4>Dark & Light Modes</h4>
+                <p>Switch themes to match your environment. Easy on the eyes, day or night.</p>
+              </div>
+            </div>
+            <div class="highlight-feature">
+              <div class="highlight-feature-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </div>
+              <div>
+                <h4>Organized Notebooks</h4>
+                <p>Create folders, sort your notes, and find everything with instant search.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Highlight -->
+  <section class="highlight">
+    <div class="container">
+      <div class="highlight-grid reverse">
+        <div class="highlight-content fade-in">
+          <div class="section-label">Mobile App</div>
+          <h2 class="section-title">Notes on the go,<br />always secure.</h2>
+          <p class="section-subtitle">
+            Capture thoughts instantly with voice recording, document scanning, and rich text editing on your phone.
+          </p>
+          <div class="highlight-features">
+            <div class="highlight-feature">
+              <div class="highlight-feature-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              </div>
+              <div>
+                <h4>Document Scanner</h4>
+                <p>Capture, crop, and convert physical pages into digital documents.</p>
+              </div>
+            </div>
+            <div class="highlight-feature">
+              <div class="highlight-feature-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+              </div>
+              <div>
+                <h4>Voice Recorder</h4>
+                <p>Record voice memos and embed them directly inside your notes.</p>
+              </div>
+            </div>
+            <div class="highlight-feature">
+              <div class="highlight-feature-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              </div>
+              <div>
+                <h4>QR Code Pairing</h4>
+                <p>Link new devices securely by scanning a QR code. Simple, fast, private.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="highlight-visual fade-in fade-in-delay-2">
+          <div class="device-frame device-frame-mobile">
+            <div class="device-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              Mobile screenshot coming soon
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Security -->
+  <section class="security" id="security">
+    <div class="container">
+      <div class="features-header fade-in">
+        <div class="section-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Security
+        </div>
+        <h2 class="section-title">Built for paranoid<br />levels of privacy.</h2>
+        <p class="section-subtitle">
+          Zero-knowledge architecture means even we can't read your notes. Because we never see them.
+        </p>
+      </div>
+      <div class="security-grid">
+        <div class="security-card fade-in fade-in-delay-1">
+          <div class="security-card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>No Central Servers</h3>
+          <p>Your data never touches a cloud provider. Devices connect directly over encrypted peer-to-peer channels using advanced NAT traversal.</p>
+        </div>
+        <div class="security-card fade-in fade-in-delay-2">
+          <div class="security-card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>AES-256 Encrypted Backups</h3>
+          <p>Export your vault into a single .pnbk file secured with military-grade encryption. Only your unique 64-character private key can unlock it.</p>
+        </div>
+        <div class="security-card fade-in fade-in-delay-3">
+          <div class="security-card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+          </div>
+          <h3>Blind Device Pairing</h3>
+          <p>Secure cryptographic handshake prevents passive observers from tracing your identity. Pair devices with QR codes and identity key verification.</p>
+        </div>
+        <div class="security-card fade-in fade-in-delay-4">
+          <div class="security-card-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <h3>Encrypted Media Vault</h3>
+          <p>Voice notes, scans, and images are stored in an encrypted local vault. A secure streaming server renders them without leaking unencrypted caches.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Preview / Screenshots -->
+  <section class="preview" id="preview">
+    <div class="container">
+      <div class="preview-header fade-in">
+        <div class="section-label">Preview</div>
+        <h2 class="section-title">See it in action.</h2>
+        <p class="section-subtitle">
+          A glimpse at the Pear Notes experience across platforms.
+        </p>
+      </div>
+      <div class="preview-grid">
+        <div class="preview-item fade-in fade-in-delay-1">
+          <div class="preview-placeholder">
+            <div class="preview-placeholder-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            Screenshot coming soon
+          </div>
+          <div class="preview-label">Note Editor</div>
+        </div>
+        <div class="preview-item fade-in fade-in-delay-2">
+          <div class="preview-placeholder">
+            <div class="preview-placeholder-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+            </div>
+            Screenshot coming soon
+          </div>
+          <div class="preview-label">Device Sync</div>
+        </div>
+        <div class="preview-item fade-in fade-in-delay-3">
+          <div class="preview-placeholder">
+            <div class="preview-placeholder-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+            Screenshot coming soon
+          </div>
+          <div class="preview-label">Customization</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CTA / Download -->
+  <section class="cta" id="download">
+    <div class="container">
+      <div class="cta-content fade-in">
+        <h2>Start writing privately.</h2>
+        <p>
+          Download Pear Notes for free. Available on all major platforms.
+          Your notes stay yours — always.
+        </p>
+        <div class="cta-actions">
+          <a href="#" class="btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83"/><path d="M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+            Download for Mac
+          </a>
+          <a href="#" class="btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+            Download for Windows
+          </a>
+        </div>
+        <div class="hero-platforms" style="margin-top: 2rem;">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 2H6.477C5.768 2 5 2.768 5 3.477v17.046C5 21.232 5.768 22 6.477 22h11.046c.709 0 1.477-.768 1.477-1.477V3.477C19 2.768 18.232 2 17.523 2zM12 20.5a1 1 0 110-2 1 1 0 010 2zM17 17H7V5h10v12z"/></svg>
+            Coming soon to iOS & Android
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,22 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+
+<header class="header">
+  <div class="header-inner">
+    <a href={`${base}`} class="logo">
+      <img src={`${base}icon.png`} alt="Pear Notes" />
+      Pear Notes
+    </a>
+    <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+    <nav>
+      <ul class="nav-links">
+        <li><a href={`${base}#features`}>Features</a></li>
+        <li><a href={`${base}#security`}>Security</a></li>
+        <li><a href={`${base}#preview`}>Preview</a></li>
+        <li><a href={`${base}privacy/`}>Privacy</a></li>
+        <li><a href={`${base}#download`} class="nav-cta">Download</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

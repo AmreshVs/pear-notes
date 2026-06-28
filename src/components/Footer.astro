@@ -1,0 +1,22 @@
+---
+const base = import.meta.env.BASE_URL;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src={`${base}icon.png`} alt="Pear Notes" />
+        <span>Pear Notes</span>
+      </div>
+      <ul class="footer-links">
+        <li><a href={`${base}#features`}>Features</a></li>
+        <li><a href={`${base}#security`}>Security</a></li>
+        <li><a href={`${base}privacy/`}>Privacy Policy</a></li>
+        <li><a href={`${base}terms/`}>Terms of Service</a></li>
+      </ul>
+      <p class="footer-copy">&copy; {year} Pear Notes. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

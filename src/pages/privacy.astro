@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Privacy Policy — Pear Notes" description="Pear Notes Privacy Policy. We collect zero data. Your notes are encrypted on-device and synced peer-to-peer.">
+  <Header />
+
+  <section class="legal container">
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated: June 28, 2026</p>
+
+    <p>
+      Pear Notes ("we", "our", or "the app") is committed to protecting your privacy.
+      This Privacy Policy explains how we handle information when you use the Pear Notes
+      application on any platform (iOS, Android, macOS, Windows).
+    </p>
+
+    <h2>1. Data We Collect</h2>
+    <p>
+      <strong>We do not collect any personal data.</strong> Pear Notes is built on a
+      zero-knowledge architecture. All your notes, voice recordings, document scans,
+      and media are created, stored, and encrypted entirely on your device. We have no
+      servers that receive, process, or store your content.
+    </p>
+
+    <h2>2. Data Storage</h2>
+    <p>
+      All data is stored locally on your device in an encrypted database. Specifically:
+    </p>
+    <ul>
+      <li><strong>Notes and text content</strong> — Stored in a local encrypted database on your device.</li>
+      <li><strong>Voice recordings</strong> — Saved in an encrypted media vault on your device's local storage.</li>
+      <li><strong>Document scans and images</strong> — Stored in the same encrypted media vault.</li>
+      <li><strong>Backups</strong> — Exported as AES-256 encrypted .pnbk files that you control. These files can only be decrypted with your unique 64-character private key.</li>
+    </ul>
+
+    <h2>3. Data Synchronization</h2>
+    <p>
+      Pear Notes uses <strong>peer-to-peer (P2P) synchronization</strong> to sync your data
+      between your own devices. This means:
+    </p>
+    <ul>
+      <li>Your data is transmitted directly between your devices over encrypted channels.</li>
+      <li>No third-party cloud servers are used to store or relay your content.</li>
+      <li>Device pairing uses a secure blind handshake with cryptographic identity verification via QR codes.</li>
+      <li>All data in transit is end-to-end encrypted.</li>
+    </ul>
+
+    <h2>4. Third-Party Services</h2>
+    <p>
+      Pear Notes does not integrate with any third-party analytics, advertising,
+      tracking, or data collection services. We do not use:
+    </p>
+    <ul>
+      <li>Google Analytics or any analytics SDK</li>
+      <li>Advertising networks or ad SDKs</li>
+      <li>Crash reporting services that collect personal data</li>
+      <li>Social media tracking pixels</li>
+    </ul>
+
+    <h2>5. Device Permissions</h2>
+    <p>
+      Pear Notes requests the following device permissions, used solely for in-app functionality:
+    </p>
+    <ul>
+      <li><strong>Camera</strong> — Used to scan physical documents and to scan QR codes for secure device pairing. Camera data is processed on-device and never transmitted externally.</li>
+      <li><strong>Microphone</strong> — Used to record voice notes. Audio is saved locally in the encrypted media vault and never sent to external servers.</li>
+      <li><strong>Storage / File Access</strong> — Used to export and import encrypted backup archives (.pnbk files). Files are managed locally by you.</li>
+    </ul>
+
+    <h2>6. Data Sharing</h2>
+    <p>
+      <strong>We do not share any data with third parties.</strong> Since we do not collect
+      or have access to your data, there is nothing to share. Your notes, recordings,
+      and documents remain exclusively on your devices.
+    </p>
+
+    <h2>7. Data Retention & Deletion</h2>
+    <p>
+      Since all data is stored locally on your device:
+    </p>
+    <ul>
+      <li>You have full control over your data at all times.</li>
+      <li>You can delete individual notes, recordings, or scans at any time from within the app.</li>
+      <li>You can wipe all app data from the settings menu.</li>
+      <li>Uninstalling the app removes all locally stored data.</li>
+    </ul>
+
+    <h2>8. Children's Privacy</h2>
+    <p>
+      Pear Notes does not knowingly collect any information from children under the age
+      of 13. Since we collect no data from any user, there are no special provisions
+      required. The app is suitable for users of all ages.
+    </p>
+
+    <h2>9. Security</h2>
+    <p>
+      We take security seriously. Pear Notes employs:
+    </p>
+    <ul>
+      <li><strong>AES-256 encryption</strong> for all stored data and backup files.</li>
+      <li><strong>End-to-end encrypted P2P channels</strong> for device synchronization.</li>
+      <li><strong>Cryptographic blind pairing</strong> to prevent identity leaks during device linking.</li>
+      <li><strong>Encrypted media vault</strong> with an isolated streaming server to prevent cache leaks.</li>
+    </ul>
+
+    <h2>10. Changes to This Policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time. Any changes will be posted
+      on this page with an updated "Last updated" date. Since we do not collect user
+      contact information, we cannot notify you directly — we encourage you to review
+      this page periodically.
+    </p>
+
+    <h2>11. Contact</h2>
+    <p>
+      If you have any questions or concerns about this Privacy Policy, please contact us at:
+    </p>
+    <p>
+      <strong>Email:</strong> <a href="mailto:amreshcse007@gmail.com">amreshcse007@gmail.com</a>
+    </p>
+  </section>
+
+  <Footer />
+</Layout>
