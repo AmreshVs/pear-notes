@@ -660,6 +660,12 @@ a:hover {
   gap: 4px;
   overflow-y: auto;
   padding-bottom: 24px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.feature-list::-webkit-scrollbar {
+  display: none;
 }
 
 [data-section="mobile"] .feature-list {
@@ -783,7 +789,13 @@ a:hover {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+  transition: opacity 0.3s ease;
 }
+
+.device-frame-phone[data-active-platform="ios"] .device-notch {
+  opacity: 0;
+}
+
 
 /* Feature Screens */
 
@@ -795,6 +807,35 @@ a:hover {
 
 .device-frame-desktop .feature-screens {
   height: calc(100% - 28px);
+}
+
+.device-frame-no-chrome {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  aspect-ratio: auto;
+}
+
+.device-frame-no-chrome .feature-screens {
+  height: auto;
+  position: relative;
+}
+
+.device-frame-no-chrome .feature-screen {
+  position: relative;
+  inset: auto;
+}
+
+.device-frame-no-chrome .feature-screen:not(.active) {
+  position: absolute;
+  inset: 0;
+}
+
+.device-frame-no-chrome .feature-screen img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .feature-screen {
@@ -813,6 +854,13 @@ a:hover {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+}
+
+.feature-screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
 }
 
 .screen-placeholder {

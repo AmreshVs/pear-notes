@@ -133,67 +133,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       <div class="app-showcase-body">
         <div class="feature-list-wrap">
         <div class="feature-list">
-          <button class="feature-item active" data-feature="editor">
+          <button class="feature-item active" data-feature="folders">
             <div class="feature-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
             </div>
             <div class="feature-item-text">
-              <h4>Rich Text Editor</h4>
-              <p>Headings, lists, task lists, code blocks, blockquotes, links, and text alignment.</p>
-            </div>
-          </button>
-          <button class="feature-item" data-feature="voice">
-            <div class="feature-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-            </div>
-            <div class="feature-item-text">
-              <h4>Voice Notes</h4>
-              <p>Record with waveform visualization, playback, and embed directly inside notes.</p>
-            </div>
-          </button>
-          <button class="feature-item" data-feature="scanner">
-            <div class="feature-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            </div>
-            <div class="feature-item-text">
-              <h4>Document Scanner</h4>
-              <p>Multi-page scanning, auto-crop, and attach photos or videos from camera.</p>
-            </div>
-          </button>
-          <button class="feature-item" data-feature="sync">
-            <div class="feature-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            </div>
-            <div class="feature-item-text">
-              <h4>P2P Device Sync</h4>
-              <p>Hypercore-based sync with QR code pairing and device management.</p>
-            </div>
-          </button>
-          <button class="feature-item" data-feature="backup">
-            <div class="feature-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <div class="feature-item-text">
-              <h4>Encrypted Backups</h4>
-              <p>AES-256 encrypted .pnbk export/import with 64-character recovery key.</p>
-            </div>
-          </button>
-          <button class="feature-item" data-feature="search">
-            <div class="feature-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            </div>
-            <div class="feature-item-text">
-              <h4>Full-Text Search</h4>
-              <p>Instant search across all notes with real-time filtering and results.</p>
-            </div>
-          </button>
-          <button class="feature-item" data-feature="customize">
-            <div class="feature-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            </div>
-            <div class="feature-item-text">
-              <h4>Customization</h4>
-              <p>8 fonts, adjustable text size, dark/light/system themes, and sort options.</p>
+              <h4>Folders</h4>
+              <p>Create, rename, and organize notes into folders with drag-and-drop support.</p>
             </div>
           </button>
           <button class="feature-item" data-feature="notes-list">
@@ -205,13 +151,67 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
               <p>Browse notes grouped by date — today, yesterday, last 7 days, and older.</p>
             </div>
           </button>
-          <button class="feature-item" data-feature="folders">
+          <button class="feature-item" data-feature="search">
             <div class="feature-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </div>
             <div class="feature-item-text">
-              <h4>Folders</h4>
-              <p>Create, rename, and organize notes into folders with drag-and-drop support.</p>
+              <h4>Full-Text Search</h4>
+              <p>Instant search across all notes with real-time filtering and results.</p>
+            </div>
+          </button>
+          <button class="feature-item" data-feature="editor">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <div class="feature-item-text">
+              <h4>Rich Text Editor</h4>
+              <p>Headings, lists, task lists, code blocks, blockquotes, links, and text alignment.</p>
+            </div>
+          </button>
+          <button class="feature-item" data-feature="scanner">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </div>
+            <div class="feature-item-text">
+              <h4>Document Scanner</h4>
+              <p>Multi-page scanning, auto-crop, and attach photos or videos from camera.</p>
+            </div>
+          </button>
+          <button class="feature-item" data-feature="voice">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </div>
+            <div class="feature-item-text">
+              <h4>Voice Notes</h4>
+              <p>Record with waveform visualization, playback, and embed directly inside notes.</p>
+            </div>
+          </button>
+          <button class="feature-item" data-feature="customize">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+            <div class="feature-item-text">
+              <h4>Customization</h4>
+              <p>8 fonts, adjustable text size, dark/light/system themes, and sort options.</p>
+            </div>
+          </button>
+          <button class="feature-item" data-feature="linked-devices">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div class="feature-item-text">
+              <h4>Linked Devices</h4>
+              <p>View, rename, and manage all connected devices with sync status indicators.</p>
+            </div>
+          </button>
+          <button class="feature-item" data-feature="sync">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="feature-item-text">
+              <h4>P2P Device Sync</h4>
+              <p>Hypercore-based sync with QR code pairing and device management.</p>
             </div>
           </button>
           <button class="feature-item" data-feature="fingerprint">
@@ -223,13 +223,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
               <p>Verify device identity keys during pairing to prevent man-in-the-middle attacks.</p>
             </div>
           </button>
-          <button class="feature-item" data-feature="linked-devices">
+          <button class="feature-item" data-feature="backup">
             <div class="feature-item-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <div class="feature-item-text">
-              <h4>Linked Devices</h4>
-              <p>View, rename, and manage all connected devices with sync status indicators.</p>
+              <h4>Encrypted Backups</h4>
+              <p>AES-256 encrypted .pnbk export/import with 64-character recovery key.</p>
             </div>
           </button>
           <button class="feature-item" data-feature="storage">
@@ -245,179 +245,83 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         </div>
         <div class="device-preview">
           <div class="platform-toggle platform-toggle-above">
-            <button class="platform-toggle-btn active" data-platform="android">Android</button>
-            <button class="platform-toggle-btn" data-platform="ios">iOS</button>
+            <button class="platform-toggle-btn active" data-platform="ios">iOS</button>
+            <button class="platform-toggle-btn" data-platform="android">Android</button>
           </div>
           <div class="device-frame device-frame-phone">
             <div class="device-notch"></div>
             <div class="feature-screens">
-              <div class="feature-screen active" data-feature="editor" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
-                  <span class="screen-placeholder-label">Rich Text Editor</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+              <div class="feature-screen" data-feature="editor" data-platform="android">
+                <img src={`${base}screenshots/Android/Rich-Text-Editor.png`} alt="Rich Text Editor - Android" />
               </div>
               <div class="feature-screen" data-feature="editor" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
-                  <span class="screen-placeholder-label">Rich Text Editor</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/iOS/Rich-Text-Editor.png`} alt="Rich Text Editor - iOS" />
               </div>
               <div class="feature-screen" data-feature="voice" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></div>
-                  <span class="screen-placeholder-label">Voice Notes</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Android/Voice-Notes.png`} alt="Voice Notes - Android" />
               </div>
               <div class="feature-screen" data-feature="voice" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></div>
-                  <span class="screen-placeholder-label">Voice Notes</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/iOS/Voice-Notes.png`} alt="Voice Notes - iOS" />
               </div>
               <div class="feature-screen" data-feature="scanner" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-                  <span class="screen-placeholder-label">Document Scanner</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Android/Document-Scanner.png`} alt="Document Scanner - Android" />
               </div>
               <div class="feature-screen" data-feature="scanner" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-                  <span class="screen-placeholder-label">Document Scanner</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/iOS/Document-Scanner.png`} alt="Document Scanner - iOS" />
               </div>
               <div class="feature-screen" data-feature="sync" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-                  <span class="screen-placeholder-label">P2P Device Sync</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Android/P2P-Device-Sync.png`} alt="P2P Device Sync - Android" />
               </div>
               <div class="feature-screen" data-feature="sync" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-                  <span class="screen-placeholder-label">P2P Device Sync</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/iOS/P2P-Device-Sync.png`} alt="P2P Device Sync - iOS" />
               </div>
               <div class="feature-screen" data-feature="backup" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                  <span class="screen-placeholder-label">Encrypted Backups</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Android/Encrypted-Backups.png`} alt="Encrypted Backups - Android" />
               </div>
               <div class="feature-screen" data-feature="backup" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                  <span class="screen-placeholder-label">Encrypted Backups</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/iOS/Encrypted-Backups.png`} alt="Encrypted Backups - iOS" />
               </div>
               <div class="feature-screen" data-feature="search" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-                  <span class="screen-placeholder-label">Full-Text Search</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Android/Full-Text-Search.png`} alt="Full-Text Search - Android" />
               </div>
               <div class="feature-screen" data-feature="search" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-                  <span class="screen-placeholder-label">Full-Text Search</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/iOS/Full-Text-Search.png`} alt="Full-Text Search - iOS" />
               </div>
               <div class="feature-screen" data-feature="customize" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4"/></svg></div>
-                  <span class="screen-placeholder-label">Customization</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Android/Customization.png`} alt="Customization - Android" />
               </div>
               <div class="feature-screen" data-feature="customize" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4"/></svg></div>
-                  <span class="screen-placeholder-label">Customization</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/iOS/Customization.png`} alt="Customization - iOS" />
               </div>
               <div class="feature-screen" data-feature="notes-list" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
-                  <span class="screen-placeholder-label">Notes List</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Android/Notes-List.png`} alt="Notes List - Android" />
               </div>
               <div class="feature-screen" data-feature="notes-list" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
-                  <span class="screen-placeholder-label">Notes List</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/iOS/Notes-List.png`} alt="Notes List - iOS" />
               </div>
               <div class="feature-screen" data-feature="folders" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                  <span class="screen-placeholder-label">Folders</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Android/Folders.png`} alt="Folders - Android" />
               </div>
-              <div class="feature-screen" data-feature="folders" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
-                  <span class="screen-placeholder-label">Folders</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+              <div class="feature-screen active" data-feature="folders" data-platform="ios">
+                <img src={`${base}screenshots/iOS/Folders.png`} alt="Folders - iOS" />
               </div>
               <div class="feature-screen" data-feature="fingerprint" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.5C5.5 18 6 15 6 12c0-.7.12-1.37.34-2"/><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M9 6.8a6 6 0 0 1 9 5.2c0 .47 0 1.17-.02 2"/></svg></div>
-                  <span class="screen-placeholder-label">Fingerprint Matching</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Android/Fingerprint-Matching.png`} alt="Fingerprint Matching - Android" />
               </div>
               <div class="feature-screen" data-feature="fingerprint" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.5C5.5 18 6 15 6 12c0-.7.12-1.37.34-2"/><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M9 6.8a6 6 0 0 1 9 5.2c0 .47 0 1.17-.02 2"/></svg></div>
-                  <span class="screen-placeholder-label">Fingerprint Matching</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/iOS/Fingerprint-Matching.png`} alt="Fingerprint Matching - iOS" />
               </div>
               <div class="feature-screen" data-feature="linked-devices" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-                  <span class="screen-placeholder-label">Linked Devices</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Android/Linked-Devices.png`} alt="Linked Devices - Android" />
               </div>
               <div class="feature-screen" data-feature="linked-devices" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-                  <span class="screen-placeholder-label">Linked Devices</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/iOS/Linked-Devices.png`} alt="Linked Devices - iOS" />
               </div>
               <div class="feature-screen" data-feature="storage" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-                  <span class="screen-placeholder-label">Storage</span>
-                  <span class="screen-placeholder-hint">Android screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Android/Storage.png`} alt="Storage - Android" />
               </div>
               <div class="feature-screen" data-feature="storage" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-                  <span class="screen-placeholder-label">Storage</span>
-                  <span class="screen-placeholder-hint">iOS screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/iOS/Storage.png`} alt="Storage - iOS" />
               </div>
             </div>
           </div>
@@ -440,75 +344,34 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       </div>
       <div class="app-showcase-body reverse">
         <div class="device-preview">
-          <div class="device-frame device-frame-desktop">
-            <div class="device-titlebar">
-              <span class="device-dot device-dot-r"></span>
-              <span class="device-dot device-dot-y"></span>
-              <span class="device-dot device-dot-g"></span>
-            </div>
+          <div class="device-frame device-frame-desktop device-frame-no-chrome">
             <div class="feature-screens">
               <div class="feature-screen active" data-feature="d-layout">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg></div>
-                  <span class="screen-placeholder-label">Three-Panel Layout</span>
-                  <span class="screen-placeholder-hint">Desktop screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Desktop/Three-Panel-Layout.png`} alt="Three-Panel Layout" />
               </div>
               <div class="feature-screen" data-feature="d-editor">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
-                  <span class="screen-placeholder-label">Rich Text Editor</span>
-                  <span class="screen-placeholder-hint">Desktop screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Desktop/Rich-Text-Editor.png`} alt="Rich Text Editor" />
               </div>
               <div class="feature-screen" data-feature="d-sync">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-                  <span class="screen-placeholder-label">P2P Device Sync</span>
-                  <span class="screen-placeholder-hint">Desktop screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Desktop/P2P-Device-Sync.png`} alt="P2P Device Sync" />
               </div>
               <div class="feature-screen" data-feature="d-backup">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                  <span class="screen-placeholder-label">Encrypted Backups</span>
-                  <span class="screen-placeholder-hint">Desktop screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Desktop/Encrypted-Backups.png`} alt="Encrypted Backups" />
               </div>
               <div class="feature-screen" data-feature="d-storage">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-                  <span class="screen-placeholder-label">Storage Analytics</span>
-                  <span class="screen-placeholder-hint">Desktop screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Desktop/Storage-Analytics.png`} alt="Storage Analytics" />
               </div>
               <div class="feature-screen" data-feature="d-voice">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></div>
-                  <span class="screen-placeholder-label">Voice Recorder</span>
-                  <span class="screen-placeholder-hint">Desktop screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Desktop/Voice-Recorder.png`} alt="Voice Recorder" />
               </div>
               <div class="feature-screen" data-feature="d-customize">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4"/></svg></div>
-                  <span class="screen-placeholder-label">Customization</span>
-                  <span class="screen-placeholder-hint">Desktop screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Desktop/Customisation.png`} alt="Customization" />
               </div>
               <div class="feature-screen" data-feature="d-fingerprint">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.5C5.5 18 6 15 6 12c0-.7.12-1.37.34-2"/><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M9 6.8a6 6 0 0 1 9 5.2c0 .47 0 1.17-.02 2"/></svg></div>
-                  <span class="screen-placeholder-label">Fingerprint Matching</span>
-                  <span class="screen-placeholder-hint">Desktop screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Desktop/Fingerprint-Matching.png`} alt="Fingerprint Matching" />
               </div>
               <div class="feature-screen" data-feature="d-linked-devices">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
-                  <span class="screen-placeholder-label">Linked Devices</span>
-                  <span class="screen-placeholder-hint">Desktop screenshot placeholder</span>
-                </div>
+                <img src={`${base}screenshots/Desktop/Linked-Devices.png`} alt="Linked Devices" />
               </div>
             </div>
           </div>
@@ -529,27 +392,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
               <p>Syntax-highlighted code blocks, tables, media embeds, headings, and task lists.</p>
             </div>
           </button>
-          <button class="feature-item" data-feature="d-sync">
-            <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-            <div class="feature-item-text">
-              <h4>P2P Device Sync</h4>
-              <p>Hyperswarm discovery with QR code invites — temporary or permanent links.</p>
-            </div>
-          </button>
-          <button class="feature-item" data-feature="d-backup">
-            <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <div class="feature-item-text">
-              <h4>Encrypted Backups</h4>
-              <p>AES-256-GCM .pnbk files with 64-character hex recovery key.</p>
-            </div>
-          </button>
-          <button class="feature-item" data-feature="d-storage">
-            <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-            <div class="feature-item-text">
-              <h4>Storage Analytics</h4>
-              <p>Per-note media breakdown — images, videos, audio, files — with reclaimable space.</p>
-            </div>
-          </button>
           <button class="feature-item" data-feature="d-voice">
             <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></div>
             <div class="feature-item-text">
@@ -564,6 +406,20 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
               <p>8 fonts, adjustable size 12-24px, system/light/dark themes.</p>
             </div>
           </button>
+          <button class="feature-item" data-feature="d-linked-devices">
+            <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+            <div class="feature-item-text">
+              <h4>Linked Devices</h4>
+              <p>View, rename, and manage connected devices with platform info and sync status.</p>
+            </div>
+          </button>
+          <button class="feature-item" data-feature="d-sync">
+            <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div class="feature-item-text">
+              <h4>P2P Device Sync</h4>
+              <p>Hyperswarm discovery with QR code invites — temporary or permanent links.</p>
+            </div>
+          </button>
           <button class="feature-item" data-feature="d-fingerprint">
             <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.5C5.5 18 6 15 6 12c0-.7.12-1.37.34-2"/><path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/><path d="M14 13.12c0 2.38 0 6.38-1 8.88"/><path d="M9 6.8a6 6 0 0 1 9 5.2c0 .47 0 1.17-.02 2"/></svg></div>
             <div class="feature-item-text">
@@ -571,11 +427,18 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
               <p>Verify device identity keys during pairing to prevent man-in-the-middle attacks.</p>
             </div>
           </button>
-          <button class="feature-item" data-feature="d-linked-devices">
-            <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+          <button class="feature-item" data-feature="d-backup">
+            <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
             <div class="feature-item-text">
-              <h4>Linked Devices</h4>
-              <p>View, rename, and manage connected devices with platform info and sync status.</p>
+              <h4>Encrypted Backups</h4>
+              <p>AES-256-GCM .pnbk files with 64-character hex recovery key.</p>
+            </div>
+          </button>
+          <button class="feature-item" data-feature="d-storage">
+            <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+            <div class="feature-item-text">
+              <h4>Storage Analytics</h4>
+              <p>Per-note media breakdown — images, videos, audio, files — with reclaimable space.</p>
             </div>
           </button>
         </div>

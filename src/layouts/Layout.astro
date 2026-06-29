@@ -80,7 +80,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         const featureItems = section.querySelectorAll('.feature-item');
         const featureScreens = section.querySelectorAll('.feature-screen');
         const platformBtns = section.querySelectorAll('.platform-toggle-btn');
-        let activePlatform = 'android';
+        let activePlatform = platformBtns.length > 0 ? platformBtns[0].getAttribute('data-platform')! : 'android';
 
         function showScreen(featureId: string) {
           featureScreens.forEach(s => s.classList.remove('active'));
@@ -101,11 +101,15 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           });
         });
 
+        const deviceFrame = section.querySelector('.device-frame-phone');
+        if (deviceFrame) deviceFrame.setAttribute('data-active-platform', activePlatform);
+
         platformBtns.forEach(btn => {
           btn.addEventListener('click', () => {
             platformBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             activePlatform = btn.getAttribute('data-platform')!;
+            if (deviceFrame) deviceFrame.setAttribute('data-active-platform', activePlatform);
             const activeFeature = section.querySelector('.feature-item.active');
             if (activeFeature) showScreen(activeFeature.getAttribute('data-feature')!);
           });
