@@ -52,6 +52,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   background-color: var(--bg-primary);
@@ -198,6 +202,7 @@ a:hover {
   justify-content: center;
   text-align: center;
   padding: 8rem 1.5rem 6rem;
+  overflow: hidden;
   overflow: hidden;
 }
 
@@ -418,14 +423,21 @@ a:hover {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 0.7rem;
   animation: bounce-down 2.5s ease-in-out infinite;
 }
 
+.scroll-indicator svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--accent-gold);
+  stroke-width: 2.5;
+}
+
 @keyframes bounce-down {
-  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
-  50% { transform: translateX(-50%) translateY(8px); opacity: 0.8; }
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.7; }
+  50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
 }
 
 /* ─── Sections ─── */
@@ -604,13 +616,13 @@ a:hover {
 
 .app-showcase-body {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: minmax(0, 340px) 1fr;
   gap: 2rem;
   align-items: start;
 }
 
 .app-showcase-body.reverse {
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: 1fr minmax(0, 340px);
 }
 
 .feature-list-wrap {
@@ -1273,6 +1285,13 @@ a:hover {
     position: relative;
   }
 
+  .header-inner nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+
   .nav-links {
     display: none;
     position: absolute;
@@ -1306,6 +1325,7 @@ a:hover {
     min-height: auto;
     padding: 6.5rem 1.5rem 4rem;
   }
+
 
   .hero-icon {
     width: 80px;
@@ -1345,6 +1365,29 @@ a:hover {
   .app-showcase-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .app-showcase-body,
+  .app-showcase-body.reverse {
+    grid-template-columns: 1fr;
+  }
+
+  .device-preview {
+    position: static;
+    order: -1;
+  }
+
+  .device-frame-phone {
+    max-width: 220px;
+  }
+
+  .device-frame-desktop {
+    max-width: 100%;
+  }
+
+  [data-section="mobile"] .feature-list,
+  [data-section="desktop"] .feature-list {
+    max-height: 260px;
   }
 
   .footer-inner {
