@@ -63,6 +63,41 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
       document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
 
+      // Active nav link highlighting — page-based (privacy, terms)
+      document.querySelectorAll<HTMLAnchorElement>('.nav-links a:not([href*="#"])').forEach(a => {
+        const linkPath = new URL(a.href).pathname;
+        if (linkPath !== '/' && window.location.pathname === linkPath) {
+          a.classList.add('nav-active');
+        }
+      });
+
+      // Active nav link highlighting — hash-based (sections)
+      const navAnchors = document.querySelectorAll<HTMLAnchorElement>('.nav-links a[href*="#"]');
+      const sections = Array.from(navAnchors)
+        .map(a => {
+          const id = a.getAttribute('href')!.split('#')[1];
+          return id ? document.getElementById(id) : null;
+        })
+        .filter(Boolean) as HTMLElement[];
+
+      const setActiveLink = (id: string) => {
+        navAnchors.forEach(a => {
+          const href = a.getAttribute('href') ?? '';
+          a.classList.toggle('nav-active', href.includes(`#${id}`));
+        });
+      };
+
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) setActiveLink(entry.target.id);
+          });
+        },
+        { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+      );
+
+      sections.forEach(s => sectionObserver.observe(s));
+
       document.querySelectorAll('.feature-list').forEach(list => {
         const wrap = list.closest('.feature-list-wrap');
         if (!wrap) return;
