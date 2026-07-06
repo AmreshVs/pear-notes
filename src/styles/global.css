@@ -781,8 +781,8 @@ button:focus-visible {
 .p2p-lock-pill {
   position: absolute;
   z-index: 3;
-  left: 38%;
-  top: 77%;
+  left: 44%;
+  top: 73%;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;

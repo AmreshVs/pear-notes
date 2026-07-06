@@ -31,6 +31,21 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <title>{title}</title>
+
+    <!-- Google Analytics (Anonymous/Traffic Only) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X24NHKRC5E"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Disable advertising features to respect privacy
+      gtag('set', 'allow_ad_personalization_signals', false);
+      
+      gtag('config', 'G-X24NHKRC5E', {
+        'anonymize_ip': true
+      });
+    </script>
   </head>
   <body>
     <slot />
