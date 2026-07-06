@@ -567,8 +567,8 @@ button:focus-visible {
 
 .p2p-scene {
   position: relative;
-  width: 100%;
-  max-width: 620px;
+  width: 112%;
+  max-width: 680px;
   aspect-ratio: 640 / 540;
   margin-left: auto;
   animation: preview-rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both, scene-float 9s ease-in-out 1.3s infinite;
@@ -586,6 +586,14 @@ button:focus-visible {
 @keyframes cloud-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
+}
+
+.p2p-cloud-link {
+  animation: cloud-link-flow 25s linear infinite;
+}
+
+@keyframes cloud-link-flow {
+  to { stroke-dashoffset: 160; }
 }
 
 .p2p-strike {
@@ -651,7 +659,7 @@ button:focus-visible {
 .p2p-laptop {
   top: 12%;
   right: 0;
-  width: 53%;
+  width: 60%;
 }
 
 .p2p-laptop .mock-screen {
@@ -704,7 +712,7 @@ button:focus-visible {
 .p2p-phone {
   bottom: 0;
   left: 3%;
-  width: 24%;
+  width: 27%;
 }
 
 .p2p-phone .mock-screen {
@@ -773,8 +781,8 @@ button:focus-visible {
 .p2p-lock-pill {
   position: absolute;
   z-index: 3;
-  left: 30%;
-  top: 56%;
+  left: 38%;
+  top: 77%;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -1906,6 +1914,7 @@ button:focus-visible {
   }
 
   .p2p-scene {
+    width: 100%;
     margin: 3rem auto 0;
     max-width: 540px;
   }
