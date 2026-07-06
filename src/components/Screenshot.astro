@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  dir: 'iOS' | 'Android' | 'Desktop';
+  name: string;
+  alt: string;
+  width?: number;
+  loading?: 'lazy' | 'eager';
+}
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/screenshots/**/*.png',
+  { eager: true }
+);
+
+const { dir, name, alt, loading = 'lazy' } = Astro.props;
+const width = Astro.props.width ?? (dir === 'Desktop' ? 1600 : 640);
+const entry = images[`../assets/screenshots/${dir}/${name}.png`];
+if (!entry) {
+  throw new Error(`Screenshot not found: ${dir}/${name}.png`);
+}
+---
+
+<Image
+  src={entry.default}
+  alt={alt}
+  width={width}
+  format="webp"
+  quality={80}
+  loading={loading}
+  decoding="async"
+/>

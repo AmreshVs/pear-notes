@@ -5,19 +5,45 @@ const year = new Date().getFullYear();
 
 <footer class="footer">
   <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src={`${base}icon.png`} alt="Pear Notes" />
-        <span>Pear Notes</span>
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="footer-brand">
+          <img src={`${base}icon.png`} alt="Pear Notes" />
+          <span>Pear Notes</span>
+        </div>
+        <p class="footer-tagline">
+          Private, peer-to-peer notes. Encrypted on your devices, synced directly between them — no servers, no cloud.
+        </p>
       </div>
-      <ul class="footer-links">
-        <li><a href={`${base}#features`}>Features</a></li>
-        <li><a href={`${base}#security`}>Security</a></li>
-        <li><a href={`${base}privacy/`}>Privacy Policy</a></li>
-        <li><a href={`${base}terms/`}>Terms of Service</a></li>
-        <li><a href="mailto:vsamreshpro@gmail.com">Contact</a></li>
-      </ul>
+      <nav class="footer-col" aria-label="Product">
+        <h4>Product</h4>
+        <ul>
+          <li><a href={`${base}#features`}>Features</a></li>
+          <li><a href={`${base}#security`}>Security</a></li>
+          <li><a href={`${base}#preview`}>Platforms</a></li>
+          <li><a href={`${base}faq/`}>FAQ</a></li>
+          <li><a href={`${base}#download`}>Download</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Resources">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="https://docs.pears.com/" target="_blank" rel="noopener noreferrer">Pears Docs</a></li>
+          <li><a href={`${base}#how-it-works`}>How It Works</a></li>
+          <li><a href="mailto:vsamreshpro@gmail.com">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-label="Legal">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href={`${base}privacy/`}>Privacy Policy</a></li>
+          <li><a href={`${base}terms/`}>Terms of Service</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
       <p class="footer-copy">&copy; {year} Pear Notes. All rights reserved.</p>
+      <p class="footer-copy">Built on the open-source <a href="https://docs.pears.com/" target="_blank" rel="noopener noreferrer">Pears</a> platform.</p>
     </div>
   </div>
 </footer>

@@ -2,8 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Screenshot from '../components/Screenshot.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const heroVisual: 'p2p' | 'screens' = 'p2p';
+
 ---
 
 <Layout title="Pear Notes — Private & Encrypted Notes with P2P Sync">
@@ -15,12 +19,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <div class="hero-glow hero-glow-1"></div>
     <div class="hero-glow hero-glow-2"></div>
     <div class="hero-glow hero-glow-3"></div>
-    <div class="hero-content">
-      <img src={`${base}icon.png`} alt="Pear Notes" class="hero-icon" />
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        End-to-End Encrypted
-      </div>
+    <div class="hero-inner">
+      <div class="hero-copy">
       <h1>
         Your notes,<br />
         <span class="gradient-text">truly private.</span>
@@ -55,9 +55,119 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           Windows &middot; Soon
         </span>
       </div>
-    </div>
-    <div class="scroll-indicator">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="hero-visual">
+        {heroVisual === 'screens' && (
+          <div class="hero-preview">
+            <div class="hero-preview-desktop">
+              <Screenshot dir="Desktop" name="Three-Panel-Hero" alt="Pear Notes desktop app" width={1720} loading="eager" />
+            </div>
+            <div class="hero-preview-phone">
+              <Screenshot dir="iOS" name="Notes-List" alt="Pear Notes mobile app" width={440} loading="eager" />
+            </div>
+          </div>
+        )}
+        {heroVisual === 'p2p' && (
+        <div class="p2p-scene" aria-label="Notes sync directly between your devices over an encrypted connection, bypassing the cloud">
+          <svg class="p2p-links" viewBox="0 0 640 540" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="beamGrad" x1="170" y1="380" x2="330" y2="250" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#DCA323" stop-opacity="0.5"/>
+                <stop offset="0.5" stop-color="#F0C040"/>
+                <stop offset="1" stop-color="#DCA323" stop-opacity="0.5"/>
+              </linearGradient>
+              <filter id="packetGlow" x="-200%" y="-200%" width="500%" height="500%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g class="p2p-cloud">
+              <g class="p2p-cloud-icon">
+                <circle cx="236" cy="150" r="32" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                <g transform="translate(218, 132) scale(1.5)">
+                  <path
+                    d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z"
+                    fill="none"
+                    stroke="rgba(160,160,165,0.8)"
+                    stroke-width="1.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+                <line class="p2p-strike" x1="220" y1="166" x2="252" y2="134" stroke="rgba(232,137,127,0.7)" stroke-width="1.75" stroke-linecap="round"/>
+              </g>
+              <path d="M160 240 C 175 210, 195 190, 212 172" stroke="#6e6e73" stroke-dasharray="2.5 8" stroke-width="1.4" opacity="0.5" fill="none"/>
+              <path d="M260 130 C 285 115, 310 100, 340 100" stroke="#6e6e73" stroke-dasharray="2.5 8" stroke-width="1.4" opacity="0.5" fill="none"/>
+            </g>
+            <path id="p2pPath" class="p2p-beam" d="M172 382 C 245 360, 255 300, 328 258" stroke="url(#beamGrad)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="7 9"/>
+            <g class="p2p-packets" filter="url(#packetGlow)">
+              <circle r="4.5" fill="#F0C040">
+                <animateMotion dur="2.8s" repeatCount="indefinite" calcMode="linear">
+                  <mpath href="#p2pPath"/>
+                </animateMotion>
+              </circle>
+              <circle r="3.5" fill="#e8b040" opacity="0.9" visibility="hidden">
+                <set attributeName="visibility" to="visible" begin="1.4s"/>
+                <animateMotion dur="2.8s" begin="1.4s" repeatCount="indefinite" calcMode="linear" keyPoints="1;0" keyTimes="0;1" fill="freeze">
+                  <mpath href="#p2pPath"/>
+                </animateMotion>
+              </circle>
+            </g>
+          </svg>
+          <div class="p2p-device p2p-laptop">
+            <div class="mock-screen">
+              <div class="mock-titlebar"><span></span><span></span><span></span></div>
+              <div class="mock-columns">
+                <div class="mock-sidebar">
+                  <div class="bar gold w60"></div>
+                  <div class="bar w80"></div>
+                  <div class="bar w70"></div>
+                  <div class="bar w50"></div>
+                </div>
+                <div class="mock-main">
+                  <div class="bar bright w50"></div>
+                  <div class="bar w90"></div>
+                  <div class="bar w100"></div>
+                  <div class="bar w80"></div>
+                  <div class="bar gold w40"></div>
+                  <div class="bar w70"></div>
+                </div>
+              </div>
+              <div class="mock-sync-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#08080a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </div>
+            <div class="laptop-base"></div>
+          </div>
+          <div class="p2p-device p2p-phone">
+            <div class="mock-screen">
+              <div class="mock-notch"></div>
+              <div class="bar bright w60"></div>
+              <div class="mock-card">
+                <div class="bar gold w50"></div>
+                <div class="bar w90"></div>
+              </div>
+              <div class="mock-card">
+                <div class="bar bright w70"></div>
+                <div class="bar w80"></div>
+              </div>
+              <div class="mock-card">
+                <div class="bar bright w50"></div>
+                <div class="bar w60"></div>
+              </div>
+              <div class="mock-sync-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#08080a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="p2p-lock-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            End-to-end encrypted
+          </div>
+
+        </div>
+        )}
+      </div>
     </div>
   </section>
 
@@ -77,7 +187,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </div>
           <h3>End-to-End Encrypted</h3>
-          <p>All notes are encrypted on-device with AES-256. Backups are secured with your unique 64-character private key.</p>
+          <p>All notes are encrypted on-device with AES-256. Your keys never leave your devices — there is nothing to breach.</p>
         </div>
         <div class="feature-card fade-in fade-in-delay-2">
           <div class="feature-icon">
@@ -114,6 +224,27 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           <h3>Document Scanner</h3>
           <p>Capture, crop, and convert physical pages into digital documents stored in your encrypted media vault.</p>
         </div>
+        <div class="feature-card fade-in fade-in-delay-1">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/><path d="M12 16v2"/></svg>
+          </div>
+          <h3>Note Lock</h3>
+          <p>Lock individual notes behind Face ID, Touch ID, fingerprint, Windows Hello — or a custom password enforced on every synced device.</p>
+        </div>
+        <div class="feature-card fade-in fade-in-delay-2">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/></svg>
+          </div>
+          <h3>Pinned Notes</h3>
+          <p>Pin what matters and it stays at the top of every list — on your phone, your desktop, and everywhere they sync.</p>
+        </div>
+        <div class="feature-card fade-in fade-in-delay-3">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9.5 11.5l2 2 3.5-3.5"/></svg>
+          </div>
+          <h3>Password-Protected Backups</h3>
+          <p>Export your entire vault as a single encrypted .pnbk file, sealed with a strong password only you know.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -148,7 +279,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             </div>
             <div class="feature-item-text">
               <h4>Notes List</h4>
-              <p>Browse notes grouped by date — today, yesterday, last 7 days, and older.</p>
+              <p>Notes grouped by date — today, yesterday, last 7 days — with pinned notes always on top.</p>
             </div>
           </button>
           <button class="feature-item" data-feature="search">
@@ -185,6 +316,15 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <div class="feature-item-text">
               <h4>Voice Notes</h4>
               <p>Record with waveform visualization, playback, and embed directly inside notes.</p>
+            </div>
+          </button>
+          <button class="feature-item" data-feature="lock">
+            <div class="feature-item-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+            </div>
+            <div class="feature-item-text">
+              <h4>Note Lock</h4>
+              <p>Lock notes behind biometrics or a synced password. Screenshots and the app switcher are blocked while a locked note is open.</p>
             </div>
           </button>
           <button class="feature-item" data-feature="customize">
@@ -229,7 +369,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             </div>
             <div class="feature-item-text">
               <h4>Encrypted Backups</h4>
-              <p>AES-256 encrypted .pnbk export/import with 64-character recovery key.</p>
+              <p>AES-256-GCM .pnbk export/import, sealed with a strong password you choose.</p>
             </div>
           </button>
           <button class="feature-item" data-feature="storage">
@@ -252,76 +392,92 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <div class="device-notch"></div>
             <div class="feature-screens">
               <div class="feature-screen" data-feature="editor" data-platform="android">
-                <img src={`${base}screenshots/Android/Rich-Text-Editor.png`} alt="Rich Text Editor - Android" />
+                <Screenshot dir="Android" name="Rich-Text-Editor" alt="Rich Text Editor - Android" />
               </div>
               <div class="feature-screen" data-feature="editor" data-platform="ios">
-                <img src={`${base}screenshots/iOS/Rich-Text-Editor.png`} alt="Rich Text Editor - iOS" />
+                <Screenshot dir="iOS" name="Rich-Text-Editor" alt="Rich Text Editor - iOS" />
               </div>
               <div class="feature-screen" data-feature="voice" data-platform="android">
-                <img src={`${base}screenshots/Android/Voice-Notes.png`} alt="Voice Notes - Android" />
+                <Screenshot dir="Android" name="Voice-Notes" alt="Voice Notes - Android" />
               </div>
               <div class="feature-screen" data-feature="voice" data-platform="ios">
-                <img src={`${base}screenshots/iOS/Voice-Notes.png`} alt="Voice Notes - iOS" />
+                <Screenshot dir="iOS" name="Voice-Notes" alt="Voice Notes - iOS" />
+              </div>
+              <div class="feature-screen" data-feature="lock" data-platform="android">
+                <div class="screen-placeholder">
+                  <div class="screen-placeholder-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+                  </div>
+                  <div class="screen-placeholder-label">This note is locked</div>
+                </div>
+              </div>
+              <div class="feature-screen" data-feature="lock" data-platform="ios">
+                <div class="screen-placeholder">
+                  <div class="screen-placeholder-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+                  </div>
+                  <div class="screen-placeholder-label">This note is locked</div>
+                </div>
               </div>
               <div class="feature-screen" data-feature="scanner" data-platform="android">
-                <img src={`${base}screenshots/Android/Document-Scanner.png`} alt="Document Scanner - Android" />
+                <Screenshot dir="Android" name="Document-Scanner" alt="Document Scanner - Android" />
               </div>
               <div class="feature-screen" data-feature="scanner" data-platform="ios">
-                <img src={`${base}screenshots/iOS/Document-Scanner.png`} alt="Document Scanner - iOS" />
+                <Screenshot dir="iOS" name="Document-Scanner" alt="Document Scanner - iOS" />
               </div>
               <div class="feature-screen" data-feature="sync" data-platform="android">
-                <img src={`${base}screenshots/Android/P2P-Device-Sync.png`} alt="P2P Device Sync - Android" />
+                <Screenshot dir="Android" name="P2P-Device-Sync" alt="P2P Device Sync - Android" />
               </div>
               <div class="feature-screen" data-feature="sync" data-platform="ios">
-                <img src={`${base}screenshots/iOS/P2P-Device-Sync.png`} alt="P2P Device Sync - iOS" />
+                <Screenshot dir="iOS" name="P2P-Device-Sync" alt="P2P Device Sync - iOS" />
               </div>
               <div class="feature-screen" data-feature="backup" data-platform="android">
-                <img src={`${base}screenshots/Android/Encrypted-Backups.png`} alt="Encrypted Backups - Android" />
+                <Screenshot dir="Android" name="Encrypted-Backups" alt="Encrypted Backups - Android" />
               </div>
               <div class="feature-screen" data-feature="backup" data-platform="ios">
-                <img src={`${base}screenshots/iOS/Encrypted-Backups.png`} alt="Encrypted Backups - iOS" />
+                <Screenshot dir="iOS" name="Encrypted-Backups" alt="Encrypted Backups - iOS" />
               </div>
               <div class="feature-screen" data-feature="search" data-platform="android">
-                <img src={`${base}screenshots/Android/Full-Text-Search.png`} alt="Full-Text Search - Android" />
+                <Screenshot dir="Android" name="Full-Text-Search" alt="Full-Text Search - Android" />
               </div>
               <div class="feature-screen" data-feature="search" data-platform="ios">
-                <img src={`${base}screenshots/iOS/Full-Text-Search.png`} alt="Full-Text Search - iOS" />
+                <Screenshot dir="iOS" name="Full-Text-Search" alt="Full-Text Search - iOS" />
               </div>
               <div class="feature-screen" data-feature="customize" data-platform="android">
-                <img src={`${base}screenshots/Android/Customization.png`} alt="Customization - Android" />
+                <Screenshot dir="Android" name="Customization" alt="Customization - Android" />
               </div>
               <div class="feature-screen" data-feature="customize" data-platform="ios">
-                <img src={`${base}screenshots/iOS/Customization.png`} alt="Customization - iOS" />
+                <Screenshot dir="iOS" name="Customization" alt="Customization - iOS" />
               </div>
               <div class="feature-screen" data-feature="notes-list" data-platform="android">
-                <img src={`${base}screenshots/Android/Notes-List.png`} alt="Notes List - Android" />
+                <Screenshot dir="Android" name="Notes-List" alt="Notes List - Android" />
               </div>
               <div class="feature-screen" data-feature="notes-list" data-platform="ios">
-                <img src={`${base}screenshots/iOS/Notes-List.png`} alt="Notes List - iOS" />
+                <Screenshot dir="iOS" name="Notes-List" alt="Notes List - iOS" />
               </div>
               <div class="feature-screen" data-feature="folders" data-platform="android">
-                <img src={`${base}screenshots/Android/Folders.png`} alt="Folders - Android" />
+                <Screenshot dir="Android" name="Folders" alt="Folders - Android" />
               </div>
               <div class="feature-screen active" data-feature="folders" data-platform="ios">
-                <img src={`${base}screenshots/iOS/Folders.png`} alt="Folders - iOS" />
+                <Screenshot dir="iOS" name="Folders" alt="Folders - iOS" />
               </div>
               <div class="feature-screen" data-feature="fingerprint" data-platform="android">
-                <img src={`${base}screenshots/Android/Fingerprint-Matching.png`} alt="Fingerprint Matching - Android" />
+                <Screenshot dir="Android" name="Fingerprint-Matching" alt="Fingerprint Matching - Android" />
               </div>
               <div class="feature-screen" data-feature="fingerprint" data-platform="ios">
-                <img src={`${base}screenshots/iOS/Fingerprint-Matching.png`} alt="Fingerprint Matching - iOS" />
+                <Screenshot dir="iOS" name="Fingerprint-Matching" alt="Fingerprint Matching - iOS" />
               </div>
               <div class="feature-screen" data-feature="linked-devices" data-platform="android">
-                <img src={`${base}screenshots/Android/Linked-Devices.png`} alt="Linked Devices - Android" />
+                <Screenshot dir="Android" name="Linked-Devices" alt="Linked Devices - Android" />
               </div>
               <div class="feature-screen" data-feature="linked-devices" data-platform="ios">
-                <img src={`${base}screenshots/iOS/Linked-Devices.png`} alt="Linked Devices - iOS" />
+                <Screenshot dir="iOS" name="Linked-Devices" alt="Linked Devices - iOS" />
               </div>
               <div class="feature-screen" data-feature="storage" data-platform="android">
-                <img src={`${base}screenshots/Android/Storage.png`} alt="Storage - Android" />
+                <Screenshot dir="Android" name="Storage" alt="Storage - Android" />
               </div>
               <div class="feature-screen" data-feature="storage" data-platform="ios">
-                <img src={`${base}screenshots/iOS/Storage.png`} alt="Storage - iOS" />
+                <Screenshot dir="iOS" name="Storage" alt="Storage - iOS" />
               </div>
             </div>
           </div>
@@ -347,31 +503,48 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           <div class="device-frame device-frame-desktop device-frame-no-chrome">
             <div class="feature-screens">
               <div class="feature-screen active" data-feature="d-layout">
-                <img src={`${base}screenshots/Desktop/Three-Panel-Layout.png`} alt="Three-Panel Layout" />
+                <Screenshot dir="Desktop" name="Three-Panel-Layout" alt="Three-Panel Layout" />
               </div>
               <div class="feature-screen" data-feature="d-editor">
-                <img src={`${base}screenshots/Desktop/Rich-Text-Editor.png`} alt="Rich Text Editor" />
+                <Screenshot dir="Desktop" name="Rich-Text-Editor" alt="Rich Text Editor" />
+              </div>
+              <div class="feature-screen" data-feature="d-preview">
+                <div class="screen-placeholder">
+                  <div class="screen-placeholder-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  </div>
+                  <div class="screen-placeholder-label">Media Preview</div>
+                  <div class="screen-placeholder-hint">Screenshot coming soon.</div>
+                </div>
+              </div>
+              <div class="feature-screen" data-feature="d-lock">
+                <div class="screen-placeholder">
+                  <div class="screen-placeholder-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+                  </div>
+                  <div class="screen-placeholder-label">This note is locked</div>
+                </div>
               </div>
               <div class="feature-screen" data-feature="d-sync">
-                <img src={`${base}screenshots/Desktop/P2P-Device-Sync.png`} alt="P2P Device Sync" />
+                <Screenshot dir="Desktop" name="P2P-Device-Sync" alt="P2P Device Sync" />
               </div>
               <div class="feature-screen" data-feature="d-backup">
-                <img src={`${base}screenshots/Desktop/Encrypted-Backups.png`} alt="Encrypted Backups" />
+                <Screenshot dir="Desktop" name="Encrypted-Backups" alt="Encrypted Backups" />
               </div>
               <div class="feature-screen" data-feature="d-storage">
-                <img src={`${base}screenshots/Desktop/Storage-Analytics.png`} alt="Storage Analytics" />
+                <Screenshot dir="Desktop" name="Storage-Analytics" alt="Storage Analytics" />
               </div>
               <div class="feature-screen" data-feature="d-voice">
-                <img src={`${base}screenshots/Desktop/Voice-Recorder.png`} alt="Voice Recorder" />
+                <Screenshot dir="Desktop" name="Voice-Recorder" alt="Voice Recorder" />
               </div>
               <div class="feature-screen" data-feature="d-customize">
-                <img src={`${base}screenshots/Desktop/Customisation.png`} alt="Customization" />
+                <Screenshot dir="Desktop" name="Customisation" alt="Customization" />
               </div>
               <div class="feature-screen" data-feature="d-fingerprint">
-                <img src={`${base}screenshots/Desktop/Fingerprint-Matching.png`} alt="Fingerprint Matching" />
+                <Screenshot dir="Desktop" name="Fingerprint-Matching" alt="Fingerprint Matching" />
               </div>
               <div class="feature-screen" data-feature="d-linked-devices">
-                <img src={`${base}screenshots/Desktop/Linked-Devices.png`} alt="Linked Devices" />
+                <Screenshot dir="Desktop" name="Linked-Devices" alt="Linked Devices" />
               </div>
             </div>
           </div>
@@ -390,6 +563,20 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <div class="feature-item-text">
               <h4>Rich Text Editor</h4>
               <p>Syntax-highlighted code blocks, tables, media embeds, headings, and task lists.</p>
+            </div>
+          </button>
+          <button class="feature-item" data-feature="d-preview">
+            <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <div class="feature-item-text">
+              <h4>Media Preview</h4>
+              <p>Fullscreen previews for images, PDFs, text, and audio — plus inline video playback.</p>
+            </div>
+          </button>
+          <button class="feature-item" data-feature="d-lock">
+            <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg></div>
+            <div class="feature-item-text">
+              <h4>Note Lock</h4>
+              <p>Touch ID, Windows Hello, or a synced password — with screen capture blocked while a locked note is open.</p>
             </div>
           </button>
           <button class="feature-item" data-feature="d-voice">
@@ -431,7 +618,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
             <div class="feature-item-text">
               <h4>Encrypted Backups</h4>
-              <p>AES-256-GCM .pnbk files with 64-character hex recovery key.</p>
+              <p>AES-256-GCM .pnbk files sealed with a strong password — nothing stored, nothing recoverable without it.</p>
             </div>
           </button>
           <button class="feature-item" data-feature="d-storage">
@@ -479,7 +666,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             </div>
             <h3>AES-256 Encrypted Backups</h3>
           </div>
-          <p>Export your vault into a single .pnbk file secured with AES-256-GCM encryption. Only your unique 64-character hex recovery key can unlock it.</p>
+          <p>Export your vault into a single .pnbk file secured with AES-256-GCM. The key is derived from a strong password only you know — we can't reset it, and neither can anyone else.</p>
         </div>
         <div class="security-card fade-in fade-in-delay-3">
           <div class="security-card-header">
@@ -498,6 +685,24 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             <h3>Encrypted Media Vault</h3>
           </div>
           <p>Voice notes, document scans, and images are stored in an encrypted local vault. An isolated streaming server renders attachments without leaking unencrypted caches.</p>
+        </div>
+        <div class="security-card fade-in fade-in-delay-1">
+          <div class="security-card-header">
+            <div class="security-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+            </div>
+            <h3>Locked Notes Stay Locked</h3>
+          </div>
+          <p>Lock any note behind biometrics or a key-stretched password enforced on every paired device — the password itself is never stored. Failed attempts trigger exponential backoff, so brute force gets slower, not luckier.</p>
+        </div>
+        <div class="security-card fade-in fade-in-delay-2">
+          <div class="security-card-header">
+            <div class="security-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </div>
+            <h3>Invisible to Screenshots</h3>
+          </div>
+          <p>While a locked note is open, screenshots and screen capture are blocked and the app hides its content in the task switcher. What's locked on screen stays off camera.</p>
         </div>
       </div>
     </div>
@@ -550,6 +755,57 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
   <div class="section-divider"></div>
 
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="faq-header fade-in">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">Questions, answered.</h2>
+        <p class="section-subtitle">
+          The things people ask before trusting an app with their notes.
+        </p>
+      </div>
+      <div class="faq-list fade-in fade-in-delay-1">
+        <details class="faq-item">
+          <summary>
+            If there are no servers, how does sync actually work?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p>Your devices find each other through the Hyperswarm distributed network and open a direct, end-to-end encrypted connection — no middleman ever stores or relays your notes. When two of your devices are online at the same time, changes replicate between them immediately. Until then, every edit waits safely on the device where you made it.</p>
+        </details>
+        <details class="faq-item">
+          <summary>
+            What happens if I lose my phone?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p>If you have another paired device, your notes are already on it — pair a new device to it and you're back. If it was your only device, restore from an encrypted .pnbk backup with your backup password. Without either, the data is gone: there's no server copy to recover from, by design. Export backups regularly.</p>
+        </details>
+        <details class="faq-item">
+          <summary>
+            What if I forget my backup password?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p>There is no reset. The backup's encryption key is derived from your password, and we never see either — that's what makes the backup safe to store anywhere. It also means nobody, including us, can unlock it for you. Treat your backup password like the keys to a safe.</p>
+        </details>
+        <details class="faq-item">
+          <summary>
+            Do you really collect nothing?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <p>Really. No accounts, no analytics, no crash reporters, no ads, no tracking pixels. The app has no servers of ours to talk to, so there's nowhere for your data to go. Everything lives encrypted on your devices and moves only between them.</p>
+        </details>
+      </div>
+      <div class="faq-more fade-in fade-in-delay-2">
+        <a href={`${base}faq/`} class="btn-secondary">
+          Browse all questions
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
   <!-- CTA / Download -->
   <section class="cta" id="download">
     <div class="container">
@@ -559,9 +815,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           Download Pear Notes for Android today. Your notes stay yours — encrypted on-device, synced peer-to-peer, stored nowhere else.
         </p>
         <div class="cta-actions">
-          <a href="#" class="btn-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Get it on Google Play
+          <a href="#" class="play-badge">
+            <img src={`${base}google-play-badge.png`} alt="Get it on Google Play" width="646" height="250" />
           </a>
           <a href="#features" class="btn-secondary">
             Learn More
@@ -579,13 +834,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <div class="container">
       <div class="p2p-explainer-inner fade-in">
         <div class="section-label">Under the Hood</div>
-        <h2 class="section-title">Built on Pears</h2>
+        <h2 class="section-title">Built on Pear</h2>
         <p class="section-subtitle">
-          Pear Notes is built on the open-source Pears platform — designed for peer-to-peer applications that run without central servers. Curious how it works under the hood?
+          Pear Notes is built on the open-source Pear Runtime — designed for peer-to-peer applications that run without central servers. Curious how it works under the hood?
         </p>
         <a href="https://docs.pears.com/" target="_blank" rel="noopener noreferrer" class="btn-secondary p2p-learn-more">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Read the Pears docs
+          Read the Pear docs
         </a>
       </div>
     </div>

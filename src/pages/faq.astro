@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const groups = [
+  {
+    label: 'Sync & Devices',
+    items: [
+      {
+        q: 'If there are no servers, how does sync actually work?',
+        a: 'Your devices find each other through the Hyperswarm distributed network and open a direct, end-to-end encrypted connection — no middleman ever stores or relays your notes. When two of your devices are online at the same time, changes replicate between them immediately. Until then, every edit waits safely on the device where you made it.',
+      },
+      {
+        q: 'What if my devices are never online at the same time?',
+        a: "Nothing is lost — each device keeps its own full history and syncs the moment both sides can reach each other. For phones and computers you use daily, that overlap happens naturally; sync catches up in seconds when it does.",
+      },
+      {
+        q: 'How many devices can I pair?',
+        a: 'As many as you like. Every paired device holds a complete encrypted copy of your notes and can sync with any other. Your phone, laptop, and desktop all stay in step without a hub in the middle.',
+      },
+      {
+        q: 'How does pairing stay secure?',
+        a: "Pairing uses a cryptographic blind handshake: you scan a QR invite (or paste an invite code), both devices verify each other's identity keys, and you can compare fingerprints on both screens to rule out man-in-the-middle attacks. The inviting device must explicitly confirm before the new device is admitted.",
+      },
+      {
+        q: 'Can I remove a device I no longer use?',
+        a: 'Yes. Open Linked Devices on any of your devices to view, rename, or remove others. A removed device is cut off from future changes.',
+      },
+      {
+        q: 'What happens if I lose my phone?',
+        a: "If you have another paired device, your notes are already on it — pair a replacement device to it and you're back. If it was your only device, restore from an encrypted .pnbk backup with your backup password. Without either, the data is gone: there's no server copy to recover from, by design. Export backups regularly.",
+      },
+    ],
+  },
+  {
+    label: 'Security & Privacy',
+    items: [
+      {
+        q: 'Do you really collect nothing?',
+        a: "Really. No accounts, no analytics, no crash reporters, no ads, no tracking pixels. The app has no servers of ours to talk to, so there's nowhere for your data to go. Everything lives encrypted on your devices and moves only between them.",
+      },
+      {
+        q: 'How is my data protected on the device?',
+        a: 'Notes are stored in an AES-256 encrypted database, and attachments — photos, videos, voice notes, scans — live in an encrypted media vault. Nothing is written to disk in the clear, and an isolated streaming server renders media without leaking unencrypted caches.',
+      },
+      {
+        q: 'What if I forget my backup password?',
+        a: "There is no reset. The backup's encryption key is derived from your password, and we never see either — that's what makes the backup safe to store anywhere. It also means nobody, including us, can unlock it for you. Treat your backup password like the keys to a safe.",
+      },
+      {
+        q: 'How do locked notes work?',
+        a: 'Lock any note from its menu and it can only be opened with your device biometrics — Face ID, Touch ID, fingerprint, Windows Hello — or a custom lock password that is enforced on every paired device. While a locked note is open, screenshots and screen capture are blocked and the app hides its content in the task switcher. Repeated wrong passwords trigger escalating wait times.',
+      },
+      {
+        q: 'Can Pear Notes read my notes?',
+        a: "No — and not as a promise, as an architecture. Notes are encrypted on your device with keys that never leave your devices, and they travel only over direct device-to-device channels. There is no point in the system where we could read them even if we wanted to.",
+      },
+    ],
+  },
+  {
+    label: 'Using Pear Notes',
+    items: [
+      {
+        q: 'Does it work offline?',
+        a: 'Completely. Pear Notes is offline-first: reading, writing, attachments, and voice notes all work with no connection at all. The network is only used when your devices sync with each other.',
+      },
+      {
+        q: 'What can I attach to a note?',
+        a: 'Photos and videos from your camera or library, scanned documents, voice recordings with waveform playback, and arbitrary files like PDFs. Attachments are encrypted alongside the note, sync between devices, and can be previewed, shared, or saved from inside the app.',
+      },
+      {
+        q: 'Is there a limit on notes or storage?',
+        a: "No artificial limits — you're bounded only by your device's storage. The built-in Storage screen shows exactly how much space your notes, images, videos, voice notes, and files use, so nothing is a mystery.",
+      },
+      {
+        q: 'Which platforms are supported?',
+        a: 'Android is available today. iOS, macOS, and Windows are in development on the same peer-to-peer backend, so all your devices will sync together the moment they arrive.',
+      },
+
+    ],
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: groups.flatMap(g =>
+    g.items.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    }))
+  ),
+};
+---
+
+<Layout title="FAQ — Pear Notes" description="Answers about Pear Notes: how peer-to-peer sync works without servers, device pairing, encrypted backups, note locking, and what happens if you lose a device.">
+  <div class="dot-grid"></div>
+  <Header />
+
+  <section class="faq faq-page">
+    <div class="container">
+      <div class="faq-header fade-in visible">
+        <div class="section-label">FAQ</div>
+        <h1 class="section-title">Questions, answered.</h1>
+        <p class="section-subtitle">
+          Everything people ask before trusting an app with their notes. Still curious? <a href="mailto:vsamreshpro@gmail.com">Ask us directly</a>.
+        </p>
+      </div>
+      {groups.map(group => (
+        <div class="faq-group">
+          <h2 class="faq-group-label">{group.label}</h2>
+          <div class="faq-list">
+            {group.items.map(item => (
+              <details class="faq-item">
+                <summary>
+                  {item.q}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+      <div class="faq-footer-cta">
+        <p>Ready to try it?</p>
+        <a href={`${base}#download`} class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Get Pear Notes
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <Footer />
+</Layout>

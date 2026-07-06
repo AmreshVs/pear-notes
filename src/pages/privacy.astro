@@ -10,7 +10,7 @@ import Footer from '../components/Footer.astro';
 
   <section class="legal container">
     <h1>Privacy Policy</h1>
-    <p class="last-updated">Last updated: June 28, 2026</p>
+    <p class="last-updated">Last updated: July 5, 2026</p>
 
     <p>
       Pear Notes ("we", "our", or "the app") is committed to protecting your privacy.
@@ -34,7 +34,8 @@ import Footer from '../components/Footer.astro';
       <li><strong>Notes and text content</strong> — Stored in a local encrypted database on your device.</li>
       <li><strong>Voice recordings</strong> — Saved in an encrypted media vault on your device's local storage.</li>
       <li><strong>Document scans and images</strong> — Stored in the same encrypted media vault.</li>
-      <li><strong>Backups</strong> — Exported as AES-256 encrypted .pnbk files that you control. These files can only be decrypted with your unique 64-character private key.</li>
+      <li><strong>Backups</strong> — Exported as AES-256-GCM encrypted .pnbk files that you control. The encryption key is derived from a password you choose (PBKDF2); the password itself is never stored, and the backup cannot be decrypted without it.</li>
+      <li><strong>Note lock passwords</strong> — If you protect locked notes with a custom password, only a cryptographic verifier (PBKDF2-HMAC-SHA256) is stored and synced between your devices. The plaintext password is never stored anywhere.</li>
     </ul>
 
     <h2>3. Data Synchronization</h2>
@@ -69,6 +70,7 @@ import Footer from '../components/Footer.astro';
       <li><strong>Camera</strong> — Used to scan physical documents and to scan QR codes for secure device pairing. Camera data is processed on-device and never transmitted externally.</li>
       <li><strong>Microphone</strong> — Used to record voice notes. Audio is saved locally in the encrypted media vault and never sent to external servers.</li>
       <li><strong>Storage / File Access</strong> — Used to export and import encrypted backup archives (.pnbk files). Files are managed locally by you.</li>
+      <li><strong>Biometric Authentication</strong> — Face ID, Touch ID, fingerprint, or your device passcode can be used to unlock locked notes. Biometric data is handled entirely by your device's operating system; Pear Notes never sees, stores, or transmits it.</li>
     </ul>
 
     <h2>6. Data Sharing</h2>
@@ -102,8 +104,11 @@ import Footer from '../components/Footer.astro';
     </p>
     <ul>
       <li><strong>AES-256 encryption</strong> for all stored data and backup files.</li>
+      <li><strong>Password-derived backup keys</strong> — backups are sealed with AES-256-GCM using a key derived from your password via PBKDF2-HMAC-SHA256.</li>
       <li><strong>End-to-end encrypted P2P channels</strong> for device synchronization.</li>
       <li><strong>Cryptographic blind pairing</strong> to prevent identity leaks during device linking.</li>
+      <li><strong>Per-note locking</strong> with biometric or password unlock, rate-limited against brute-force attempts.</li>
+      <li><strong>Screenshot and app-switcher protection</strong> — while a locked note is open, the system blocks screenshots and hides note content in the task switcher.</li>
       <li><strong>Encrypted media vault</strong> with an isolated streaming server to prevent cache leaks.</li>
     </ul>
 

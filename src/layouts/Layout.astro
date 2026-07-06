@@ -6,6 +6,7 @@ interface Props {
 
 const { title, description = 'Pear Notes is a secure, private, and offline-first notebook. End-to-end encrypted with peer-to-peer sync across all your devices. No servers, no cloud leaks.' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const ogImage = new URL(`${base}og-image.png`, Astro.site);
 ---
 
 <!doctype html>
@@ -16,13 +17,19 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0e0e10" />
     <link rel="icon" type="image/png" href={`${base}icon.png`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${base}icon.png`} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <title>{title}</title>
   </head>
   <body>
@@ -38,14 +45,17 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       const menuBtn = document.querySelector('.mobile-menu-btn');
       const navLinks = document.querySelector('.nav-links');
       if (menuBtn && navLinks) {
+        menuBtn.setAttribute('aria-expanded', 'false');
         menuBtn.addEventListener('click', () => {
-          navLinks.classList.toggle('open');
-          menuBtn.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+          const open = navLinks.classList.toggle('open');
+          menuBtn.textContent = open ? '✕' : '☰';
+          menuBtn.setAttribute('aria-expanded', String(open));
         });
         navLinks.querySelectorAll('a').forEach(link => {
           link.addEventListener('click', () => {
             navLinks.classList.remove('open');
             menuBtn.textContent = '☰';
+            menuBtn.setAttribute('aria-expanded', 'false');
           });
         });
       }
@@ -111,10 +121,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         list.addEventListener('scroll', check);
       });
 
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       document.querySelectorAll('.app-showcase').forEach(section => {
-        const featureItems = section.querySelectorAll('.feature-item');
+        const featureItems = Array.from(section.querySelectorAll<HTMLElement>('.feature-item'));
         const featureScreens = section.querySelectorAll('.feature-screen');
         const platformBtns = section.querySelectorAll('.platform-toggle-btn');
+        const list = section.querySelector<HTMLElement>('.feature-list');
         let activePlatform = platformBtns.length > 0 ? platformBtns[0].getAttribute('data-platform')! : 'android';
 
         function showScreen(featureId: string) {
@@ -127,11 +140,73 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
           if (target) target.classList.add('active');
         }
 
+        function activate(item: HTMLElement) {
+          featureItems.forEach(i => {
+            i.classList.toggle('active', i === item);
+            i.setAttribute('aria-pressed', String(i === item));
+          });
+          showScreen(item.getAttribute('data-feature')!);
+        }
+
+        function scrollListTo(item: HTMLElement) {
+          if (!list) return;
+          list.scrollTo({
+            top: item.offsetTop - list.offsetTop - list.clientHeight / 2 + item.clientHeight / 2,
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+          });
+        }
+
+        featureItems.forEach(i =>
+          i.setAttribute('aria-pressed', String(i.classList.contains('active')))
+        );
+
+        let autoTimer: ReturnType<typeof setInterval> | null = null;
+        let userInteracted = false;
+        let sectionInView = false;
+
+        function stopAuto() {
+          if (autoTimer) {
+            clearInterval(autoTimer);
+            autoTimer = null;
+          }
+        }
+
+        function startAuto() {
+          if (userInteracted || prefersReducedMotion || autoTimer) return;
+          if (!sectionInView || document.visibilityState === 'hidden') return;
+          autoTimer = setInterval(() => {
+            const current = featureItems.findIndex(i => i.classList.contains('active'));
+            const next = featureItems[(current + 1) % featureItems.length];
+            activate(next);
+            scrollListTo(next);
+          }, 4000);
+        }
+
+        section.addEventListener('pointerdown', () => {
+          userInteracted = true;
+          stopAuto();
+        });
+
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'hidden') stopAuto();
+          else startAuto();
+        });
+
+        const autoObserver = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              sectionInView = entry.isIntersecting;
+              if (entry.isIntersecting) startAuto();
+              else stopAuto();
+            });
+          },
+          { threshold: 0.35 }
+        );
+        autoObserver.observe(section);
+
         featureItems.forEach(item => {
           item.addEventListener('click', () => {
-            featureItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-            showScreen(item.getAttribute('data-feature')!);
+            activate(item);
             item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           });
         });
@@ -139,13 +214,19 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
         const deviceFrame = section.querySelector('.device-frame-phone');
         if (deviceFrame) deviceFrame.setAttribute('data-active-platform', activePlatform);
 
+        platformBtns.forEach(btn =>
+          btn.setAttribute('aria-pressed', String(btn.classList.contains('active')))
+        );
+
         platformBtns.forEach(btn => {
           btn.addEventListener('click', () => {
-            platformBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            platformBtns.forEach(b => {
+              b.classList.toggle('active', b === btn);
+              b.setAttribute('aria-pressed', String(b === btn));
+            });
             activePlatform = btn.getAttribute('data-platform')!;
             if (deviceFrame) deviceFrame.setAttribute('data-active-platform', activePlatform);
-            const activeFeature = section.querySelector('.feature-item.active');
+            const activeFeature = section.querySelector<HTMLElement>('.feature-item.active');
             if (activeFeature) showScreen(activeFeature.getAttribute('data-feature')!);
           });
         });
