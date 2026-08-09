@@ -6,8 +6,86 @@ import Screenshot from '../components/Screenshot.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
-const heroVisual: 'p2p' | 'screens' = 'p2p';
-
+const featureGroups = [
+  {
+    label: 'Privacy & Encryption',
+    icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+    items: [
+      {
+        title: 'End-to-End Encrypted',
+        body: 'Notes are encrypted on-device with AES-256. Your keys never leave your devices.',
+        icon: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+      },
+      {
+        title: 'Note Lock',
+        body: 'Lock individual notes behind Face ID, Touch ID, Windows Hello, or a synced password.',
+        icon: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/>',
+      },
+      {
+        title: 'Password-Protected Backups',
+        body: 'Export your vault as a single encrypted .pnbk file, sealed with a password only you know.',
+        icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9.5 11.5l2 2 3.5-3.5"/>',
+      },
+      {
+        title: 'Offline First',
+        body: 'Works entirely without internet. Everything is stored locally, encrypted, on your device.',
+        icon: '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>',
+      },
+    ],
+  },
+  {
+    label: 'Sync & Devices',
+    icon: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
+    items: [
+      {
+        title: 'P2P Device Sync',
+        body: 'Devices connect directly over encrypted channels using Hyperswarm and HyperDHT.',
+        icon: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
+      },
+      {
+        title: 'Background Sync',
+        body: 'Devices catch up without you opening anything — periodically on mobile, from the tray on desktop.',
+        icon: '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>',
+      },
+      {
+        title: 'Media on Your Terms',
+        body: 'Hold photo and file transfers on cellular, or pause them. Notes keep syncing either way.',
+        icon: '<circle cx="12" cy="12" r="10"/><line x1="10" y1="15" x2="10" y2="9"/><line x1="14" y1="15" x2="14" y2="9"/>',
+      },
+      {
+        title: 'Live Transfer Queue',
+        body: 'Every upload and download shows its progress. Pause, resume, cancel, or retry any of them.',
+        icon: '<line x1="7" y1="20" x2="7" y2="4"/><polyline points="3 8 7 4 11 8"/><line x1="17" y1="4" x2="17" y2="20"/><polyline points="13 16 17 20 21 16"/>',
+      },
+    ],
+  },
+  {
+    label: 'Writing & Capture',
+    icon: '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>',
+    items: [
+      {
+        title: 'Rich Text Editor',
+        body: 'Headings, lists, task lists, blockquotes, code blocks, tables, and text alignment.',
+        icon: '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>',
+      },
+      {
+        title: 'Voice Notes',
+        body: 'Record voice memos with waveform visualization and embed them inside your notes.',
+        icon: '<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>',
+      },
+      {
+        title: 'Document Scanner',
+        body: 'Capture, crop, and convert physical pages into documents in your encrypted media vault.',
+        icon: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
+      },
+      {
+        title: 'Pinned Notes',
+        body: 'Pin what matters and it stays at the top of every list, on every device you sync.',
+        icon: '<path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/>',
+      },
+    ],
+  },
+];
 ---
 
 <Layout title="Pear Notes — Private & Encrypted Notes with P2P Sync">
@@ -57,17 +135,6 @@ const heroVisual: 'p2p' | 'screens' = 'p2p';
       </div>
       </div>
       <div class="hero-visual">
-        {heroVisual === 'screens' && (
-          <div class="hero-preview">
-            <div class="hero-preview-desktop">
-              <Screenshot dir="Desktop" name="Three-Panel-Hero" alt="Pear Notes desktop app" width={1720} loading="eager" />
-            </div>
-            <div class="hero-preview-phone">
-              <Screenshot dir="iOS" name="Notes-List" alt="Pear Notes mobile app" width={440} loading="eager" />
-            </div>
-          </div>
-        )}
-        {heroVisual === 'p2p' && (
         <div class="p2p-scene" aria-label="Notes sync directly between your devices over an encrypted connection, bypassing the cloud">
           <svg class="p2p-links" viewBox="0 0 640 540" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
@@ -169,7 +236,6 @@ const heroVisual: 'p2p' | 'screens' = 'p2p';
           </div>
 
         </div>
-        )}
       </div>
     </div>
   </section>
@@ -181,73 +247,33 @@ const heroVisual: 'p2p' | 'screens' = 'p2p';
         <div class="section-label">Features</div>
         <h2 class="section-title">Everything you need,<br />nothing you don't.</h2>
         <p class="section-subtitle">
-          A complete writing experience built around privacy, powered by the Hypercore protocol.
+          A complete writing experience built around privacy.
         </p>
       </div>
-      <div class="features-grid">
-        <div class="feature-card fade-in fade-in-delay-1">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </div>
-          <h3>End-to-End Encrypted</h3>
-          <p>All notes are encrypted on-device with AES-256. Your keys never leave your devices — there is nothing to breach.</p>
-        </div>
-        <div class="feature-card fade-in fade-in-delay-2">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3>P2P Device Sync</h3>
-          <p>Sync via Hypercore protocol — devices connect directly over encrypted channels using Hyperswarm and HyperDHT.</p>
-        </div>
-        <div class="feature-card fade-in fade-in-delay-3">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <h3>Offline First</h3>
-          <p>Works entirely without internet. Everything is stored locally in an encrypted database on your device.</p>
-        </div>
-        <div class="feature-card fade-in fade-in-delay-1">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          </div>
-          <h3>Rich Text Editor</h3>
-          <p>Tiptap-powered editor with headings, lists, task lists, blockquotes, code blocks, tables, and text alignment.</p>
-        </div>
-        <div class="feature-card fade-in fade-in-delay-2">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-          </div>
-          <h3>Voice Notes</h3>
-          <p>Record voice memos with waveform visualization, embed them directly inside your notes, and play back anytime.</p>
-        </div>
-        <div class="feature-card fade-in fade-in-delay-3">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          </div>
-          <h3>Document Scanner</h3>
-          <p>Capture, crop, and convert physical pages into digital documents stored in your encrypted media vault.</p>
-        </div>
-        <div class="feature-card fade-in fade-in-delay-1">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/><path d="M12 16v2"/></svg>
-          </div>
-          <h3>Note Lock</h3>
-          <p>Lock individual notes behind Face ID, Touch ID, fingerprint, Windows Hello — or a custom password enforced on every synced device.</p>
-        </div>
-        <div class="feature-card fade-in fade-in-delay-2">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/></svg>
-          </div>
-          <h3>Pinned Notes</h3>
-          <p>Pin what matters and it stays at the top of every list — on your phone, your desktop, and everywhere they sync.</p>
-        </div>
-        <div class="feature-card fade-in fade-in-delay-3">
-          <div class="feature-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9.5 11.5l2 2 3.5-3.5"/></svg>
-          </div>
-          <h3>Password-Protected Backups</h3>
-          <p>Export your entire vault as a single encrypted .pnbk file, sealed with a strong password only you know.</p>
-        </div>
+      <div class="feature-panels">
+        {featureGroups.map((group, gi) => (
+          <section class={`feature-panel fade-in fade-in-delay-${gi + 1}`}>
+            <header class="feature-panel-head">
+              <span class="feature-panel-icon" aria-hidden="true">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={group.icon} />
+              </span>
+              <h3>{group.label}</h3>
+            </header>
+            <ul class="feature-panel-list">
+              {group.items.map(item => (
+                <li class="feature-point">
+                  <span class="feature-point-icon" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={item.icon} />
+                  </span>
+                  <div class="feature-point-text">
+                    <h4>{item.title}</h4>
+                    <p>{item.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
       </div>
     </div>
   </section>
@@ -336,7 +362,7 @@ const heroVisual: 'p2p' | 'screens' = 'p2p';
             </div>
             <div class="feature-item-text">
               <h4>Customization</h4>
-              <p>8 fonts, adjustable text size, dark/light/system themes, and sort options.</p>
+              <p>8 fonts, adjustable text size, dark/light/system themes, and sorting by date edited, date created, or title.</p>
             </div>
           </button>
           <button class="feature-item" data-feature="linked-devices">
@@ -381,7 +407,7 @@ const heroVisual: 'p2p' | 'screens' = 'p2p';
             </div>
             <div class="feature-item-text">
               <h4>Storage</h4>
-              <p>View storage usage breakdown by images, videos, voice notes, files, and text.</p>
+              <p>Usage broken down by images, videos, voice notes, and files — plus one-tap reclaim for space held by deleted attachments.</p>
             </div>
           </button>
         </div>
@@ -407,20 +433,10 @@ const heroVisual: 'p2p' | 'screens' = 'p2p';
                 <Screenshot dir="iOS" name="Voice-Notes" alt="Voice Notes - iOS" />
               </div>
               <div class="feature-screen" data-feature="lock" data-platform="android">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
-                  </div>
-                  <div class="screen-placeholder-label">This note is locked</div>
-                </div>
+                <Screenshot dir="Android" name="Lock-Note" alt="Locked Note - Android" />
               </div>
               <div class="feature-screen" data-feature="lock" data-platform="ios">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
-                  </div>
-                  <div class="screen-placeholder-label">This note is locked</div>
-                </div>
+                <Screenshot dir="iOS" name="Lock-Note" alt="Locked Note - iOS" />
               </div>
               <div class="feature-screen" data-feature="scanner" data-platform="android">
                 <Screenshot dir="Android" name="Document-Scanner" alt="Document Scanner - Android" />
@@ -512,21 +528,10 @@ const heroVisual: 'p2p' | 'screens' = 'p2p';
                 <Screenshot dir="Desktop" name="Rich-Text-Editor" alt="Rich Text Editor" />
               </div>
               <div class="feature-screen" data-feature="d-preview">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                  </div>
-                  <div class="screen-placeholder-label">Media Preview</div>
-                  <div class="screen-placeholder-hint">Screenshot coming soon.</div>
-                </div>
+                <Screenshot dir="Desktop" name="Media-Preview" alt="Media Preview" />
               </div>
               <div class="feature-screen" data-feature="d-lock">
-                <div class="screen-placeholder">
-                  <div class="screen-placeholder-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
-                  </div>
-                  <div class="screen-placeholder-label">This note is locked</div>
-                </div>
+                <Screenshot dir="Desktop" name="Lock-Note" alt="Locked Note" />
               </div>
               <div class="feature-screen" data-feature="d-sync">
                 <Screenshot dir="Desktop" name="P2P-Device-Sync" alt="P2P Device Sync" />
@@ -593,7 +598,7 @@ const heroVisual: 'p2p' | 'screens' = 'p2p';
             <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4"/></svg></div>
             <div class="feature-item-text">
               <h4>Customization</h4>
-              <p>8 fonts, adjustable size 12-24px, system/light/dark themes.</p>
+              <p>8 fonts, adjustable size 12-24px, system/light/dark themes, and sorting by date or title.</p>
             </div>
           </button>
           <button class="feature-item" data-feature="d-linked-devices">
@@ -628,7 +633,7 @@ const heroVisual: 'p2p' | 'screens' = 'p2p';
             <div class="feature-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
             <div class="feature-item-text">
               <h4>Storage Analytics</h4>
-              <p>Per-note media breakdown — images, videos, audio, files — with reclaimable space.</p>
+              <p>Per-note media breakdown, on-disk footprint, and one-click reclaim of space still held by deleted attachments.</p>
             </div>
           </button>
         </div>
@@ -832,19 +837,32 @@ const heroVisual: 'p2p' | 'screens' = 'p2p';
 
   <div class="section-divider"></div>
 
-  <!-- P2P Explainer -->
+  <!-- P2P Explainer + Attribution -->
   <section class="p2p-explainer" id="how-it-works">
     <div class="container">
-      <div class="p2p-explainer-inner fade-in">
-        <div class="section-label">Under the Hood</div>
-        <h2 class="section-title">Built on Pear</h2>
-        <p class="section-subtitle">
-          Pear Notes is built on the open-source Pear Runtime — designed for peer-to-peer applications that run without central servers. Curious how it works under the hood?
-        </p>
-        <a href="https://docs.pears.com/" target="_blank" rel="noopener noreferrer" class="btn-secondary p2p-learn-more">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Read the Pear docs
-        </a>
+      <div class="explainer-pair">
+        <div class="p2p-explainer-inner fade-in">
+          <div class="section-label">Under the Hood</div>
+          <h2 class="section-title">Built on Pear</h2>
+          <p class="section-subtitle">
+            Pear Notes is built on the open-source Pear Runtime — designed for peer-to-peer applications that run without central servers. Curious how it works under the hood?
+          </p>
+          <a href="https://docs.pears.com/" target="_blank" rel="noopener noreferrer" class="btn-secondary p2p-learn-more">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Read the Pear docs
+          </a>
+        </div>
+        <div class="p2p-explainer-inner fade-in fade-in-delay-2" id="credits">
+          <div class="section-label">Further Reading</div>
+          <h2 class="section-title">P2P from scratch</h2>
+          <p class="section-subtitle">
+            HeartIT's <em>P2P from scratch</em> series is a ground-up walkthrough of how peer-to-peer systems work. Worth a read if you want to go deeper.
+          </p>
+          <a href="https://heartit.tech/category/p2p-systems/" target="_blank" rel="noopener noreferrer" class="btn-secondary p2p-learn-more">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Read the series on HeartIT
+          </a>
+        </div>
       </div>
     </div>
   </section>

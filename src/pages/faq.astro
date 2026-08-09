@@ -15,7 +15,15 @@ const groups = [
       },
       {
         q: 'What if my devices are never online at the same time?',
-        a: "Nothing is lost — each device keeps its own full history and syncs the moment both sides can reach each other. For phones and computers you use daily, that overlap happens naturally; sync catches up in seconds when it does.",
+        a: "Nothing is lost — each device keeps its own full history and syncs the moment both sides can reach each other. Background sync widens that window for you: on mobile the app can wake periodically to catch up, and on desktop closing the window leaves Pear Notes running in the tray. So the overlap usually happens without you arranging it.",
+      },
+      {
+        q: 'Can Pear Notes sync when the app is closed?',
+        a: "Yes, and you choose how much. Mobile offers three modes — off, periodic background sync that the system wakes occasionally for minimal battery impact, or always-on with a persistent notification. On desktop, closing the window keeps the app alive in the tray. Set it to off and syncing only ever happens while you have the app open.",
+      },
+      {
+        q: 'Will syncing eat my mobile data?',
+        a: "Not unless you let it. Photos, videos, and file attachments are held automatically while you are on a cellular connection, and you can pause media transfers entirely at any time — notes, folders, and settings are tiny and keep syncing regardless. Held items resume on their own once you are back on Wi-Fi. Every transfer is listed with its own progress, and you can pause, resume, or cancel any of them.",
       },
       {
         q: 'How many devices can I pair?',
@@ -73,7 +81,7 @@ const groups = [
       },
       {
         q: 'Is there a limit on notes or storage?',
-        a: "No artificial limits — you're bounded only by your device's storage. The built-in Storage screen shows exactly how much space your notes, images, videos, voice notes, and files use, so nothing is a mystery.",
+        a: "No artificial limits — you're bounded only by your device's storage. The built-in Storage screen shows exactly how much space your notes, images, videos, voice notes, and files use, broken down per note, so nothing is a mystery. It also reports what is reclaimable — disk space still held by attachments you have deleted — and frees it on request.",
       },
       {
         q: 'Which platforms are supported?',
