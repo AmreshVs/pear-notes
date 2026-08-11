@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  class?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+/* Globbed rather than imported directly so the site still builds when the
+   MacBook bezel PNG hasn't been dropped in yet — without it the screenshot
+   simply renders borderless. Cutout bounds were measured from the frame's
+   alpha channel (see the design handoff README). */
+const frames = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/frames/macbook-pro-14.png',
+  { eager: true }
+);
+const bezel = frames['../assets/frames/macbook-pro-14.png']?.default;
+
+const { class: className = '', loading = 'eager' } = Astro.props;
+
+const style = [
+  '--frame-ratio:3860 / 2540',
+  '--screen-left:10.8%',
+  '--screen-top:11.3%',
+  '--screen-width:78.37%',
+  '--screen-height:77.36%',
+].join(';');
+---
+
+<div
+  class={`laptop-frame ${className}`.trim()}
+  style={bezel ? style : undefined}
+  data-framed={bezel ? 'true' : 'false'}
+>
+  <div class="laptop-frame-screen">
+    <slot />
+  </div>
+  {bezel && (
+    <Image
+      class="laptop-frame-bezel"
+      src={bezel}
+      alt=""
+      width={1200}
+      format="webp"
+      quality={90}
+      loading={loading}
+      decoding="async"
+      aria-hidden="true"
+    />
+  )}
+</div>

@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import iphoneFrame from '../assets/frames/iphone-16-pro-max.png';
+import pixelFrame from '../assets/frames/pixel-9-pro.png';
+
+interface Props {
+  device: 'iphone' | 'pixel';
+  class?: string;
+  radius?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+/* Screen-cutout bounds come from device-frames-media's per-device template.json,
+   expressed as percentages of the frame image. */
+const frames = {
+  iphone: {
+    src: iphoneFrame,
+    ratio: '1520 / 3068',
+    left: '6.58%',
+    top: '3.26%',
+    width: '86.84%',
+    height: '93.48%',
+    label: 'iPhone 16 Pro Max',
+  },
+  pixel: {
+    src: pixelFrame,
+    ratio: '1620 / 3136',
+    left: '10.49%',
+    top: '4.53%',
+    width: '79.01%',
+    height: '91.07%',
+    label: 'Pixel 9 Pro',
+  },
+} as const;
+
+const { device, class: className = '', radius = '30px', loading = 'lazy' } = Astro.props;
+const f = frames[device];
+
+const style = [
+  `--frame-ratio:${f.ratio}`,
+  `--screen-left:${f.left}`,
+  `--screen-top:${f.top}`,
+  `--screen-width:${f.width}`,
+  `--screen-height:${f.height}`,
+  `--screen-radius:${radius}`,
+].join(';');
+---
+
+<div class={`phone-frame ${className}`.trim()} style={style} data-device={device}>
+  <div class="phone-frame-screen">
+    <slot />
+  </div>
+  <Image
+    class="phone-frame-bezel"
+    src={f.src}
+    alt=""
+    width={640}
+    format="webp"
+    quality={90}
+    loading={loading}
+    decoding="async"
+    aria-hidden="true"
+  />
+</div>

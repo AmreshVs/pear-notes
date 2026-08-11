@@ -126,9 +126,9 @@ const faqSchema = {
               <details class="faq-item">
                 <summary>
                   {item.q}
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                 </summary>
-                <p>{item.a}</p>
+                <div class="faq-answer"><p>{item.a}</p></div>
               </details>
             ))}
           </div>

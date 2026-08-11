@@ -20,7 +20,7 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
     <link rel="icon" type="image/png" href={`${base}icon.png`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
@@ -124,8 +124,8 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
 
       sections.forEach(s => sectionObserver.observe(s));
 
-      document.querySelectorAll('.feature-list').forEach(list => {
-        const wrap = list.closest('.feature-list-wrap');
+      document.querySelectorAll('.tour-list').forEach(list => {
+        const wrap = list.closest('.tour-list-wrap');
         if (!wrap) return;
         const check = () => {
           const atTop = list.scrollTop < 8;
@@ -139,32 +139,90 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      document.querySelectorAll('.app-showcase').forEach(section => {
-        const featureItems = Array.from(section.querySelectorAll<HTMLElement>('.feature-item'));
-        const featureScreens = section.querySelectorAll('.feature-screen');
-        const platformBtns = section.querySelectorAll('.platform-toggle-btn');
-        const list = section.querySelector<HTMLElement>('.feature-list');
-        let activePlatform = platformBtns.length > 0 ? platformBtns[0].getAttribute('data-platform')! : 'android';
+      // <details> opens and closes instantly on its own, so drive the panel
+      // height ourselves. Closing is deferred until the animation finishes,
+      // otherwise the content would vanish before it could collapse.
+      document.querySelectorAll<HTMLDetailsElement>('.faq-item').forEach(details => {
+        const summary = details.querySelector('summary');
+        const panel = details.querySelector<HTMLElement>('.faq-answer');
+        if (!summary || !panel) return;
 
-        function showScreen(featureId: string) {
-          featureScreens.forEach(s => s.classList.remove('active'));
-          const target = section.querySelector(
-            platformBtns.length > 0
-              ? `.feature-screen[data-feature="${featureId}"][data-platform="${activePlatform}"]`
-              : `.feature-screen[data-feature="${featureId}"]`
-          );
-          if (target) target.classList.add('active');
-        }
+        let animation: Animation | null = null;
+        let closing = false;
 
-        function activate(item: HTMLElement) {
-          featureItems.forEach(i => {
-            i.classList.toggle('active', i === item);
-            i.setAttribute('aria-pressed', String(i === item));
+        summary.addEventListener('click', event => {
+          if (prefersReducedMotion) return;
+          event.preventDefault();
+
+          // Measured before cancelling, so an interrupted animation resumes
+          // from where it actually is instead of snapping.
+          const from = panel.offsetHeight;
+          animation?.cancel();
+
+          // Mid-collapse the element is still `open`, but the intent is to reopen.
+          if (details.open && !closing) {
+            closing = true;
+            animation = panel.animate(
+              { height: [`${from}px`, '0px'], opacity: [1, 0] },
+              { duration: 220, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
+            );
+            animation.onfinish = () => {
+              details.open = false;
+              closing = false;
+              animation = null;
+            };
+          } else {
+            details.open = true;
+            closing = false;
+            const to = panel.offsetHeight;
+            animation = panel.animate(
+              { height: [`${from}px`, `${to}px`], opacity: [to ? from / to : 0, 1] },
+              { duration: 260, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }
+            );
+            animation.onfinish = () => {
+              animation = null;
+            };
+          }
+        });
+      });
+
+      document.querySelectorAll<HTMLElement>('[data-tour]').forEach(section => {
+        type DeviceKind = 'mobile' | 'desktop';
+
+        const deviceBtns = Array.from(
+          section.querySelectorAll<HTMLElement>('[data-tour-device]')
+        );
+        let device: DeviceKind =
+          (deviceBtns[0]?.getAttribute('data-tour-device') as DeviceKind) ?? 'mobile';
+
+        const itemsFor = (kind: DeviceKind) =>
+          Array.from(section.querySelectorAll<HTMLElement>(`[data-tour-pick="${kind}"]`));
+        const listFor = (kind: DeviceKind) =>
+          section.querySelector<HTMLElement>(`[data-tour-list="${kind}"] .tour-list`);
+
+        function select(kind: DeviceKind, index: number) {
+          itemsFor(kind).forEach(item => {
+            const on = Number(item.dataset.index) === index;
+            item.classList.toggle('active', on);
+            item.setAttribute('aria-pressed', String(on));
           });
-          showScreen(item.getAttribute('data-feature')!);
+
+          section
+            .querySelectorAll<HTMLElement>(`[data-tour-pane="${kind}"] .tour-screen`)
+            .forEach(screen => {
+              const on = Number(screen.dataset.index) === index;
+              screen.classList.toggle('active', on);
+              // Restart the entrance animation on every swap.
+              if (on) {
+                screen.classList.remove('tour-screen-in');
+                void screen.offsetWidth;
+                screen.classList.add('tour-screen-in');
+              }
+            });
         }
 
-        function scrollListTo(item: HTMLElement) {
+        function scrollListTo(kind: DeviceKind, item: HTMLElement) {
+          const list = listFor(kind);
           if (!list) return;
           list.scrollTo({
             top: item.offsetTop - list.offsetTop - list.clientHeight / 2 + item.clientHeight / 2,
@@ -172,9 +230,37 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
           });
         }
 
-        featureItems.forEach(i =>
-          i.setAttribute('aria-pressed', String(i.classList.contains('active')))
-        );
+        function setDevice(kind: DeviceKind) {
+          device = kind;
+          deviceBtns.forEach(btn => {
+            const on = btn.getAttribute('data-tour-device') === kind;
+            btn.classList.toggle('active', on);
+            btn.setAttribute('aria-pressed', String(on));
+          });
+          section.querySelectorAll<HTMLElement>('[data-tour-list]').forEach(el => {
+            el.hidden = el.getAttribute('data-tour-list') !== kind;
+          });
+          section.querySelectorAll<HTMLElement>('[data-tour-pane]').forEach(el => {
+            el.hidden = el.getAttribute('data-tour-pane') !== kind;
+          });
+        }
+
+        (['mobile', 'desktop'] as DeviceKind[]).forEach(kind => {
+          itemsFor(kind).forEach(item => {
+            item.setAttribute('aria-pressed', String(item.classList.contains('active')));
+            item.addEventListener('click', () => {
+              select(kind, Number(item.dataset.index));
+              item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+          });
+        });
+
+        deviceBtns.forEach(btn => {
+          btn.setAttribute('aria-pressed', String(btn.classList.contains('active')));
+          btn.addEventListener('click', () =>
+            setDevice(btn.getAttribute('data-tour-device') as DeviceKind)
+          );
+        });
 
         let autoTimer: ReturnType<typeof setInterval> | null = null;
         let userInteracted = false;
@@ -191,10 +277,12 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
           if (userInteracted || prefersReducedMotion || autoTimer) return;
           if (!sectionInView || document.visibilityState === 'hidden') return;
           autoTimer = setInterval(() => {
-            const current = featureItems.findIndex(i => i.classList.contains('active'));
-            const next = featureItems[(current + 1) % featureItems.length];
-            activate(next);
-            scrollListTo(next);
+            const items = itemsFor(device);
+            if (items.length === 0) return;
+            const current = items.findIndex(i => i.classList.contains('active'));
+            const next = (current + 1) % items.length;
+            select(device, next);
+            scrollListTo(device, items[next]);
           }, 4000);
         }
 
@@ -219,33 +307,6 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
           { threshold: 0.35 }
         );
         autoObserver.observe(section);
-
-        featureItems.forEach(item => {
-          item.addEventListener('click', () => {
-            activate(item);
-            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          });
-        });
-
-        const deviceFrame = section.querySelector('.device-frame-phone');
-        if (deviceFrame) deviceFrame.setAttribute('data-active-platform', activePlatform);
-
-        platformBtns.forEach(btn =>
-          btn.setAttribute('aria-pressed', String(btn.classList.contains('active')))
-        );
-
-        platformBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            platformBtns.forEach(b => {
-              b.classList.toggle('active', b === btn);
-              b.setAttribute('aria-pressed', String(b === btn));
-            });
-            activePlatform = btn.getAttribute('data-platform')!;
-            if (deviceFrame) deviceFrame.setAttribute('data-active-platform', activePlatform);
-            const activeFeature = section.querySelector<HTMLElement>('.feature-item.active');
-            if (activeFeature) showScreen(activeFeature.getAttribute('data-feature')!);
-          });
-        });
       });
     </script>
   </body>
