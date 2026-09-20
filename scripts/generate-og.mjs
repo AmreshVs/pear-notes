@@ -36,7 +36,7 @@ const svg = `<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http:/
   <image x="527" y="96" width="146" height="146" clip-path="url(#iconClip)" xlink:href="data:image/png;base64,${iconB64}"/>
   <rect x="527" y="96" width="146" height="146" rx="34" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
   <text x="600" y="330" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="bold" font-size="76" fill="#f5f5f7" letter-spacing="-2">Your notes, <tspan fill="url(#goldText)">truly private.</tspan></text>
-  <text x="600" y="398" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#a1a1a6">End-to-end encrypted notes with peer-to-peer sync.</text>
+  <text x="600" y="398" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#a1a1a6">Encrypted notes, peer-to-peer sync, on-device AI.</text>
   <text x="600" y="444" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#a1a1a6">No servers. No cloud. No compromises.</text>
   <text x="600" y="540" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="bold" font-size="26" fill="#DCA323" letter-spacing="6">PEAR NOTES</text>
 </svg>`;

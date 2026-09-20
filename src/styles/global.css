@@ -708,6 +708,7 @@ button:focus-visible {
    whose opacity transitions instead. */
 
 .bento-card,
+.ai-card,
 .sec-card,
 .step-card {
   position: relative;
@@ -719,6 +720,7 @@ button:focus-visible {
 }
 
 .bento-card::before,
+.ai-card::before,
 .sec-card::before,
 .step-card::before {
   content: '';
@@ -733,12 +735,14 @@ button:focus-visible {
 }
 
 .bento-card:hover,
+.ai-card:hover,
 .sec-card:hover,
 .step-card:hover {
   border-color: rgba(220, 163, 35, 0.4);
 }
 
 .bento-card:hover::before,
+.ai-card:hover::before,
 .sec-card:hover::before,
 .step-card:hover::before {
   opacity: 1;
@@ -935,6 +939,209 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ─── On-device AI ─── */
+
+.ai {
+  padding: 0 0 6.875rem;
+}
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.ai-card {
+  padding: 1.75rem;
+}
+
+.ai-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.ai-card p {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.ai-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-gold-light);
+  border: 1px solid rgba(220, 163, 35, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.ai-icon-lg {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: rgba(220, 163, 35, 0.15);
+  border-color: rgba(220, 163, 35, 0.35);
+  margin-bottom: 1.25rem;
+}
+
+.ai-card-wide {
+  grid-column: span 2;
+}
+
+.ai-card-hero {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  padding: 2.125rem;
+  border-color: rgba(220, 163, 35, 0.22);
+  background: linear-gradient(165deg, rgba(220, 163, 35, 0.1), rgba(255, 255, 255, 0.015) 55%);
+}
+
+.ai-card-hero::before {
+  background: linear-gradient(165deg, rgba(220, 163, 35, 0.2), transparent 60%);
+}
+
+.ai-card-hero:hover {
+  border-color: rgba(220, 163, 35, 0.5);
+}
+
+.ai-card-hero h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.625rem;
+}
+
+.ai-card-hero p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* Mock of the Ask sheet: a question, the edits it proposes, and the button
+   that is the only thing which ever changes the note. */
+.ask-demo {
+  margin-top: auto;
+  padding-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ask-bubble {
+  align-self: flex-end;
+  max-width: 85%;
+  padding: 0.55rem 0.85rem;
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-xs) var(--radius-lg);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+  background: rgba(220, 163, 35, 0.16);
+  border: 1px solid rgba(220, 163, 35, 0.28);
+}
+
+.ask-edits {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.9rem;
+  border-radius: var(--radius-lg);
+  background: rgba(8, 8, 10, 0.5);
+  border: 1px solid var(--border-subtle);
+}
+
+.ask-edits-title {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+}
+
+.ask-edit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+  flex-wrap: wrap;
+}
+
+.ask-edit svg {
+  flex-shrink: 0;
+}
+
+.ask-edit-old {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.ask-edit-new {
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+.ask-apply {
+  margin-top: 0.15rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-3xl);
+  background: var(--accent-gold);
+  color: #08080a;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.ai-proof {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem 1.75rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.ai-proof-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.ai-proof-icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-xs);
+  background: var(--accent-gold-light);
+  border: 1px solid rgba(220, 163, 35, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-proof-item h3 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.ai-proof-item p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  line-height: 1.55;
+}
+
+.ai-note {
+  margin-top: 1.75rem;
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  line-height: 1.7;
+  max-width: 90ch;
 }
 
 /* ─── Interactive Tour ─── */
@@ -1840,6 +2047,20 @@ button:focus-visible {
     margin: 0 auto;
   }
 
+  .ai-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ai-card-hero,
+  .ai-card-wide {
+    grid-row: auto;
+    grid-column: span 2;
+  }
+
+  .ai-proof {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sec-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1963,6 +2184,7 @@ button:focus-visible {
   }
 
   .features,
+  .ai,
   .tour,
   .security,
   .how-sync,
@@ -1971,6 +2193,8 @@ button:focus-visible {
   }
 
   .bento,
+  .ai-grid,
+  .ai-proof,
   .sec-grid,
   .footer-grid {
     grid-template-columns: 1fr;
@@ -1978,6 +2202,8 @@ button:focus-visible {
 
   .bento-card-hero,
   .bento-card-wide,
+  .ai-card-hero,
+  .ai-card-wide,
   .sec-card-hero {
     grid-column: auto;
   }
@@ -2016,11 +2242,13 @@ button:focus-visible {
   .download-content h2 { font-size: 1.65rem; }
 
   .bento-card,
+  .ai-card,
   .sec-card {
     padding: 1.5rem;
   }
 
   .bento-card-hero,
+  .ai-card-hero,
   .sec-card-hero {
     padding: 1.75rem;
   }

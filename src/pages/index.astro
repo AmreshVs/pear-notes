@@ -35,6 +35,18 @@ const icons = {
   eyeOff: '<path d="M1 1l22 22"/><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.4 18.4 0 0 1 4.22-5.06M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24"/>',
   radio: '<circle cx="12" cy="12" r="3"/><path d="M4 12a8 8 0 0 1 8-8"/><path d="M20 12a8 8 0 0 1-8 8"/>',
   refresh: '<path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/>',
+  sparkles: '<path d="M12 3l1.9 4.8L18.7 9.7 13.9 11.6 12 16.4 10.1 11.6 5.3 9.7 10.1 7.8z"/><path d="M19 15l.7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7z"/>',
+  chat: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/>',
+  globe: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  scanText: '<path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="13" y2="14"/>',
+  share: '<path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/>',
+  history: '<path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 3 3 9 9 9"/><polyline points="12 7 12 12 15 14"/>',
+  restore: '<polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>',
+  wifiOff: '<line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.58 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>',
+  download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+  toggle: '<rect x="1" y="5" width="22" height="14" rx="7" ry="7"/><circle cx="16" cy="12" r="3"/>',
+  code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+  transcript: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/>',
 };
 
 const bentoCards = [
@@ -47,6 +59,31 @@ const bentoCardsBottom = [
   { title: 'Live transfer queue', body: 'Every upload and download shows progress. Pause, resume, cancel, or retry any of them.', icon: icons.transfer },
   { title: 'Pinned notes', body: 'Pin what matters and it stays on top, on every device you sync.', icon: icons.pin },
   { title: 'Write, speak, or scan', body: 'Rich text, voice memos with waveforms, and a document scanner — all landing in the encrypted vault.', icon: icons.pencil },
+  { title: 'Every change, attributed', body: 'An activity log records what each device created, edited, or deleted — with the exact lines that changed.', icon: icons.history },
+  { title: 'Share straight into a note', body: 'Send photos, files, links, or text from any other app and Pear Notes drops them into the note you pick.', icon: icons.share },
+  { title: 'A 30-day safety net', body: 'Deleted notes wait in Recently Deleted for 30 days, on every device, before they are gone for good.', icon: icons.restore },
+  { title: 'See it before you open it', body: 'The notes list previews images and the first page of a PDF, so you recognize a note without opening it.', icon: icons.image },
+];
+
+const aiHero = {
+  title: 'Ask a note anything',
+  body: "Ask a question and get an answer from that note alone. Ask for a change and you get the exact edits, listed, to apply or throw away. Nothing is rewritten behind your back — and nothing is sent anywhere.",
+};
+
+const aiFeatures = [
+  { title: 'Voice typing', body: 'Speak and the words appear in the note as you talk. Your voice is turned into text on the device.', icon: icons.mic },
+  { title: 'Transcribe recordings', body: 'Turn any voice memo into text, transcribed on the device and inserted as a quote under the recording.', icon: icons.transcript },
+  { title: 'Extract text', body: 'Read the text out of photos, scans, and PDFs in 27 Latin-script languages — up to 20 pages, none of them uploaded.', icon: icons.scanText },
+  { title: 'Describe images', body: 'A short description of a photo, written on the device and added as a caption below the image.', icon: icons.image },
+  { title: 'Translate notes', body: '48 languages, to and from English. Each one is a 13–44 MB download, then it translates offline.', icon: icons.globe },
+  { title: 'Summarize and rewrite', body: 'Summaries, key points, and suggested titles for a whole note. Fix grammar, or make a selection shorter, clearer, more professional, or friendlier — every pass runs on your own hardware.', icon: icons.pencil, wide: true },
+];
+
+const aiProof = [
+  { title: 'Off until you turn it on', body: 'Every feature is a separate switch, off by default. The setting is per device and never synced.', icon: icons.toggle },
+  { title: 'One download, then offline', body: 'Models come over Wi-Fi once, then run with no network at all. Pause, resume, or delete them any time.', icon: icons.download },
+  { title: 'No AI provider involved', body: "There is no API key, no account, and no request to send. Your notes never leave the device to be processed.", icon: icons.wifiOff },
+  { title: 'Locked notes stay out of it', body: 'Every AI action disappears on a locked note. Nothing summarizes, translates, or reads it.', icon: icons.lock },
 ];
 
 /* `name` matches the screenshot filename under src/assets/screenshots/<platform>/ */
@@ -55,9 +92,15 @@ const mobileFeatures = [
   { name: 'Notes-List', title: 'Notes List', body: 'Notes grouped by date, with pinned notes always on top.', icon: icons.list },
   { name: 'Full-Text-Search', title: 'Full-Text Search', body: 'Instant search across all notes with real-time filtering.', icon: icons.search },
   { name: 'Rich-Text-Editor', title: 'Rich Text Editor', body: 'Headings, lists, task lists, code blocks, blockquotes, and alignment.', icon: icons.pencil },
+  { name: 'Ask-AI', title: 'Ask AI', body: 'Ask about a note and apply the exact edits it proposes — answered on your phone, never in the cloud.', icon: icons.chat },
+  { name: 'AI-Tools', title: 'AI Tools', body: 'Summaries, key points, titles, and rewrites — all generated on the device, with nothing uploaded.', icon: icons.sparkles },
+  { name: 'Voice-Typing', title: 'Voice Typing', body: 'Speak and the words land in the note as you talk. Your voice is transcribed on the device and never sent.', icon: icons.mic },
+  { name: 'Translate', title: 'Translate', body: '48 languages, to and from English, translated offline on the device once the language is downloaded.', icon: icons.globe },
+  { name: 'On-Device-AI', title: 'On-Device AI', body: 'Turn features on one at a time. Each model downloads once, then runs with no network at all.', icon: icons.toggle },
   { name: 'Document-Scanner', title: 'Document Scanner', body: 'Multi-page scanning with auto-crop, attach photos or videos.', icon: icons.camera },
   { name: 'Voice-Notes', title: 'Voice Notes', body: 'Record with waveform visualization, playback, and embed inside notes.', icon: icons.mic },
   { name: 'Lock-Note', title: 'Note Lock', body: 'Biometrics or a synced password — screenshots blocked while open.', icon: icons.lockDot },
+  { name: 'Activity-Log', title: 'Activity Log', body: 'What each device created, edited, or deleted — with the exact lines that changed.', icon: icons.history },
   { name: 'Customization', title: 'Customization', body: '8 fonts, adjustable text size, and dark/light/system themes.', icon: icons.gear },
   { name: 'Linked-Devices', title: 'Linked Devices', body: 'View, rename, and manage all connected devices.', icon: icons.phone },
   { name: 'P2P-Device-Sync', title: 'P2P Device Sync', body: 'Hypercore-based sync with QR code pairing.', icon: icons.activity },
@@ -69,9 +112,13 @@ const mobileFeatures = [
 const desktopFeatures = [
   { name: 'Three-Panel-Layout', title: 'Three-Panel Layout', body: 'Resizable folders sidebar, notes list, and editor that adapt to your workflow.', icon: icons.columns },
   { name: 'Rich-Text-Editor', title: 'Rich Text Editor', body: 'Syntax-highlighted code blocks, tables, media embeds, headings, and task lists.', icon: icons.pencil },
+  { name: 'Ask-AI', title: 'Ask AI', body: 'Ask about a note or a selection and review every change before it applies — answered on your computer, not a server.', icon: icons.chat },
+  { name: 'AI-Tools', title: 'AI Tools', body: 'Summaries, key points, titles, rewrites, and translation from the editor or the selection menu — nothing leaves the machine.', icon: icons.sparkles },
+  { name: 'On-Device-AI', title: 'On-Device AI', body: 'Per-feature switches with model sizes and licences. Models run on your computer, with no account and no API key.', icon: icons.toggle },
   { name: 'Media-Preview', title: 'Media Preview', body: 'Fullscreen previews for images, PDFs, text, and audio — plus inline video playback.', icon: icons.image },
   { name: 'Lock-Note', title: 'Note Lock', body: 'Touch ID, Windows Hello, or a synced password — with screen capture blocked while a locked note is open.', icon: icons.lockDot },
   { name: 'Voice-Recorder', title: 'Voice Recorder', body: 'Web Audio API recording with preview playback, saved as WebM audio.', icon: icons.mic },
+  { name: 'Activity-Log', title: 'Activity Log', body: 'A timeline of every device\u2019s changes, with a line-by-line diff behind each entry.', icon: icons.history },
   { name: 'Customization', title: 'Customization', body: '8 fonts, adjustable size 12-24px, system/light/dark themes, and sorting by date or title.', icon: icons.gear },
   { name: 'Linked-Devices', title: 'Linked Devices', body: 'View, rename, and manage connected devices with platform info and sync status.', icon: icons.phone },
   { name: 'P2P-Device-Sync', title: 'P2P Device Sync', body: 'Hyperswarm discovery with QR code invites — temporary or permanent links.', icon: icons.activity },
@@ -95,6 +142,11 @@ const steps = [
 
 const faqs = [
   {
+    id: 'faq-ai',
+    q: 'Does the AI send my notes anywhere?',
+    a: "No. Every AI feature runs on the device with a model you download once, so there is no API key, no account, and no request to send. Each feature is off until you turn it on, the setting stays on that device, and AI actions are hidden entirely on locked notes.",
+  },
+  {
     id: 'faq-sync',
     q: 'If there are no servers, how does sync actually work?',
     a: 'Your devices find each other through the Hyperswarm distributed network and open a direct, end-to-end encrypted connection — no middleman ever stores or relays your notes. Changes replicate immediately when two devices are online together; otherwise every edit waits safely on the device where you made it.',
@@ -114,7 +166,10 @@ const faqs = [
 ];
 ---
 
-<Layout title="Pear Notes — Private & Encrypted Notes with P2P Sync">
+<Layout
+  title="Pear Notes — Private & Encrypted Notes with P2P Sync and On-Device AI"
+  description="Pear Notes is a secure, private, offline-first notebook. End-to-end encrypted with peer-to-peer sync across your devices, plus on-device AI for voice typing, transcripts, summaries and translation. No servers, no cloud, nothing uploaded."
+>
   <Header />
 
   <!-- Hero -->
@@ -130,7 +185,7 @@ const faqs = [
           <span class="gradient-text">truly private.</span>
         </h1>
         <p class="hero-subtitle">
-          Encrypted notes that sync directly between your devices over peer-to-peer connections. No servers. No cloud. No compromises.
+          Encrypted notes that sync straight between your devices — and AI that runs on your own hardware. No servers. No cloud. No compromises.
         </p>
         <div class="hero-actions">
           <a href="#download" class="btn-primary">Get Pear Notes</a>
@@ -303,6 +358,73 @@ const faqs = [
     </div>
   </section>
 
+  <!-- On-device AI -->
+  <section class="ai" id="ai">
+    <div class="container">
+      <div class="section-head fade-in">
+        <div class="section-label">On-device AI</div>
+        <h2 class="section-title">AI that never<br />leaves your device.</h2>
+        <p class="section-subtitle">Six optional features, each running on an open model you download once. After that they work with no network at all — there is no AI provider in the picture, because there is nowhere to send anything.</p>
+      </div>
+
+      <div class="ai-grid fade-in">
+        <article class="ai-card ai-card-hero">
+          <span class="ai-icon ai-icon-lg" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icons.chat} />
+          </span>
+          <h3>{aiHero.title}</h3>
+          <p>{aiHero.body}</p>
+          <div class="ask-demo" aria-hidden="true">
+            <div class="ask-bubble ask-bubble-you">Move the standup to Friday and add Sam</div>
+            <div class="ask-edits">
+              <span class="ask-edits-title">2 changes to the note</span>
+              <span class="ask-edit">
+                <span class="ask-edit-old">Monday</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6e6e73" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <span class="ask-edit-new">Friday</span>
+              </span>
+              <span class="ask-edit">
+                <span class="ask-edit-old">Anna, Ben</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6e6e73" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <span class="ask-edit-new">Anna, Ben, Sam</span>
+              </span>
+              <span class="ask-apply">Apply changes</span>
+            </div>
+          </div>
+        </article>
+
+        {aiFeatures.map(f => (
+          <article class:list={['ai-card', { 'ai-card-wide': f.wide }]}>
+            <span class="ai-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={f.icon} />
+            </span>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="ai-proof fade-in">
+        {aiProof.map(item => (
+          <div class="ai-proof-item">
+            <span class="ai-proof-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={item.icon} />
+            </span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="ai-note">
+        Models are open and named in the app, with their licences — Whisper (MIT), Qwen3 and VisionPsy (Apache&nbsp;2.0), Bergamot (MPL&nbsp;2.0).
+        On-device AI needs a physical device running iOS&nbsp;17, Android&nbsp;12, or macOS&nbsp;14 or later, and the models it downloads are left out of backups and sync.
+      </p>
+    </div>
+  </section>
+
   <!-- Interactive tour -->
   <section class="tour" id="tour" data-tour>
     <div class="container">
@@ -472,8 +594,8 @@ const faqs = [
       <div class="download-glow" aria-hidden="true"></div>
       <div class="download-content">
         <h2>Start writing privately.</h2>
-        <p>Download Pear Notes for Android today. Your notes stay yours — encrypted on-device, synced peer-to-peer, stored nowhere else.</p>
-        <a href="#" class="btn-primary btn-primary-lg">Get it on Google Play</a>
+        <p>Download Pear Notes for Android today. Your notes stay yours — encrypted on-device, synced peer-to-peer, and never uploaded — not even for AI.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.amreshvs.pearnotes" target="_blank" rel="noopener noreferrer" class="btn-primary btn-primary-lg">Get it on Google Play</a>
         <p class="download-note">iOS &middot; macOS &middot; Windows coming soon</p>
       </div>
     </div>

@@ -69,6 +69,39 @@ const groups = [
     ],
   },
   {
+    label: 'On-device AI',
+    items: [
+      {
+        q: 'Does the AI send my notes anywhere?',
+        a: "No. Every AI feature runs on your device using a model you download once — there is no API key, no account, and no request to send. Your notes, recordings, and photos are processed locally and never uploaded, which is also why the features keep working with no connection at all.",
+      },
+      {
+        q: 'What can the on-device AI do?',
+        a: "Six things, each a separate switch: voice typing that turns speech into text as you talk; transcripts for voice recordings; text extraction from photos, scans, and PDFs; short descriptions of images; summaries, key points, suggested titles, and rewrites of selected text; and translation between English and 48 other languages. You can also ask a question about a note and get an answer from that note alone.",
+      },
+      {
+        q: 'Can the AI change my notes on its own?',
+        a: "No. When you ask for a change, it shows you the exact edits it proposes — each one as the old text and the new text — and nothing happens until you apply them. Applied changes can be undone like any other edit, and rewrites and translations always preview before they replace anything.",
+      },
+      {
+        q: 'How much space do the AI models take?',
+        a: "It depends on what you turn on. Speech is 44 MB to 400 MB depending on the quality you pick, text extraction about 100 MB, image descriptions about 412 MB, and the model behind summaries and rewrites 382 MB or 1 GB. Translation downloads only the languages you actually use, at 13–44 MB each. Downloads can wait for Wi-Fi, can be paused, and every model can be deleted later to free the space.",
+      },
+      {
+        q: 'Can the AI be wrong?',
+        a: "Yes, and the app says so where it matters. Transcripts mishear names and punctuation, summaries can miss details, image descriptions can be inaccurate, and translations lose nuance when they pivot through English. Everything is shown to you for review before it goes into a note. These are small models running on a phone or laptop, not a datacenter.",
+      },
+      {
+        q: 'Which devices can run it?',
+        a: "A physical device running iOS 17, Android 12 (64-bit), or macOS 14 or later. Devices with less memory can still use the lighter models; the largest ones need more headroom. If your device can't run it, everything else in Pear Notes works exactly as usual.",
+      },
+      {
+        q: 'Can I turn it off completely?',
+        a: "It is off until you turn it on — every feature individually. The setting lives on that device and is never synced, so turning it on for your laptop doesn't turn it on for your phone. Models are excluded from backups and sync, and AI actions are hidden entirely on locked notes.",
+      },
+    ],
+  },
+  {
     label: 'Using Pear Notes',
     items: [
       {
@@ -82,6 +115,18 @@ const groups = [
       {
         q: 'Is there a limit on notes or storage?',
         a: "No artificial limits — you're bounded only by your device's storage. The built-in Storage screen shows exactly how much space your notes, images, videos, voice notes, and files use, broken down per note, so nothing is a mystery. It also reports what is reclaimable — disk space still held by attachments you have deleted — and frees it on request.",
+      },
+      {
+        q: 'Can I see what changed, and on which device?',
+        a: "Yes. The activity log records what each of your devices created, edited, renamed, moved, or deleted, and any note has its own history. Open an entry to see the exact lines that changed, with the device that changed them. Recording can be turned off, entries can be kept for as long as you choose, and clearing the log clears it on every linked device.",
+      },
+      {
+        q: 'Can I send things into Pear Notes from other apps?',
+        a: "Yes. Share photos, videos, files, links, or text from any app and Pear Notes takes them in — pick the note to add them to, or start a new one. Everything that arrives lands in the same encrypted vault as anything you create in the app.",
+      },
+      {
+        q: 'What happens when I delete a note?',
+        a: "It moves to Recently Deleted for 30 days, on every one of your devices, so a mistake on one device isn't final everywhere else. You can restore it any time in that window, or delete it permanently yourself. After 30 days it is removed for good.",
       },
       {
         q: 'Which platforms are supported?',
