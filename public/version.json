@@ -1,17 +1,17 @@
 {
   "desktop": {
-    "latestVersion": "1.0.1",
+    "latestVersion": "1.0.0",
     "minimumVersion": "1.0.0",
     "downloadUrl": "https://amreshvs.github.io/pear-notes/#download"
   },
   "ios": {
-    "latestVersion": "1.0.1",
+    "latestVersion": "1.0.0",
     "minimumVersion": "1.0.0",
     "minimumRuntimeVersion": "1.0.0",
     "storeUrl": "https://apps.apple.com/app/id6803172019"
   },
   "android": {
-    "latestVersion": "1.0.1",
+    "latestVersion": "1.0.0",
     "minimumVersion": "1.0.0",
     "minimumRuntimeVersion": "1.0.0",
     "storeUrl": "https://play.google.com/store/apps/details?id=com.amreshvs.pearnotes"
