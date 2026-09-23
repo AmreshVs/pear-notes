@@ -11,9 +11,9 @@
     "storeUrl": "https://apps.apple.com/app/id6803172019"
   },
   "android": {
-    "latestVersion": "1.0.0",
-    "minimumVersion": "1.0.0",
-    "minimumRuntimeVersion": "1.0.0",
+    "latestVersion": "1.0.1",
+    "minimumVersion": "1.0.1",
+    "minimumRuntimeVersion": "1.0.1",
     "storeUrl": "https://play.google.com/store/apps/details?id=com.amreshvs.pearnotes"
   }
 }
