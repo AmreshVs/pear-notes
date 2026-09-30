@@ -6,6 +6,7 @@ interface Props {
 
 const { title, description = 'Pear Notes is a secure, private, and offline-first notebook. End-to-end encrypted with peer-to-peer sync across all your devices. No servers, no cloud leaks.' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const canonical = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).href;
 const ogImage = new URL(`${base}og-image.png`, Astro.site);
 ---
 
@@ -14,7 +15,8 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0e0e10" />
     <link rel="icon" type="image/png" href={`${base}icon.png`} />
@@ -27,11 +29,25 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Pear Notes" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <title>{title}</title>
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Pear Notes',
+      description,
+      applicationCategory: 'ProductivityApplication',
+      operatingSystem: 'Android, Windows, Linux',
+      url: new URL(base, Astro.site).href,
+      image: ogImage.href,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    })} />
 
     <!-- Google Analytics (Anonymous/Traffic Only) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-X24NHKRC5E"></script>
