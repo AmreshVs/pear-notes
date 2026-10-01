@@ -2,9 +2,11 @@
 interface Props {
   title: string;
   description?: string;
+  /** Browser chrome tint (status bar on older iOS Safari). */
+  themeColor?: string;
 }
 
-const { title, description = 'Pear Notes is a secure, private, and offline-first notebook. End-to-end encrypted with peer-to-peer sync across all your devices. No servers, no cloud leaks.' } = Astro.props;
+const { title, themeColor = '#0e0e10', description = 'Pear Notes is a secure, private, and offline-first notebook. End-to-end encrypted with peer-to-peer sync across all your devices. No servers, no cloud leaks.' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const canonical = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).href;
 const ogImage = new URL(`${base}og-image.png`, Astro.site);
@@ -18,7 +20,7 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href={canonical} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0e0e10" />
+    <meta name="theme-color" content={themeColor} />
     <link rel="icon" type="image/png" href={`${base}icon.png`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -68,14 +70,74 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
     <slot />
     <script>
       const header = document.querySelector('.header');
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      const navLinks = document.querySelector('.nav-links');
+
+      // Desktop: hide on scroll down, reveal on scroll up (the "headroom" pattern), with
+      // the header only position: fixed while it's actually on screen:
+      //   static: sits at the top of the page and scrolls away with it
+      //   pinned: fixed, slid in after the reader scrolls back up
+      // Phones/tablets: the header never pins. iOS Safari tints the status bar solid for the
+      // rest of the visit once a fixed element shows near the top, so staying in the page
+      // keeps the status bar transparent. Tapping the status bar scrolls back to it.
       if (header) {
+        const compact = window.matchMedia('(max-width: 1024px)');
+        const JITTER = 8;
+        let lastY = window.scrollY;
+        let ticking = false;
+        const isPinned = () => header.classList.contains('is-pinned');
+        const menuOpen = () => !!navLinks && navLinks.classList.contains('open');
+
+        const pin = () => {
+          header.classList.add('is-pinned', 'is-hidden');
+          header.getBoundingClientRect();
+          header.classList.remove('is-hidden');
+        };
+        const unpinAfterSlide = () => {
+          header.classList.add('is-hidden');
+          const done = (e) => {
+            if (e && e.propertyName !== 'transform') return;
+            header.removeEventListener('transitionend', done);
+            if (header.classList.contains('is-hidden')) header.classList.remove('is-pinned', 'is-hidden');
+          };
+          header.addEventListener('transitionend', done);
+          setTimeout(done, 500);
+        };
+
+        const update = () => {
+          ticking = false;
+          const y = Math.max(window.scrollY, 0);
+          header.classList.toggle('scrolled', y > 40);
+          if (compact.matches) {
+            header.classList.remove('is-pinned', 'is-hidden');
+            lastY = y;
+            return;
+          }
+          // Back at the very top a pinned header lines up with its static spot, so drop
+          // the fixed position without any visible change.
+          if (y <= 0 && isPinned()) header.classList.remove('is-pinned', 'is-hidden');
+          const delta = y - lastY;
+          if (Math.abs(delta) < JITTER) return;
+          lastY = y;
+          const hidden = header.classList.contains('is-hidden');
+          if (delta < 0) {
+            if (!isPinned() && y > header.offsetHeight) pin();
+            else if (hidden) header.classList.remove('is-hidden');
+          } else if (isPinned() && !hidden && !menuOpen() && !header.contains(document.activeElement)) {
+            unpinAfterSlide();
+          }
+        };
         window.addEventListener('scroll', () => {
-          header.classList.toggle('scrolled', window.scrollY > 40);
+          if (!ticking) { ticking = true; requestAnimationFrame(update); }
+        }, { passive: true });
+        // Keyboard users tabbing into a scrolled-away header get it back in view.
+        header.addEventListener('focusin', () => {
+          if (compact.matches) return;
+          if (!isPinned() && window.scrollY > header.offsetHeight) pin();
+          else header.classList.remove('is-hidden');
         });
       }
 
-      const menuBtn = document.querySelector('.mobile-menu-btn');
-      const navLinks = document.querySelector('.nav-links');
       if (menuBtn && navLinks) {
         menuBtn.setAttribute('aria-expanded', 'false');
         menuBtn.addEventListener('click', () => {

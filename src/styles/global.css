@@ -61,6 +61,15 @@ body {
   overflow-x: hidden;
 }
 
+/* At the very top of the page there's nothing above the content, so iOS Safari fills the
+   strip behind the status bar with body's background-color (once scrolled, content shows
+   through it). On the home page, make that colour the hero's gold glow so the top blends
+   in, and paint the real dark background as an image on top so the page looks unchanged. */
+html:has(.hero) body {
+  background-color: #382a0e;
+  background-image: linear-gradient(var(--bg-primary), var(--bg-primary));
+}
+
 a {
   color: var(--accent-gold);
   text-decoration: none;
@@ -113,8 +122,13 @@ button:focus-visible {
 
 /* ─── Header ─── */
 
+/* The header sits in the page (absolute). On desktop it's fixed only while revealed on
+   scroll up (.is-pinned); on phones/tablets it never pins, because iOS Safari paints a
+   solid strip behind the status bar for the rest of the visit once any fixed element
+   shows near the top. Not pinning keeps the status bar transparent, with content
+   scrolling under it. Layout's script drives the states. */
 .header {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -124,7 +138,17 @@ button:focus-visible {
   background: transparent;
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
-  transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease;
+  transition:
+    background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease,
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header.is-pinned {
+  position: fixed;
+}
+
+.header.is-hidden {
+  transform: translateY(-100%);
 }
 
 .header.scrolled {
@@ -133,6 +157,7 @@ button:focus-visible {
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom-color: var(--border-subtle);
 }
+
 
 .header-inner {
   display: flex;
