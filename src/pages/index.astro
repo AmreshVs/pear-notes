@@ -216,7 +216,32 @@ const faqs = [
       </div>
 
       <div class="hero-visual">
-        <div class="p2p-scene" aria-label="Notes sync directly between your devices over an encrypted connection, bypassing the cloud">
+        <div class="p2p-scene" data-hero-scene aria-label="Notes sync directly between your devices over an encrypted connection, bypassing the cloud">
+          <div class="hero-film" data-hero-film>
+            <video
+              class="hero-film-video"
+              muted
+              playsinline
+              preload="none"
+              poster={`${base}video/pear-notes-story-poster.jpg`}
+              aria-label="Notes apps tethered to a cloud dissolve into a direct device-to-device link, ending on the Pear Notes logo"
+            >
+              <source src={`${base}video/pear-notes-story.webm`} type="video/webm" />
+              <source src={`${base}video/pear-notes-story.mp4`} type="video/mp4" />
+            </video>
+            <div class="hero-film-controls">
+              <button type="button" class="hero-film-btn hero-film-sound" data-hero-film-sound aria-pressed="false" aria-label="Unmute film">
+                <svg class="hero-film-sound-off" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg class="hero-film-sound-on" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+              </button>
+              <button type="button" class="hero-film-btn hero-film-skip" data-hero-film-skip>Skip</button>
+            </div>
+            <span class="hero-film-progress" aria-hidden="true"><span data-hero-film-bar></span></span>
+          </div>
+          <button type="button" class="hero-film-replay" data-hero-film-replay hidden>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86A1 1 0 0 0 8 5.14z"/></svg>
+            <span data-hero-film-replay-label>Play film</span>
+          </button>
           <svg class="p2p-links" viewBox="0 0 640 540" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <linearGradient id="beamGrad" x1="101" y1="400" x2="428" y2="300" gradientUnits="userSpaceOnUse">
@@ -291,6 +316,137 @@ const faqs = [
       </div>
     </div>
   </section>
+
+  <script>
+    // The illustration is the resting state. The film downloads in the background and
+    // takes over only once it can play through, and only while the hero is on screen,
+    // so nobody ever stares at a loading card. It ends (or is skipped) back into the
+    // illustration, and plays again on every page load.
+    (function () {
+      var scene = document.querySelector('[data-hero-scene]');
+      var film = document.querySelector('[data-hero-film]');
+      if (!scene || !film) return;
+      var video = film.querySelector('video');
+      var sound = document.querySelector('[data-hero-film-sound]');
+      var skip = document.querySelector('[data-hero-film-skip]');
+      var replay = document.querySelector('[data-hero-film-replay]');
+      var replayLabel = document.querySelector('[data-hero-film-replay-label]');
+      var bar = document.querySelector('[data-hero-film-bar]');
+      var copy = document.querySelector('.hero-copy');
+      var stacked = window.matchMedia('(max-width: 1024px)');
+      var ready = false;
+      var visible = !('IntersectionObserver' in window);
+      var played = false;
+
+      function isOn() { return scene.classList.contains('film-on'); }
+
+      // In the stacked layout the film needs more room than the illustration. The room
+      // switches instantly and the copy below is slid from its old spot with a transform
+      // (FLIP), which stays on the compositor instead of re-laying-out every frame.
+      function setFilm(on) {
+        var before = stacked.matches ? copy.getBoundingClientRect().top : 0;
+        scene.classList.toggle('film-on', on);
+        if (!stacked.matches) return;
+        var delta = before - copy.getBoundingClientRect().top;
+        if (!delta) return;
+        copy.style.transition = 'none';
+        copy.style.transform = 'translate3d(0,' + delta + 'px,0)';
+        copy.getBoundingClientRect();
+        copy.style.transition = 'transform 0.85s cubic-bezier(0.65, 0, 0.35, 1) ' + (on ? '0s' : '0.2s');
+        copy.style.transform = '';
+      }
+
+      function play() {
+        var p = video.play();
+        if (p && p.catch) p.catch(function (e) { if (e.name !== 'AbortError') exit(); });
+      }
+
+      function enter() {
+        if (isOn()) return;
+        replay.hidden = true;
+        video.currentTime = 0;
+        bar.style.transform = 'scaleX(0)';
+        setFilm(true);
+        play();
+      }
+
+      function exit() {
+        played = true;
+        replayLabel.textContent = 'Replay film';
+        replay.hidden = false;
+        if (!isOn()) return;
+        setFilm(false);
+        // Let the crossfade finish before stopping on the last frame.
+        setTimeout(function () { if (!isOn()) video.pause(); }, 1000);
+      }
+
+      function maybeAutoplay() {
+        if (ready && visible && !played) enter();
+      }
+
+      function markReady() {
+        if (ready) return;
+        ready = true;
+        maybeAutoplay();
+      }
+
+      video.addEventListener('ended', exit);
+      video.addEventListener('timeupdate', function () {
+        if (video.duration) bar.style.transform = 'scaleX(' + video.currentTime / video.duration + ')';
+      });
+
+      skip.addEventListener('click', exit);
+      sound.addEventListener('click', function () {
+        video.muted = !video.muted;
+        sound.setAttribute('aria-pressed', String(!video.muted));
+        sound.setAttribute('aria-label', video.muted ? 'Unmute film' : 'Mute film');
+      });
+      replay.addEventListener('click', enter);
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        replay.hidden = false;
+        return;
+      }
+
+      // canplaythrough alone is too optimistic (Chrome fires it with <1s buffered on a
+      // slow link), so wait for the whole file. If the browser stops fetching on its own
+      // ('suspend' with enough data), take that as ready too rather than waiting forever.
+      function checkBuffered() {
+        var b = video.buffered;
+        if (video.duration && b.length && b.start(0) <= 0.1 && b.end(b.length - 1) >= video.duration - 0.25) markReady();
+      }
+      video.addEventListener('progress', checkBuffered);
+      video.addEventListener('canplaythrough', checkBuffered);
+      video.addEventListener('suspend', function () {
+        checkBuffered();
+        if (!ready && video.readyState >= 4 && video.networkState === 1) markReady();
+      });
+      video.preload = 'auto';
+      video.load();
+      // Some mobile browsers won't buffer a video that hasn't been asked to play.
+      // Nudge it while hidden; markReady fires once enough is buffered.
+      setTimeout(function () {
+        if (ready || isOn() || video.readyState >= 4) return;
+        var p = video.play();
+        if (p && p.then) p.then(function () { if (!isOn()) video.pause(); }, function () {});
+      }, 2500);
+      // If the film never gets there, the illustration simply stays; offer it on demand.
+      setTimeout(function () { if (!ready && !isOn()) replay.hidden = false; }, 12000);
+
+      // Only autoplay while the hero is on screen, and pause if it's scrolled away.
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          visible = entries[0].isIntersecting;
+          if (visible) {
+            if (isOn() && video.paused) play();
+            else maybeAutoplay();
+          } else if (isOn() && !video.paused) {
+            video.pause();
+          }
+        }, { threshold: 0.25 }).observe(scene);
+      }
+    })();
+  </script>
 
   <!-- Features bento -->
   <section class="features" id="features">
@@ -609,27 +765,29 @@ const faqs = [
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
 
-        <div class="download-all" id="download-all" hidden>
-          {platforms.map((pl) => (
-            <div class={`download-option${pl.href ? '' : ' is-soon'}`} data-platform={pl.id}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={pl.icon}/></svg>
-              <div class="download-option-text">
-                <strong>{pl.name}</strong>
-                <span>{pl.detail}</span>
-              </div>
-              {pl.href ? (
-                <div class="download-option-links">
-                  {pl.extra ? pl.extra.map((x) => (
-                    <a href={x.href} target="_blank" rel="noopener noreferrer">{x.label}</a>
-                  )) : (
-                    <a href={pl.href} target="_blank" rel="noopener noreferrer">Download</a>
-                  )}
+        <div class="download-all" id="download-all" inert>
+          <div class="download-all-inner">
+            {platforms.map((pl) => (
+              <div class={`download-option${pl.href ? '' : ' is-soon'}`} data-platform={pl.id}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={pl.icon}/></svg>
+                <div class="download-option-text">
+                  <strong>{pl.name}</strong>
+                  <span>{pl.detail}</span>
                 </div>
-              ) : (
-                <span class="download-option-soon">In review</span>
-              )}
-            </div>
-          ))}
+                {pl.href ? (
+                  <div class="download-option-links">
+                    {pl.extra ? pl.extra.map((x) => (
+                      <a href={x.href} target="_blank" rel="noopener noreferrer">{x.label}</a>
+                    )) : (
+                      <a href={pl.href} target="_blank" rel="noopener noreferrer">Download</a>
+                    )}
+                  </div>
+                ) : (
+                  <span class="download-option-soon">In review</span>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -652,6 +810,13 @@ const faqs = [
       var list = document.getElementById('download-all');
       var toggle = document.getElementById('download-toggle');
 
+      // Height animates in CSS; inert keeps the collapsed links out of tab order.
+      function setOpen(open) {
+        list.classList.toggle('is-open', open);
+        list.inert = !open;
+        toggle.setAttribute('aria-expanded', String(open));
+      }
+
       if (match && primary) {
         var slot = list && list.querySelector('[data-platform="' + match.id + '"]');
         if (slot) slot.classList.add('is-current');
@@ -666,15 +831,13 @@ const faqs = [
           primary.setAttribute('aria-disabled', 'true');
           primary.classList.add('is-disabled');
           if (note) { note.textContent = 'Available now on Android, Windows, macOS & Linux'; note.hidden = false; }
-          if (list && toggle) { list.hidden = false; toggle.setAttribute('aria-expanded', 'true'); }
+          if (list && toggle) setOpen(true);
         }
       }
 
       if (toggle && list) {
         toggle.addEventListener('click', function () {
-          var open = list.hidden;
-          list.hidden = !open;
-          toggle.setAttribute('aria-expanded', String(open));
+          setOpen(!list.classList.contains('is-open'));
         });
       }
     })();

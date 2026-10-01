@@ -610,6 +610,197 @@ button:focus-visible {
   }
 }
 
+/* ─── Hero Film ───
+   The illustration is the resting state; .film-on (added by JS once the video can
+   play through) dissolves the film in over it, and removing the class dissolves
+   back. Reduced motion or no JS: the film never shows.
+   On desktop it's sized by the viewport and overhangs the scene; the stacked
+   layout instead grows the scene to fit it (see the 1024px breakpoint). */
+
+.hero-visual {
+  container-type: inline-size;
+}
+
+.hero-film {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  height: min(80vh, 760px);
+  aspect-ratio: 9 / 16;
+  translate: -50% -50%;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--glass-border);
+  background: var(--bg-secondary);
+  overflow: hidden;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.85), 0 0 60px rgba(220, 163, 35, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  scale: 0.9;
+  filter: blur(12px);
+  pointer-events: none;
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    scale 1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s linear 1s;
+}
+
+.film-on .hero-film {
+  opacity: 1;
+  visibility: visible;
+  scale: 1;
+  filter: none;
+  pointer-events: auto;
+  transition:
+    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.15s,
+    scale 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
+    filter 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.15s,
+    visibility 0s;
+}
+
+/* The float is the illustration's idle motion. Pause it (not remove it) while the
+   film is up, so the card holds still and nothing snaps on either swap. */
+.p2p-scene.film-on {
+  animation-play-state: running, paused;
+}
+
+.hero-film-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-film-controls {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.875rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.hero-film-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  min-width: 2rem;
+  padding: 0 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-3xl);
+  color: var(--text-primary);
+  background: rgba(8, 8, 10, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hero-film-btn:hover {
+  background: rgba(8, 8, 10, 0.75);
+  border-color: var(--accent-gold-strong);
+}
+
+.hero-film-sound {
+  padding: 0;
+}
+
+.hero-film-sound .hero-film-sound-on,
+.hero-film-sound[aria-pressed="true"] .hero-film-sound-off {
+  display: none;
+}
+
+.hero-film-sound[aria-pressed="true"] .hero-film-sound-on {
+  display: block;
+}
+
+.hero-film-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hero-film-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--accent-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s linear;
+}
+
+/* The illustration blurs away as the film arrives, and comes back into focus piece by
+   piece as the film dissolves, so the swaps read as a blend rather than a cut. */
+.p2p-links,
+.p2p-device,
+.p2p-lock-pill {
+  transition:
+    opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+    translate 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.p2p-links { transition-delay: 0.1s; }
+.p2p-laptop { transition-delay: 0.18s; }
+.p2p-phone { transition-delay: 0.3s; }
+.p2p-lock-pill { transition-delay: 0.5s; }
+
+.film-on .p2p-links,
+.film-on .p2p-device,
+.film-on .p2p-lock-pill {
+  opacity: 0;
+  translate: 0 -10px;
+  filter: blur(8px);
+  transition:
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    translate 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-film-replay {
+  position: absolute;
+  z-index: 3;
+  top: 2%;
+  right: 2%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-3xl);
+  color: var(--text-secondary);
+  background: rgba(17, 17, 19, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  animation: hero-replay-in 0.6s ease 1.4s both;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hero-film-replay:hover {
+  color: var(--accent-gold);
+  border-color: rgba(220, 163, 35, 0.4);
+}
+
+.hero-film-replay[hidden] {
+  display: none;
+}
+
+@keyframes hero-replay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* ─── Device Frames ─── */
 
 .phone-frame,
@@ -1999,10 +2190,47 @@ button:focus-visible {
     justify-content: center;
   }
 
+  /* Stacked layout: the film / illustration leads, the pitch follows. */
+  .hero-visual {
+    order: -1;
+  }
+
+  /* The scene keeps its own size (so the illustration never moves); the film overhangs
+     it and the extra room it needs is a margin that switches instantly. The copy below
+     is slid into place with a transform by the hero script (FLIP), so the swap never
+     re-lays-out the page frame by frame. */
   .p2p-scene {
+    --scene-h: calc(min(100cqw, 540px) * 540 / 640);
+    --film-h: calc(min(82cqw, 380px) * 16 / 9);
     width: 100%;
-    margin: 2rem auto 0;
+    margin: 0 auto 2rem;
     max-width: 540px;
+  }
+
+  .p2p-scene.film-on {
+    margin-bottom: calc(var(--film-h) - var(--scene-h) + 2rem);
+  }
+
+  .hero-film {
+    top: 0;
+    height: var(--film-h);
+    translate: -50% 0;
+    transform-origin: 50% 40%;
+    will-change: opacity, scale;
+  }
+
+  /* Blur is a full repaint every frame on phone GPUs; fade + move only here. */
+  .hero-film,
+  .film-on .hero-film,
+  .film-on .p2p-links,
+  .film-on .p2p-device,
+  .film-on .p2p-lock-pill {
+    filter: none;
+  }
+
+  /* Mobile: let the copy start sliding out of the way before the film fades in over it. */
+  .film-on .hero-film {
+    transition-delay: 0.45s;
   }
 
   .bento {
@@ -2179,8 +2407,28 @@ button:focus-visible {
   }
 
   .hero-platforms {
-    flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.5rem;
+    max-width: 340px;
+    margin: 0 auto;
+    font-size: 0.75rem;
+  }
+
+  .hero-platforms span {
+    gap: 0.35rem;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-3xl);
+    background: var(--glass-bg);
+  }
+
+  .hero-platforms .platform-available {
+    border-color: rgba(48, 209, 88, 0.22);
+    background: rgba(48, 209, 88, 0.06);
+  }
+
+  /* Available platforms first; the one still in review trails the row. */
+  .hero-platforms .platform-soon {
+    order: 1;
   }
 
   .features,
@@ -2310,15 +2558,39 @@ button:focus-visible {
   transform: rotate(180deg);
 }
 
+/* Collapsed via grid rows (0fr → 1fr) so the height can animate to its natural size.
+   The negative margin cancels the parent's flex gap while closed. */
 .download-all {
   width: min(100%, 560px);
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-top: -1.25rem;
+  opacity: 0;
+  text-align: left;
+  transition:
+    grid-template-rows 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    margin-top 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s ease;
+}
+
+.download-all.is-open {
+  grid-template-rows: 1fr;
+  margin-top: 0;
+  opacity: 1;
+  transition:
+    grid-template-rows 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    margin-top 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s ease 0.1s;
+}
+
+.download-all-inner {
+  min-height: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
-  text-align: left;
 }
 
-.download-all[hidden],
 .download-note[hidden] {
   display: none;
 }
