@@ -15,7 +15,7 @@ const RELEASES = 'https://github.com/AmreshVs/pear-notes/releases/latest';
 // `id` matches the value the platform-detection script computes from the user agent.
 const platforms = [
   { id: 'android', name: 'Android', cta: 'Get it on Google Play', detail: 'Google Play', href: PLAY_STORE, icon: 'M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V7H6v11zM3.5 7C2.67 7 2 7.67 2 8.5v7c0 .83.67 1.5 1.5 1.5S5 16.33 5 15.5v-7C5 7.67 4.33 7 3.5 7zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48A5.84 5.84 0 0 0 12 0c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31A5.983 5.983 0 0 0 6 6h12c0-2.21-1.2-4.15-2.97-5.19V1.16zM10 4H9V3h1v1zm5 0h-1V3h1v1z' },
-  { id: 'windows', name: 'Windows', cta: 'Windows in review', detail: 'In Microsoft Store review', icon: 'M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801' },
+  { id: 'windows', name: 'Windows', cta: 'Get it from Microsoft Store', detail: 'Microsoft Store', href: MS_STORE, icon: 'M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801' },
   { id: 'linux', name: 'Linux', cta: 'Download for Linux', detail: '.deb and .rpm packages', href: RELEASES, icon: 'M3 4h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm3.7 4.3L5.3 9.7 7.6 12l-2.3 2.3 1.4 1.4L10.4 12 6.7 8.3zM12 15v2h6v-2h-6z', extra: [
     { label: '.deb (Debian, Ubuntu)', href: RELEASES },
     { label: '.rpm (Fedora, RHEL)', href: RELEASES },
@@ -598,7 +598,7 @@ const faqs = [
       <div class="download-glow" aria-hidden="true"></div>
       <div class="download-content">
         <h2>Start writing privately.</h2>
-        <p id="download-lead">Pear Notes is available on Android, macOS, and Linux. Your notes stay yours — encrypted on-device, synced peer-to-peer, and never uploaded — not even for AI.</p>
+        <p id="download-lead">Pear Notes is available on Android, Windows, macOS, and Linux. Your notes stay yours — encrypted on-device, synced peer-to-peer, and never uploaded — not even for AI.</p>
 
         <!-- Primary CTA: swapped to the visitor's platform by the script below. Defaults to Google Play without JS. -->
         <a id="download-primary" href={PLAY_STORE} target="_blank" rel="noopener noreferrer" class="btn-primary btn-primary-lg">Get it on Google Play</a>
@@ -665,7 +665,7 @@ const faqs = [
           primary.removeAttribute('href');
           primary.setAttribute('aria-disabled', 'true');
           primary.classList.add('is-disabled');
-          if (note) { note.textContent = 'Available now on Android, macOS & Linux'; note.hidden = false; }
+          if (note) { note.textContent = 'Available now on Android, Windows, macOS & Linux'; note.hidden = false; }
           if (list && toggle) { list.hidden = false; toggle.setAttribute('aria-expanded', 'true'); }
         }
       }
