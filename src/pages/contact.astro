@@ -68,7 +68,6 @@ const topics = [
 
 <script>
   const ENDPOINT = 'https://formsubmit.co/ajax/56678a3e75e24bb3c6476594b14f7113';
-  const FALLBACK_EMAIL = 'amreshvs.dev@gmail.com';
 
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const topicSelect = document.getElementById('contact-topic') as HTMLSelectElement;
@@ -118,12 +117,7 @@ const topics = [
       applyRequestedTopic();
       showStatus("Thanks, your message was sent. We'll reply by email.", 'success');
     } catch {
-      status.dataset.kind = 'error';
-      status.textContent = "Your message couldn't be sent. Please try again, or email ";
-      const link = document.createElement('a');
-      link.href = `mailto:${FALLBACK_EMAIL}`;
-      link.textContent = FALLBACK_EMAIL;
-      status.append(link, '.');
+      showStatus("Your message couldn't be sent. Please try again later.", 'error');
     } finally {
       submit.disabled = false;
     }
