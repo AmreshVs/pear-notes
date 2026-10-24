@@ -1939,6 +1939,129 @@ button:focus-visible {
   letter-spacing: -0.01em;
 }
 
+/* Contact page */
+
+.contact-page {
+  padding: 9rem 0 6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.contact-header .section-subtitle {
+  margin: 0 auto;
+}
+
+.contact-form {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.375rem;
+  padding: 2rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-field > span {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.contact-field small {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+}
+
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.875rem;
+  transition: border-color var(--transition-fast);
+}
+
+.contact-field textarea {
+  resize: vertical;
+  min-height: 9rem;
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus {
+  outline: none;
+  border-color: var(--accent-gold-strong);
+}
+
+.contact-honey {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-actions .btn-primary:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.contact-status {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.contact-status[data-kind="success"] {
+  color: var(--accent-success);
+}
+
+.contact-status[data-kind="error"] {
+  color: #ff6b6b;
+}
+
+.contact-note {
+  max-width: 620px;
+  margin: 1.25rem auto 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 1.25rem;
+  }
+}
+
 /* ─── Download ─── */
 
 .download {

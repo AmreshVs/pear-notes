@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const topics = [
+  { value: 'bug', label: "Something isn't working" },
+  { value: 'ai-result', label: 'Problem with an AI result' },
+  { value: 'feedback', label: 'Feedback or an idea' },
+  { value: 'question', label: 'A question' },
+  { value: 'other', label: 'Something else' },
+];
+---
+
+<Layout title="Contact and feedback — Pear Notes" description="Report a problem, share feedback, or ask a question about Pear Notes.">
+  <div class="dot-grid"></div>
+  <Header />
+
+  <section class="contact-page">
+    <div class="container">
+      <div class="contact-header">
+        <div class="section-label">Contact</div>
+        <h1 class="section-title">Contact and feedback</h1>
+        <p class="section-subtitle">
+          Report a problem, share an idea, or ask a question. We read every message and reply by email.
+        </p>
+      </div>
+
+      <form class="contact-form" id="contact-form" novalidate>
+        <label class="contact-field">
+          <span>What is it about?</span>
+          <select name="topic" id="contact-topic">
+            {topics.map(topic => <option value={topic.value}>{topic.label}</option>)}
+          </select>
+        </label>
+
+        <label class="contact-field">
+          <span>Your email</span>
+          <input type="email" name="email" autocomplete="email" required placeholder="you@example.com" />
+          <small>Only used to reply to you.</small>
+        </label>
+
+        <label class="contact-field">
+          <span>Message</span>
+          <textarea name="message" rows="7" required maxlength="5000" placeholder="What happened, and what did you expect? Which device and app version are you using?"></textarea>
+          <small>Please don't include note content or passwords you want to keep private.</small>
+        </label>
+
+        <input type="text" name="_honey" class="contact-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <div class="contact-actions">
+          <button type="submit" class="btn-primary" id="contact-submit">Send message</button>
+          <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <p class="contact-note">
+        Messages are delivered by <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit</a>.
+        See the <a href={`${base}privacy/`}>privacy policy</a>.
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script>
+  const ENDPOINT = 'https://formsubmit.co/ajax/amreshvs.dev@gmail.com';
+  const FALLBACK_EMAIL = 'amreshvs.dev@gmail.com';
+
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const topicSelect = document.getElementById('contact-topic') as HTMLSelectElement;
+  const submit = document.getElementById('contact-submit') as HTMLButtonElement;
+  const status = document.getElementById('contact-status') as HTMLParagraphElement;
+
+  const requested = new URLSearchParams(location.search).get('topic');
+  function applyRequestedTopic() {
+    if (requested && [...topicSelect.options].some(option => option.value === requested)) {
+      topicSelect.value = requested;
+    }
+  }
+  applyRequestedTopic();
+
+  function showStatus(text: string, kind: 'error' | 'success' | '') {
+    status.textContent = text;
+    status.dataset.kind = kind;
+  }
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const data = new FormData(form);
+    if (data.get('_honey')) return;
+
+    const topicLabel = topicSelect.selectedOptions[0]?.textContent ?? 'Message';
+    submit.disabled = true;
+    showStatus('Sending…', '');
+    try {
+      const response = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: `Pear Notes: ${topicLabel}`,
+          _template: 'table',
+          topic: topicLabel,
+          email: data.get('email'),
+          message: data.get('message'),
+        }),
+      });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || String(result?.success) !== 'true') throw new Error(result?.message);
+      form.reset();
+      applyRequestedTopic();
+      showStatus("Thanks, your message was sent. We'll reply by email.", 'success');
+    } catch {
+      status.dataset.kind = 'error';
+      status.textContent = "Your message couldn't be sent. Please try again, or email ";
+      const link = document.createElement('a');
+      link.href = `mailto:${FALLBACK_EMAIL}`;
+      link.textContent = FALLBACK_EMAIL;
+      status.append(link, '.');
+    } finally {
+      submit.disabled = false;
+    }
+  });
+</script>

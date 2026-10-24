@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <Layout title="Privacy Policy — Pear Notes" description="Pear Notes Privacy Policy. We collect zero data. Your notes are encrypted on-device and synced peer-to-peer.">
@@ -10,7 +12,7 @@ import Footer from '../components/Footer.astro';
 
   <section class="legal container">
     <h1>Privacy Policy</h1>
-    <p class="last-updated">Last updated: September 20, 2026</p>
+    <p class="last-updated">Last updated: October 24, 2026</p>
 
     <p>
       Pear Notes ("we", "our", or "the app") is committed to protecting your privacy.
@@ -74,8 +76,17 @@ import Footer from '../components/Footer.astro';
       <li><strong>Models are downloaded once.</strong> Turning a feature on downloads its AI model (for example Whisper for speech, an OCR model for text, a small language model for summaries and image descriptions, or a translation model for each language you choose) from the model provider's public hosting (such as Hugging Face or Amazon S3). Like any download, that host can see your IP address and which model file was requested. No note content, recordings, or account details are included in the request.</li>
       <li><strong>Downloads are verified.</strong> Model files are fetched over HTTPS and checked against a published checksum before use.</li>
       <li><strong>You stay in control.</strong> You can pause or cancel downloads, limit them to Wi-Fi, and delete models at any time from Settings. Results are only added to a note when you tap Insert, and changes suggested when you ask for an edit are applied only after you review and approve them. AI actions are hidden entirely on locked notes.</li>
-      <li><strong>Generated results can be wrong.</strong> Transcripts, summaries, titles, key points, image descriptions, rewrites, translations, and answers to questions are produced by AI models and may contain mistakes, so check them before you rely on them. If you use "Report a problem", your email app opens a message addressed to us; nothing is sent unless you choose to send it, and it contains only what you write.</li>
+      <li><strong>Generated results can be wrong.</strong> Transcripts, summaries, titles, key points, image descriptions, rewrites, translations, and answers to questions are produced by AI models and may contain mistakes, so check them before you rely on them. If you use "Report a problem", our contact page opens in your browser; nothing is sent unless you choose to send it, and it contains only what you write.</li>
     </ul>
+
+    <h3>Contact form</h3>
+    <p>
+      The <a href={`${base}contact/`}>contact page</a> on this website sends your message through
+      <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit</a>,
+      which delivers it to us by email. It includes only the topic, the email address you
+      enter, and your message, and we use your email address only to reply. The app itself
+      never sends anything to this form.
+    </p>
 
     <h2>5. Device Permissions</h2>
     <p>
@@ -140,6 +151,7 @@ import Footer from '../components/Footer.astro';
       If you have any questions or concerns about this Privacy Policy, please contact us at:
     </p>
     <p>
+      <strong>Contact page:</strong> <a href={`${base}contact/`}>Contact and feedback</a><br />
       <strong>Email:</strong> <a href="mailto:vsamreshpro@gmail.com">vsamreshpro@gmail.com</a>
     </p>
   </section>
