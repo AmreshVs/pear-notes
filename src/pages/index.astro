@@ -37,9 +37,6 @@ const icons = {
   layers: '<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>',
   shieldCheck: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9.5 11.5l2 2 3.5-3.5"/>',
   shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
-  pause: '<circle cx="12" cy="12" r="10"/><line x1="10" y1="15" x2="10" y2="9"/><line x1="14" y1="15" x2="14" y2="9"/>',
-  transfer: '<line x1="7" y1="20" x2="7" y2="4"/><polyline points="3 8 7 4 11 8"/><line x1="17" y1="4" x2="17" y2="20"/><polyline points="13 16 17 20 21 16"/>',
-  pin: '<path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/>',
   pencil: '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>',
   lock: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
   lockDot: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/>',
@@ -55,20 +52,13 @@ const icons = {
   box: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/>',
   columns: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/>',
   image: '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>',
-  qr: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M20 14h1v1"/><path d="M14 20h1v1"/><path d="M20 20h1v1"/>',
-  eyeOff: '<path d="M1 1l22 22"/><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.4 18.4 0 0 1 4.22-5.06M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24"/>',
   radio: '<circle cx="12" cy="12" r="3"/><path d="M4 12a8 8 0 0 1 8-8"/><path d="M20 12a8 8 0 0 1-8 8"/>',
   refresh: '<path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/>',
   sparkles: '<path d="M12 3l1.9 4.8L18.7 9.7 13.9 11.6 12 16.4 10.1 11.6 5.3 9.7 10.1 7.8z"/><path d="M19 15l.7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7z"/>',
   chat: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/>',
   globe: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
   scanText: '<path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="13" y2="14"/>',
-  share: '<path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/>',
   history: '<path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 3 3 9 9 9"/><polyline points="12 7 12 12 15 14"/>',
-  restore: '<polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>',
-  wifiOff: '<line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.58 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>',
-  grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
-  download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
   toggle: '<rect x="1" y="5" width="22" height="14" rx="7" ry="7"/><circle cx="16" cy="12" r="3"/>',
   code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
   transcript: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/>',
@@ -79,15 +69,12 @@ const bentoCards = [
   { title: 'Offline first', body: 'Works with no internet at all. Everything stored locally, encrypted.', icon: icons.layers },
 ];
 
-const bentoCardsBottom = [
-  { title: 'Media on your terms', body: 'Hold photo and file transfers on cellular, or pause them. Notes keep syncing either way.', icon: icons.pause },
-  { title: 'Live transfer queue', body: 'Every upload and download shows progress. Pause, resume, cancel, or retry any of them.', icon: icons.transfer },
-  { title: 'Pinned notes', body: 'Pin what matters and it stays on top, on every device you sync.', icon: icons.pin },
-  { title: 'Write, speak, or scan', body: 'Rich text, voice memos with waveforms, and a document scanner — all landing in the encrypted vault.', icon: icons.pencil },
-  { title: 'Every change, attributed', body: 'An activity log records what each device created, edited, or deleted — with the exact lines that changed.', icon: icons.history },
-  { title: 'Share straight into a note', body: 'Send photos, files, links, or text from any other app and Pear Notes drops them into the note you pick.', icon: icons.share },
-  { title: 'A 30-day safety net', body: 'Deleted notes wait in Recently Deleted for 30 days, on every device, before they are gone for good.', icon: icons.restore },
-  { title: 'Folders with their own icons', body: 'Pick an icon for any folder from the folder menu, so the ones you open most stand out at a glance.', icon: icons.grid },
+/* Everyday features with no screen of their own in the tour; listed under it. */
+const alsoIncluded = [
+  'Share photos, files, links, or text into a note from any app',
+  'Recently Deleted keeps notes for 30 days, on every device',
+  'A transfer queue to pause, resume, cancel, or retry uploads',
+  'Hold media transfers on cellular while notes keep syncing',
 ];
 
 const aiHero = {
@@ -104,62 +91,76 @@ const aiFeatures = [
   { title: 'Summarize and rewrite', body: 'Summaries, key points, and suggested titles for a whole note. Fix grammar, or make a selection shorter, clearer, more professional, or friendlier — every pass runs on your own hardware.', icon: icons.pencil, wide: true },
 ];
 
+/* Drawn as one device outline: what happens inside it, and along its foot the
+   provider a cloud app would call, struck out. */
 const aiProof = [
-  { title: 'Off until you turn it on', body: 'Every feature is a separate switch, off by default. The setting is per device and never synced.', icon: icons.toggle },
-  { title: 'One download, then offline', body: 'Models come over Wi-Fi once, then run with no network at all. Pause, resume, or delete them any time.', icon: icons.download },
-  { title: 'No AI provider involved', body: "There is no API key, no account, and no request to send. Your notes never leave the device to be processed.", icon: icons.wifiOff },
-  { title: 'Locked notes stay out of it', body: 'Every AI action disappears on a locked note. Nothing summarizes, translates, or reads it.', icon: icons.lock },
+  { title: 'Off until you turn it on', body: 'Every feature is a separate switch, off by default. The setting is per device and never synced.' },
+  { title: 'One download, then offline', body: 'Models come over Wi-Fi once, then run with no network at all. Pause, resume, or delete them any time.' },
+  { title: 'Locked notes stay out of it', body: 'Every AI action disappears on a locked note. Nothing summarizes, translates, or reads it.' },
 ];
 
-/* `name` matches the screenshot filename under src/assets/screenshots/<platform>/ */
+const aiProofOutside = {
+  title: 'No AI provider involved',
+  body: 'There is no API key, no account, and no request to send. Your notes never leave the device to be processed.',
+};
+
+/* The tour is grouped so each list stays short enough to read without scrolling.
+   `name` matches the screenshot filename under src/assets/screenshots/<platform>/ */
+const tourGroups = [
+  { id: 'write', label: 'Write' },
+  { id: 'sync', label: 'Sync' },
+  { id: 'ai', label: 'AI' },
+  { id: 'lock', label: 'Lock' },
+];
+
 const mobileFeatures = [
-  { name: 'Folders', title: 'Folders', body: 'Create, rename, and organize notes into folders with drag-and-drop — and give each one its own icon.', icon: icons.folder },
-  { name: 'Notes-List', title: 'Notes List', body: 'Notes grouped by date, with pinned notes always on top.', icon: icons.list },
-  { name: 'Full-Text-Search', title: 'Full-Text Search', body: 'Instant search across all notes with real-time filtering.', icon: icons.search },
-  { name: 'Rich-Text-Editor', title: 'Rich Text Editor', body: 'Headings, lists, task lists, code blocks, blockquotes, and alignment.', icon: icons.pencil },
-  { name: 'Ask-AI', title: 'Ask AI', body: 'Ask about a note and apply the exact edits it proposes — answered on your phone, never in the cloud.', icon: icons.chat },
-  { name: 'AI-Tools', title: 'AI Tools', body: 'Summaries, key points, titles, and rewrites — all generated on the device, with nothing uploaded.', icon: icons.sparkles },
-  { name: 'Voice-Typing', title: 'Voice Typing', body: 'Speak and the words land in the note as you talk. Your voice is transcribed on the device and never sent.', icon: icons.mic },
-  { name: 'Translate', title: 'Translate', body: '48 languages, to and from English, translated offline on the device once the language is downloaded.', icon: icons.globe },
-  { name: 'On-Device-AI', title: 'On-Device AI', body: 'Turn features on one at a time. Each model downloads once, then runs with no network at all.', icon: icons.toggle },
-  { name: 'Lock-Note', title: 'Note Lock', body: 'Biometrics or a synced password — screenshots blocked while open.', icon: icons.lockDot },
-  { name: 'Activity-Log', title: 'Activity Log', body: 'What each device created, edited, or deleted — with the exact lines that changed.', icon: icons.history },
-  { name: 'Customization', title: 'Customization', body: '8 fonts, adjustable text size, and dark/light/system themes.', icon: icons.gear },
-  { name: 'Linked-Devices', title: 'Linked Devices', body: 'View, rename, and manage all connected devices.', icon: icons.phone },
-  { name: 'P2P-Device-Sync', title: 'P2P Device Sync', body: 'Hypercore-based sync with QR code pairing.', icon: icons.activity },
-  { name: 'Fingerprint-Matching', title: 'Fingerprint Matching', body: 'Verify device identity keys during pairing.', icon: icons.fingerprint },
-  { name: 'Encrypted-Backups', title: 'Encrypted Backups', body: 'AES-256 .pnbk export/import, sealed with a password.', icon: icons.shield },
-  { name: 'Storage', title: 'Storage', body: 'Usage by media type, plus one-tap reclaim of space.', icon: icons.box },
+  { group: 'write', name: 'Folders', title: 'Folders', body: 'Create, rename, and organize notes into folders with drag-and-drop — and give each one its own icon.', icon: icons.folder },
+  { group: 'write', name: 'Notes-List', title: 'Notes List', body: 'Notes grouped by date, with pinned notes always on top.', icon: icons.list },
+  { group: 'write', name: 'Full-Text-Search', title: 'Full-Text Search', body: 'Instant search across all notes with real-time filtering.', icon: icons.search },
+  { group: 'write', name: 'Rich-Text-Editor', title: 'Rich Text Editor', body: 'Headings, lists, task lists, and code blocks, plus voice memos and a document scanner.', icon: icons.pencil },
+  { group: 'write', name: 'Customization', title: 'Customization', body: '8 fonts, adjustable text size, and dark/light/system themes.', icon: icons.gear },
+  { group: 'sync', name: 'P2P-Device-Sync', title: 'P2P Device Sync', body: 'Hypercore-based sync with QR code pairing.', icon: icons.activity },
+  { group: 'sync', name: 'Fingerprint-Matching', title: 'Fingerprint Matching', body: 'Verify device identity keys during pairing.', icon: icons.fingerprint },
+  { group: 'sync', name: 'Linked-Devices', title: 'Linked Devices', body: 'View, rename, and manage all connected devices.', icon: icons.phone },
+  { group: 'sync', name: 'Activity-Log', title: 'Activity Log', body: 'What each device created, edited, or deleted — with the exact lines that changed.', icon: icons.history },
+  { group: 'ai', name: 'Ask-AI', title: 'Ask AI', body: 'Ask about a note and apply the exact edits it proposes — answered on your phone, never in the cloud.', icon: icons.chat },
+  { group: 'ai', name: 'AI-Tools', title: 'AI Tools', body: 'Summaries, key points, titles, and rewrites — all generated on the device, with nothing uploaded.', icon: icons.sparkles },
+  { group: 'ai', name: 'Voice-Typing', title: 'Voice Typing', body: 'Speak and the words land in the note as you talk. Your voice is transcribed on the device and never sent.', icon: icons.mic },
+  { group: 'ai', name: 'Translate', title: 'Translate', body: '48 languages, to and from English, translated offline on the device once the language is downloaded.', icon: icons.globe },
+  { group: 'ai', name: 'On-Device-AI', title: 'On-Device AI', body: 'Turn features on one at a time. Each model downloads once, then runs with no network at all.', icon: icons.toggle },
+  { group: 'lock', name: 'Lock-Note', title: 'Note Lock', body: 'Biometrics or a synced password — screenshots blocked while open.', icon: icons.lockDot },
+  { group: 'lock', name: 'Encrypted-Backups', title: 'Encrypted Backups', body: 'AES-256 .pnbk export/import, sealed with a password.', icon: icons.shield },
+  { group: 'lock', name: 'Storage', title: 'Storage', body: 'Usage by media type, plus one-tap reclaim of space.', icon: icons.box },
 ];
 
 const desktopFeatures = [
-  { name: 'Three-Panel-Layout', title: 'Three-Panel Layout', body: 'Resizable folders sidebar, notes list, and editor that adapt to your workflow.', icon: icons.columns },
-  { name: 'Rich-Text-Editor', title: 'Rich Text Editor', body: 'Syntax-highlighted code blocks, tables, media embeds, headings, and task lists.', icon: icons.pencil },
-  { name: 'Ask-AI', title: 'Ask AI', body: 'Ask about a note or a selection and review every change before it applies — answered on your computer, not a server.', icon: icons.chat },
-  { name: 'AI-Tools', title: 'AI Tools', body: 'Summaries, key points, titles, rewrites, and translation from the editor or the selection menu — nothing leaves the machine.', icon: icons.sparkles },
-  { name: 'On-Device-AI', title: 'On-Device AI', body: 'Per-feature switches with model sizes and licences. Models run on your computer, with no account and no API key.', icon: icons.toggle },
-  { name: 'Media-Preview', title: 'Media Preview', body: 'Fullscreen previews for images, PDFs, text, and audio — plus inline video playback.', icon: icons.image },
-  { name: 'Lock-Note', title: 'Note Lock', body: 'Touch ID, Windows Hello, or a synced password — with screen capture blocked while a locked note is open.', icon: icons.lockDot },
-  { name: 'Activity-Log', title: 'Activity Log', body: 'A timeline of every device\u2019s changes, with a line-by-line diff behind each entry.', icon: icons.history },
-  { name: 'Customization', title: 'Customization', body: '8 fonts, adjustable size 12-24px, system/light/dark themes, and sorting by date or title.', icon: icons.gear },
-  { name: 'Linked-Devices', title: 'Linked Devices', body: 'View, rename, and manage connected devices with platform info and sync status.', icon: icons.phone },
-  { name: 'P2P-Device-Sync', title: 'P2P Device Sync', body: 'Hyperswarm discovery with QR code invites — temporary or permanent links.', icon: icons.activity },
-  { name: 'Fingerprint-Matching', title: 'Fingerprint Matching', body: 'Verify device identity keys during pairing to prevent man-in-the-middle attacks.', icon: icons.fingerprint },
-  { name: 'Encrypted-Backups', title: 'Encrypted Backups', body: 'AES-256-GCM .pnbk files sealed with a strong password — nothing stored, nothing recoverable without it.', icon: icons.shield },
-  { name: 'Storage-Analytics', title: 'Storage Analytics', body: 'Usage broken down by media type, plus one-tap reclaim of space.', icon: icons.box },
+  { group: 'write', name: 'Three-Panel-Layout', title: 'Three-Panel Layout', body: 'Resizable folders sidebar, notes list, and editor that adapt to your workflow.', icon: icons.columns },
+  { group: 'write', name: 'Rich-Text-Editor', title: 'Rich Text Editor', body: 'Syntax-highlighted code blocks, tables, media embeds, headings, and task lists.', icon: icons.pencil },
+  { group: 'write', name: 'Media-Preview', title: 'Media Preview', body: 'Fullscreen previews for images, PDFs, text, and audio — plus inline video playback.', icon: icons.image },
+  { group: 'write', name: 'Customization', title: 'Customization', body: '8 fonts, adjustable size 12-24px, system/light/dark themes, and sorting by date or title.', icon: icons.gear },
+  { group: 'sync', name: 'P2P-Device-Sync', title: 'P2P Device Sync', body: 'Hyperswarm discovery with QR code invites — temporary or permanent links.', icon: icons.activity },
+  { group: 'sync', name: 'Fingerprint-Matching', title: 'Fingerprint Matching', body: 'Verify device identity keys during pairing to prevent man-in-the-middle attacks.', icon: icons.fingerprint },
+  { group: 'sync', name: 'Linked-Devices', title: 'Linked Devices', body: 'View, rename, and manage connected devices with platform info and sync status.', icon: icons.phone },
+  { group: 'sync', name: 'Activity-Log', title: 'Activity Log', body: 'A timeline of every device\u2019s changes, with a line-by-line diff behind each entry.', icon: icons.history },
+  { group: 'ai', name: 'Ask-AI', title: 'Ask AI', body: 'Ask about a note or a selection and review every change before it applies — answered on your computer, not a server.', icon: icons.chat },
+  { group: 'ai', name: 'AI-Tools', title: 'AI Tools', body: 'Summaries, key points, titles, rewrites, and translation from the editor or the selection menu — nothing leaves the machine.', icon: icons.sparkles },
+  { group: 'ai', name: 'On-Device-AI', title: 'On-Device AI', body: 'Per-feature switches with model sizes and licences. Models run on your computer, with no account and no API key.', icon: icons.toggle },
+  { group: 'lock', name: 'Lock-Note', title: 'Note Lock', body: 'Touch ID, Windows Hello, or a synced password — with screen capture blocked while a locked note is open.', icon: icons.lockDot },
+  { group: 'lock', name: 'Encrypted-Backups', title: 'Encrypted Backups', body: 'AES-256-GCM .pnbk files sealed with a strong password — nothing stored, nothing recoverable without it.', icon: icons.shield },
+  { group: 'lock', name: 'Storage-Analytics', title: 'Storage Analytics', body: 'Usage broken down by media type, plus one-tap reclaim of space.', icon: icons.box },
 ];
 
 const securityCards = [
-  { title: 'Cryptographic pairing', body: 'Blind pairing handshake via QR invites, with fingerprint verification against man-in-the-middle attacks.', icon: icons.qr },
-  { title: 'Encrypted media vault', body: 'An isolated streaming server renders attachments without leaking unencrypted caches.', icon: icons.box },
-  { title: 'Locked stays locked', body: 'Failed attempts trigger exponential backoff, so brute force gets slower, not luckier.', icon: icons.shieldCheck },
-  { title: 'Invisible to capture', body: 'Screenshots blocked and content hidden in the task switcher while a note is open.', icon: icons.eyeOff },
+  { title: 'Pairing you can verify', body: 'Devices pair by QR invite, and you compare fingerprints so nobody can slip in between.' },
+  { title: 'Attachments stay sealed', body: 'Photos and files open from inside the app, without leaving unencrypted copies in a cache.' },
+  { title: 'Locked stays locked', body: 'Failed attempts trigger exponential backoff, so brute force gets slower, not luckier.' },
+  { title: 'Invisible to capture', body: 'Screenshots blocked and content hidden in the task switcher while a note is open.' },
 ];
 
 const steps = [
-  { step: '01', title: 'Your device encrypts', body: 'Every note is encrypted locally before it ever leaves the device. Only your paired devices hold the keys.', icon: icons.lock },
-  { step: '02', title: 'Devices find each other', body: "Hyperswarm's DHT locates your paired devices, then opens a direct, Noise-encrypted connection between them.", icon: icons.radio },
-  { step: '03', title: 'Changes replicate', body: 'Hypercore append-only logs replicate over that connection. Nothing is stored or relayed by anyone in between.', icon: icons.refresh },
+  { step: '01', title: 'Your device encrypts', body: 'Every note is encrypted on your device before it goes anywhere. Only the devices you pair hold the keys.', tech: 'AES-256', icon: icons.lock },
+  { step: '02', title: 'Your devices find each other', body: 'They look each other up on an open peer-to-peer network, then connect directly over an encrypted link. The network helps them meet; it never sees or stores a note.', tech: 'Hyperswarm · Noise', icon: icons.radio },
+  { step: '03', title: 'Changes copy across', body: 'Each edit travels over that link straight to your other devices. Nothing is stored or relayed by anyone in between.', tech: 'Hypercore · Autobase', icon: icons.refresh },
 ];
 
 const faqs = [
@@ -205,7 +206,7 @@ const faqs = [
       <div class="hero-copy">
         <h1>
           Your notes,<br />
-          <span class="gradient-text">truly private.</span>
+          <span class="accent-text">truly private.</span>
         </h1>
         <p class="hero-subtitle">
           Encrypted notes that sync straight between your devices — and AI that runs on your own hardware. No servers. No cloud. No compromises.
@@ -461,7 +462,6 @@ const faqs = [
   <section class="features" id="features">
     <div class="container">
       <div class="section-head fade-in">
-        <div class="section-label">Features</div>
         <h2 class="section-title">Everything you need,<br />nothing you don't.</h2>
         <p class="section-subtitle">A complete writing experience built around privacy.</p>
       </div>
@@ -498,7 +498,7 @@ const faqs = [
             <span class="backup-node">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icons.lock} />
             </span>
-            <svg class="backup-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6e6e73" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            <svg class="backup-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             <span class="backup-file">
               <span class="backup-file-ext">.pnbk</span>
               <span class="backup-file-line"></span>
@@ -507,22 +507,12 @@ const faqs = [
                 <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" set:html={icons.lock} />
               </span>
             </span>
-            <svg class="backup-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6e6e73" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            <svg class="backup-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             <span class="backup-node">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icons.phone} />
             </span>
           </div>
         </article>
-
-        {bentoCardsBottom.map(card => (
-          <article class="bento-card">
-            <span class="bento-icon" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={card.icon} />
-            </span>
-            <h3>{card.title}</h3>
-            <p>{card.body}</p>
-          </article>
-        ))}
       </div>
     </div>
   </section>
@@ -531,7 +521,6 @@ const faqs = [
   <section class="ai" id="ai">
     <div class="container">
       <div class="section-head fade-in">
-        <div class="section-label">On-device AI</div>
         <h2 class="section-title">AI that never<br />leaves your device.</h2>
         <p class="section-subtitle">Six optional features, each running on an open model you download once. After that they work with no network at all — there is no AI provider in the picture, because there is nowhere to send anything.</p>
       </div>
@@ -549,12 +538,12 @@ const faqs = [
               <span class="ask-edits-title">2 changes to the note</span>
               <span class="ask-edit">
                 <span class="ask-edit-old">Monday</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6e6e73" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 <span class="ask-edit-new">Friday</span>
               </span>
               <span class="ask-edit">
                 <span class="ask-edit-old">Anna, Ben</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6e6e73" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 <span class="ask-edit-new">Anna, Ben, Sam</span>
               </span>
               <span class="ask-apply">Apply changes</span>
@@ -573,18 +562,25 @@ const faqs = [
         ))}
       </div>
 
-      <div class="ai-proof fade-in">
-        {aiProof.map(item => (
-          <div class="ai-proof-item">
-            <span class="ai-proof-icon" aria-hidden="true">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={item.icon} />
-            </span>
-            <div>
+      <div class="ai-proof" data-ai-proof>
+        <svg class="ai-proof-outline" aria-hidden="true"><rect pathLength="1" width="100%" height="100%" /></svg>
+        <span class="ai-proof-legend">Your device</span>
+        <div class="ai-proof-items">
+          {aiProof.map(item => (
+            <div class="ai-proof-item">
               <h3>{item.title}</h3>
               <p>{item.body}</p>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        <div class="ai-proof-none">
+          <svg class="ai-proof-cloud" width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" stroke="rgba(160,160,165,0.8)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <line class="ai-proof-strike" pathLength="1" x1="5" y1="20" x2="19" y2="6" stroke="rgba(232,137,127,0.8)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <p><strong>{aiProofOutside.title}.</strong> {aiProofOutside.body}</p>
+        </div>
       </div>
 
       <p class="ai-note">
@@ -598,43 +594,36 @@ const faqs = [
   <section class="tour" id="tour" data-tour>
     <div class="container">
       <div class="section-head fade-in">
-        <div class="section-label">Tour</div>
         <h2 class="section-title">Tap through the real app.</h2>
         <p class="section-subtitle">Every screen below is a live screenshot from the shipped build.</p>
       </div>
 
       <div class="tour-grid">
-        <div class="tour-list-wrap" data-tour-list="mobile">
-          <div class="tour-list">
-            {mobileFeatures.map((f, i) => (
-              <button class:list={['tour-item', { active: i === 0 }]} data-tour-pick="mobile" data-index={i} type="button">
-                <span class="tour-item-icon" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={f.icon} />
-                </span>
-                <span class="tour-item-text">
-                  <span class="tour-item-title">{f.title}</span>
-                  <span class="tour-item-body">{f.body}</span>
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div class="tour-list-wrap" data-tour-list="desktop" hidden>
-          <div class="tour-list">
-            {desktopFeatures.map((f, i) => (
-              <button class:list={['tour-item', { active: i === 0 }]} data-tour-pick="desktop" data-index={i} type="button">
-                <span class="tour-item-icon" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={f.icon} />
-                </span>
-                <span class="tour-item-text">
-                  <span class="tour-item-title">{f.title}</span>
-                  <span class="tour-item-body">{f.body}</span>
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
+        {(['mobile', 'desktop'] as const).map((kind) => {
+          const features = kind === 'mobile' ? mobileFeatures : desktopFeatures;
+          return (
+            <div class="tour-list-wrap" data-tour-list={kind} hidden={kind === 'desktop'}>
+              <div class="tour-groups" role="group" aria-label="Feature groups">
+                {tourGroups.map((g, gi) => (
+                  <button class:list={['tour-group', { active: gi === 0 }]} data-tour-group={g.id} type="button">{g.label}</button>
+                ))}
+              </div>
+              <div class="tour-list">
+                {features.map((f, i) => (
+                  <button class:list={['tour-item', { active: i === 0 }]} data-tour-pick={kind} data-index={i} data-group={f.group} hidden={f.group !== tourGroups[0].id} type="button">
+                    <span class="tour-item-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={f.icon} />
+                    </span>
+                    <span class="tour-item-text">
+                      <span class="tour-item-title">{f.title}</span>
+                      <span class="tour-item-body">{f.body}</span>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          );
+        })}
 
         <div class="tour-preview">
           <div class="platform-toggle">
@@ -666,56 +655,31 @@ const faqs = [
               </div>
             ))}
           </div>
+
+          <!-- Phones only: the chips show titles, so the selected item's description sits
+               under the screens. Screen readers already get it from the chip itself. -->
+          <p class="tour-caption" data-tour-caption aria-hidden="true">{mobileFeatures[0].body}</p>
         </div>
+      </div>
+
+      <div class="tour-also fade-in">
+        <h3>Also in every build</h3>
+        <ul>
+          {alsoIncluded.map(item => <li>{item}</li>)}
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- Security -->
+  <!-- Security: how sync works, then what protects a note on the device -->
   <section class="security" id="security">
     <div class="container">
       <div class="section-head fade-in">
-        <div class="section-label">Security</div>
-        <h2 class="section-title">Built for real privacy.</h2>
-        <p class="section-subtitle">Zero-knowledge architecture means even we can't read your notes. Because we never see them.</p>
+        <h2 class="section-title">No server in the middle.</h2>
+        <p class="section-subtitle">Zero-knowledge by design: even we can't read your notes, because they never reach us. Here is how they move between your devices instead.</p>
       </div>
 
-      <div class="sec-grid fade-in">
-        <article class="sec-card sec-card-hero">
-          <div class="sec-card-decor" aria-hidden="true"></div>
-          <span class="sec-icon sec-icon-lg" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icons.activity} />
-          </span>
-          <h3>No central servers</h3>
-          <p>Hyperswarm discovery, direct connections, and encrypted Hypercore append-only logs — there's no server in the middle to compromise.</p>
-          <div class="sec-status">
-            <span class="sec-status-dot" aria-hidden="true"></span>
-            Zero server dependencies
-          </div>
-        </article>
-
-        {securityCards.map(card => (
-          <article class="sec-card">
-            <span class="sec-icon" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DCA323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={card.icon} />
-            </span>
-            <h3>{card.title}</h3>
-            <p>{card.body}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- How sync works -->
-  <section class="how-sync" id="how-it-works">
-    <div class="container">
-      <div class="section-head fade-in">
-        <div class="section-label">How sync works</div>
-        <h2 class="section-title">Three steps, zero servers.</h2>
-      </div>
-
-      <div class="steps fade-in">
+      <div class="steps fade-in" id="how-it-works">
         {steps.map(s => (
           <article class="step-card">
             <span class="step-icon" aria-hidden="true">
@@ -724,7 +688,17 @@ const faqs = [
             <span class="step-label">Step {s.step}</span>
             <h3>{s.title}</h3>
             <p>{s.body}</p>
+            <span class="step-tech">{s.tech}</span>
           </article>
+        ))}
+      </div>
+
+      <div class="sec-list fade-in">
+        {securityCards.map(card => (
+          <div class="sec-list-item">
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </div>
         ))}
       </div>
 
@@ -739,7 +713,6 @@ const faqs = [
   <section class="faq" id="faq">
     <div class="faq-inner">
       <div class="section-head fade-in">
-        <div class="section-label">FAQ</div>
         <h2 class="section-title">Questions, answered.</h2>
       </div>
       <div class="faq-list fade-in">
@@ -849,6 +822,72 @@ const faqs = [
           setOpen(!list.classList.contains('is-open'));
         });
       }
+    })();
+  </script>
+
+  <div class="mobile-cta" data-mobile-cta inert>
+    <a href="#download" class="btn-primary">Get Pear Notes</a>
+  </div>
+
+  <script>
+    // Phones: show the download bar only between the hero's own button and the download
+    // section, so it never doubles up with either. Also drop the hero's gold from the
+    // page background and theme-color once the hero is out of view (see .past-hero).
+    (function () {
+      var bar = document.querySelector('[data-mobile-cta]');
+      var heroActions = document.querySelector('.hero-actions');
+      var hero = document.querySelector('.hero');
+      var download = document.getElementById('download');
+      var theme = document.querySelector('meta[name="theme-color"]');
+      if (!bar || !heroActions || !hero || !download) return;
+      var heroTheme = theme ? theme.getAttribute('content') : null;
+      var pastHero = null;
+      var shown = false;
+      var ticking = false;
+
+      function update() {
+        ticking = false;
+        var past = hero.getBoundingClientRect().bottom <= 0;
+        if (past !== pastHero) {
+          pastHero = past;
+          document.documentElement.classList.toggle('past-hero', past);
+          if (theme) theme.setAttribute('content', past ? '#08080a' : heroTheme);
+        }
+        var show = heroActions.getBoundingClientRect().bottom < 0 &&
+          download.getBoundingClientRect().top > window.innerHeight;
+        if (show !== shown) {
+          shown = show;
+          bar.classList.toggle('is-shown', show);
+          bar.inert = !show;
+        }
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
+
+  <script>
+    // The AI proof's one authored moment: when it scrolls in, the device outline draws
+    // itself shut around the three facts, then the cloud below is struck out. Without
+    // JS, or with reduced motion, it simply shows in its finished state.
+    (function () {
+      var proof = document.querySelector('[data-ai-proof]');
+      if (!proof || !('IntersectionObserver' in window)) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      proof.classList.add('will-draw');
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        proof.classList.add('is-drawn');
+        io.disconnect();
+        // Hand back to the plain CSS border once the sequence has landed, so the
+        // finished box never depends on SVG geometry support.
+        setTimeout(function () { proof.classList.remove('will-draw', 'is-drawn'); }, 2200);
+      }, { threshold: 0.45 });
+      io.observe(proof);
     })();
   </script>
 

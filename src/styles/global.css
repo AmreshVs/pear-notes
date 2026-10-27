@@ -7,8 +7,9 @@
   --bg-surface: #3a3a3c;
   --text-primary: #f5f5f7;
   --text-secondary: #a1a1a6;
-  --text-tertiary: #6e6e73;
-  --text-muted: #48484a;
+  /* Both stay at or above 4.5:1 on --bg-primary and on the glass cards over it. */
+  --text-tertiary: #8e8e93;
+  --text-muted: #808085;
   --border-primary: #2c2c2e;
   --border-secondary: #1c1c1e;
   --border-subtle: rgba(255, 255, 255, 0.07);
@@ -70,6 +71,13 @@ html:has(.hero) body {
   background-image: linear-gradient(var(--bg-primary), var(--bg-primary));
 }
 
+/* Once the hero is off screen the gold has nothing to blend with: it would show as a
+   brown strip in the overscroll at the bottom of the page. The home page script sets
+   .past-hero (and swaps theme-color, which tints Android's toolbar the same way). */
+html.past-hero body {
+  background-color: var(--bg-primary);
+}
+
 a {
   color: var(--accent-gold);
   text-decoration: none;
@@ -83,6 +91,12 @@ a:hover {
 ::selection {
   background: var(--accent-gold);
   color: #000;
+}
+
+/* Native scrollbars and controls follow the dark page instead of the OS default. */
+html {
+  color-scheme: dark;
+  scrollbar-color: var(--bg-surface) var(--bg-primary);
 }
 
 section[id] {
@@ -258,7 +272,7 @@ button:focus-visible {
   text-decoration: none;
   letter-spacing: -0.01em;
   box-shadow: 0 10px 40px rgba(220, 163, 35, 0.28);
-  transition: background var(--transition-base), box-shadow var(--transition-base);
+  transition: background var(--transition-base), box-shadow var(--transition-base), transform 120ms ease;
 }
 
 .btn-primary:hover {
@@ -286,7 +300,16 @@ button:focus-visible {
   border: 1px solid rgba(255, 255, 255, 0.09);
   cursor: pointer;
   text-decoration: none;
-  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
+  transition: background var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), transform 120ms ease;
+}
+
+/* A short press on every control that changes something on the page. */
+.btn-primary:active,
+.btn-secondary:active,
+.tour-group:active,
+.tour-item:active,
+.platform-toggle-btn:active {
+  transform: scale(0.97);
 }
 
 .btn-secondary:hover {
@@ -402,18 +425,9 @@ button:focus-visible {
   letter-spacing: -0.045em;
 }
 
-.hero h1 .gradient-text {
-  background: linear-gradient(120deg, #fff0c8 0%, #f0c040 30%, var(--accent-gold) 60%, #f0c040 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 8s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0%, 100% { background-position: 0% center; }
-  50% { background-position: 200% center; }
+/* Emphasis is the brand gold itself, solid: the size and weight already carry it. */
+.hero h1 .accent-text {
+  color: var(--accent-gold);
 }
 
 .hero-subtitle {
@@ -925,7 +939,6 @@ button:focus-visible {
 
 .bento-card,
 .ai-card,
-.sec-card,
 .step-card {
   position: relative;
   isolation: isolate;
@@ -937,7 +950,6 @@ button:focus-visible {
 
 .bento-card::before,
 .ai-card::before,
-.sec-card::before,
 .step-card::before {
   content: '';
   position: absolute;
@@ -952,14 +964,12 @@ button:focus-visible {
 
 .bento-card:hover,
 .ai-card:hover,
-.sec-card:hover,
 .step-card:hover {
   border-color: rgba(220, 163, 35, 0.4);
 }
 
 .bento-card:hover::before,
 .ai-card:hover::before,
-.sec-card:hover::before,
 .step-card:hover::before {
   opacity: 1;
 }
@@ -1026,6 +1036,7 @@ button:focus-visible {
 
 .bento-card-hero h3 {
   font-size: 1.4rem;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   margin-bottom: 0.625rem;
 }
@@ -1105,6 +1116,7 @@ button:focus-visible {
 
 .backup-arrow {
   flex-shrink: 0;
+  color: var(--text-tertiary);
 }
 
 .backup-file {
@@ -1184,6 +1196,7 @@ button:focus-visible {
   color: var(--text-tertiary);
   font-size: 0.86rem;
   line-height: 1.6;
+  max-width: 60ch;
 }
 
 .ai-icon {
@@ -1274,7 +1287,7 @@ button:focus-visible {
 
 .ask-edits-title {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-tertiary);
@@ -1284,12 +1297,13 @@ button:focus-visible {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.74rem;
+  font-size: 0.8rem;
   flex-wrap: wrap;
 }
 
 .ask-edit svg {
   flex-shrink: 0;
+  color: var(--text-tertiary);
 }
 
 .ask-edit-old {
@@ -1312,58 +1326,245 @@ button:focus-visible {
   font-weight: 700;
 }
 
+/* The device outline: three facts inside, and along its foot the provider a cloud
+   app would call, struck out with the hero illustration's cloud and red strike. */
 .ai-proof {
+  position: relative;
+  margin-top: 3rem;
+  border: 1px solid rgba(220, 163, 35, 0.35);
+  border-radius: var(--radius-card);
+  background: linear-gradient(165deg, rgba(220, 163, 35, 0.06), transparent 60%);
+}
+
+.ai-proof-legend {
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  translate: 0 -50%;
+  padding: 0 0.625rem;
+  background: var(--bg-primary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+.ai-proof-items {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem 1.75rem;
-  margin-top: 2.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.ai-proof-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.ai-proof-icon {
-  flex-shrink: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: var(--radius-xs);
-  background: var(--accent-gold-light);
-  border: 1px solid rgba(220, 163, 35, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+  padding: 2.25rem 2rem 2rem;
 }
 
 .ai-proof-item h3 {
-  font-size: 0.88rem;
+  font-size: 1rem;
   font-weight: 700;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
 }
 
 .ai-proof-item p {
   margin: 0;
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
   line-height: 1.55;
+}
+
+.ai-proof-none {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 2rem;
+}
+
+.ai-proof-none::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px dashed rgba(220, 163, 35, 0.25);
+  transform-origin: left;
+}
+
+/* Drawn on scroll-in (see the script at the end of index.astro). The SVG outline
+   stands in for the border while it draws; every state below ends exactly where the
+   static version sits, so the no-JS and reduced-motion page is the finished frame. */
+/* Covers the border box (inset -1px past the 1px border), so the drawn line sits
+   exactly where the CSS border does and the hand-back doesn't shift by a pixel. */
+.ai-proof-outline {
+  position: absolute;
+  inset: -1px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  overflow: visible;
+  pointer-events: none;
+  display: none;
+}
+
+.ai-proof-outline rect {
+  x: 0.5px;
+  y: 0.5px;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+  rx: calc(var(--radius-card) - 0.5px);
+  fill: none;
+  stroke: rgba(220, 163, 35, 0.35);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.ai-proof.will-draw {
+  border-color: transparent;
+}
+
+.ai-proof.will-draw .ai-proof-outline {
+  display: block;
+}
+
+.ai-proof.will-draw .ai-proof-legend,
+.ai-proof.will-draw .ai-proof-item,
+.ai-proof.will-draw .ai-proof-none p,
+.ai-proof.will-draw .ai-proof-cloud path {
+  opacity: 0;
+}
+
+.ai-proof.will-draw .ai-proof-item {
+  transform: translateY(10px);
+}
+
+.ai-proof.will-draw .ai-proof-none::before {
+  transform: scaleX(0);
+}
+
+.ai-proof.will-draw .ai-proof-strike {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.ai-proof.is-drawn .ai-proof-outline rect {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.3s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.ai-proof.is-drawn .ai-proof-legend {
+  opacity: 1;
+  transition: opacity 0.4s ease 0.05s;
+}
+
+.ai-proof.is-drawn .ai-proof-item {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ai-proof.is-drawn .ai-proof-item:nth-child(1) { transition-delay: 0.35s; }
+.ai-proof.is-drawn .ai-proof-item:nth-child(2) { transition-delay: 0.45s; }
+.ai-proof.is-drawn .ai-proof-item:nth-child(3) { transition-delay: 0.55s; }
+
+.ai-proof.is-drawn .ai-proof-none::before {
+  transform: none;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s;
+}
+
+.ai-proof.is-drawn .ai-proof-cloud path {
+  opacity: 1;
+  transition: opacity 0.4s ease 1s;
+}
+
+.ai-proof.is-drawn .ai-proof-none p {
+  opacity: 1;
+  transition: opacity 0.5s ease 1.1s;
+}
+
+/* The strike lands last, the beat the whole sequence builds to. */
+.ai-proof.is-drawn .ai-proof-strike {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.45s cubic-bezier(0.65, 0, 0.35, 1) 1.45s;
+}
+
+.ai-proof-cloud {
+  flex-shrink: 0;
+}
+
+.ai-proof-none p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.ai-proof-none strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .ai-proof-items {
+    gap: 1.75rem;
+    padding: 2rem 1.5rem 1.75rem;
+  }
+
+  .ai-proof-none {
+    align-items: flex-start;
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
 }
 
 .ai-note {
   margin-top: 1.75rem;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   color: var(--text-tertiary);
   line-height: 1.7;
-  max-width: 90ch;
+  max-width: 72ch;
 }
 
 /* ─── Interactive Tour ─── */
 
 .tour {
   padding: 0 0 6.875rem;
+}
+
+.tour-also {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.tour-also h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.tour-also ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 2rem;
+}
+
+.tour-also li {
+  position: relative;
+  padding-left: 1.125rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.tour-also li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-gold);
 }
 
 .tour-grid {
@@ -1383,49 +1584,87 @@ button:focus-visible {
   display: none;
 }
 
-.tour-list-wrap::before,
-.tour-list-wrap::after {
+/* Each group lists 3-5 items, so the list sits at its natural height beside the
+   sticky preview instead of scrolling inside a box of its own. */
+.tour-groups {
+  position: relative;
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Once the tour script has measured the tabs, one gold bar slides between them
+   instead of each tab drawing its own underline. */
+.tour-groups::after {
   content: '';
   position: absolute;
   left: 0;
-  right: 0;
-  height: 56px;
-  pointer-events: none;
-  z-index: 2;
-  transition: opacity var(--transition-base);
-}
-
-.tour-list-wrap::before {
-  top: 0;
-  background: linear-gradient(to top, transparent, var(--bg-primary));
+  bottom: -1px;
+  width: 1px;
+  height: 2px;
+  background: var(--accent-gold);
+  transform-origin: left;
+  transform: translateX(var(--ind-x, 0)) scaleX(var(--ind-w, 0));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   opacity: 0;
 }
 
-.tour-list-wrap::after {
-  bottom: 0;
-  background: linear-gradient(to bottom, transparent, var(--bg-primary));
-}
-
-.tour-list-wrap.scrolled-top::before {
+.tour-groups.has-indicator::after {
   opacity: 1;
 }
 
-.tour-list-wrap.at-bottom::after {
-  opacity: 0;
+.tour-groups.has-indicator .tour-group.active {
+  border-bottom-color: transparent;
+}
+
+.tour-group {
+  min-height: 44px;
+  padding: 0 0.875rem;
+  margin-bottom: -1px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color var(--transition-base), border-color var(--transition-base), transform 120ms ease;
+}
+
+.tour-group:hover {
+  color: var(--text-secondary);
+}
+
+.tour-group.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent-gold);
 }
 
 .tour-list {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  max-height: 680px;
-  overflow-y: auto;
-  padding-bottom: 24px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 }
 
-.tour-list::-webkit-scrollbar {
+.tour-item[hidden] {
+  display: none;
+}
+
+/* A newly shown group arrives as a list: a short stagger, capped by its 3-5 items. */
+.tour-item.tour-item-in {
+  animation: tour-item-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+@keyframes tour-item-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Phones only; see the stacked layout below. */
+.tour-caption {
   display: none;
 }
 
@@ -1442,7 +1681,7 @@ button:focus-visible {
   border: 1px solid transparent;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: background 200ms ease, border-color 200ms ease;
+  transition: background 200ms ease, border-color 200ms ease, transform 120ms ease;
 }
 
 .tour-item:hover {
@@ -1482,14 +1721,14 @@ button:focus-visible {
 
 .tour-item-body {
   display: block;
-  font-size: 0.78rem;
-  color: var(--text-tertiary);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
   line-height: 1.5;
   transition: color var(--transition-base);
 }
 
 .tour-item.active .tour-item-body {
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .tour-preview {
@@ -1611,136 +1850,17 @@ button:focus-visible {
   to { opacity: 1; transform: none; filter: blur(0); }
 }
 
-/* ─── Security ─── */
+/* ─── Security ───
+   The three sync steps lead; the on-device protections follow as a plain
+   ruled list rather than another grid of cards. */
 
 .security {
-  padding: 0 0 6.875rem;
-}
-
-.sec-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr 1fr;
-  gap: 1rem;
-}
-
-.sec-card {
-  padding: 1.75rem;
-}
-
-.sec-card h3 {
-  font-size: 1.02rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  position: relative;
-}
-
-.sec-card p {
-  margin: 0;
-  color: var(--text-tertiary);
-  font-size: 0.85rem;
-  line-height: 1.6;
-  position: relative;
-}
-
-.sec-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
-  background: var(--accent-gold-light);
-  border: 1px solid rgba(220, 163, 35, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-  position: relative;
-}
-
-.sec-icon-lg {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background: rgba(220, 163, 35, 0.15);
-  border-color: rgba(220, 163, 35, 0.35);
-  margin-bottom: 1.25rem;
-}
-
-.sec-card-hero {
-  grid-row: span 2;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  padding: 2.125rem;
-  border-color: rgba(220, 163, 35, 0.22);
-  background: linear-gradient(165deg, rgba(220, 163, 35, 0.1), rgba(255, 255, 255, 0.015) 55%);
-}
-
-.sec-card-hero::before {
-  background: linear-gradient(165deg, rgba(220, 163, 35, 0.2), transparent 60%);
-}
-
-.sec-card-hero:hover {
-  border-color: rgba(220, 163, 35, 0.5);
-}
-
-.sec-card-hero h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.625rem;
-}
-
-.sec-card-hero p {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  line-height: 1.65;
-  max-width: 32ch;
-}
-
-.sec-card-decor {
-  position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(220, 163, 35, 0.18) 0%, transparent 70%);
-  filter: blur(10px);
-  pointer-events: none;
-}
-
-.sec-status {
-  position: relative;
-  margin-top: auto;
-  padding-top: 1.375rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--accent-gold);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.sec-status-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-success);
-  animation: pulse-dot 2.4s ease-in-out infinite;
-}
-
-/* ─── How Sync Works ─── */
-
-.how-sync {
   padding: 0 0 8.125rem;
 }
 
-.how-sync .section-head {
-  max-width: 560px;
+.security .section-head {
+  max-width: 620px;
   margin-bottom: 3rem;
-}
-
-.how-sync .section-title {
-  margin-bottom: 0;
 }
 
 .steps {
@@ -1770,7 +1890,7 @@ button:focus-visible {
 .step-label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   color: var(--text-tertiary);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1789,10 +1909,90 @@ button:focus-visible {
   line-height: 1.65;
 }
 
+.step-tech {
+  display: block;
+  margin-top: 1.125rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+}
+
+.sec-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2rem;
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.sec-list-item h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.sec-list-item p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Links inside running text carry an underline, not colour alone. */
+.steps-note a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
 .steps-note {
-  margin-top: 1.5rem;
+  max-width: 72ch;
+  margin-top: 2.5rem;
   font-size: 0.85rem;
   color: var(--text-tertiary);
+}
+
+/* ─── Mobile download bar ───
+   Phones only. The header never pins on phones (see .header), so once the hero's
+   button scrolls away there is no way to download until the end of the page. This bar
+   slides up from the bottom between the hero and the download section. Its fade sits
+   on the page colour, so iOS tints its bottom toolbar dark, the same as the page. */
+
+.mobile-cta {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-cta {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    padding: 1.5rem 1.5rem max(0.875rem, env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--bg-primary) 55%, rgba(8, 8, 10, 0));
+    pointer-events: none;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  }
+
+  .mobile-cta.is-shown {
+    transform: none;
+    opacity: 1;
+  }
+
+  .mobile-cta .btn-primary {
+    width: 100%;
+    max-width: 320px;
+    min-height: 48px;
+    pointer-events: auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
 }
 
 /* ─── FAQ ─── */
@@ -2338,25 +2538,20 @@ button:focus-visible {
     justify-content: center;
   }
 
-  /* Stacked layout: the film / illustration leads, the pitch follows. */
-  .hero-visual {
-    order: -1;
-  }
-
-  /* The scene keeps its own size (so the illustration never moves); the film overhangs
-     it and the extra room it needs is a margin that switches instantly. The copy below
-     is slid into place with a transform by the hero script (FLIP), so the swap never
-     re-lays-out the page frame by frame. */
+  /* Stacked layout: the pitch and the download button lead, so they sit in the first
+     screen; the film / illustration follows. The scene keeps its own size (so the
+     illustration never moves); the film overhangs it and the extra room it needs is a
+     margin that switches instantly, below the fold. */
   .p2p-scene {
     --scene-h: calc(min(100cqw, 540px) * 540 / 640);
     --film-h: calc(min(82cqw, 380px) * 16 / 9);
     width: 100%;
-    margin: 0 auto 2rem;
+    margin: 2.5rem auto 0;
     max-width: 540px;
   }
 
   .p2p-scene.film-on {
-    margin-bottom: calc(var(--film-h) - var(--scene-h) + 2rem);
+    margin-bottom: calc(var(--film-h) - var(--scene-h));
   }
 
   .hero-film {
@@ -2389,27 +2584,99 @@ button:focus-visible {
     grid-row: auto;
   }
 
+  /* Stacked: device switch, group tabs, a sideways row of chips, then the screens
+     with the picked item's description under them. The preview box dissolves so its
+     parts can take their own rows around the list. */
   .tour-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
   }
 
-  .tour-list-wrap,
   .tour-preview {
-    grid-column: 1;
+    display: contents;
+  }
+
+  .tour-preview .platform-toggle {
+    grid-row: 1;
   }
 
   .tour-list-wrap {
+    grid-column: 1;
     grid-row: 2;
-  }
-
-  .tour-preview {
-    position: static;
-    grid-row: 1;
     margin-bottom: 1.5rem;
   }
 
+  /* As grid items with auto side margins these would shrink to their content, and the
+     phone frames have none (zero flex basis), so give them the row's width. */
+  .tour-phones,
+  .tour-desktop {
+    grid-row: 3;
+    width: 100%;
+  }
+
+  .tour-groups {
+    justify-content: center;
+  }
+
   .tour-list {
-    max-height: 420px;
+    flex-direction: row;
+    justify-content: safe center;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem;
+  }
+
+  .tour-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Relative, so each hidden description below is clipped by the row's scroll box
+     instead of widening the page. */
+  .tour-item {
+    position: relative;
+    flex: 0 0 auto;
+    width: auto;
+    min-height: 44px;
+    align-items: center;
+    padding: 0 1rem;
+    border-color: var(--glass-border);
+    border-radius: var(--radius-3xl);
+    scroll-snap-align: center;
+  }
+
+  .tour-item-icon {
+    display: none;
+  }
+
+  .tour-item-title {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 0.875rem;
+  }
+
+  /* The chip's accessible name keeps the description; it shows under the screens. */
+  .tour-item-body {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .tour-caption {
+    display: block;
+    grid-row: 4;
+    max-width: 46ch;
+    min-height: 3.2em;
+    margin: 1.25rem auto 0;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
   }
 
   /* Stacked above the list rather than sticky beside it, so the frames go back
@@ -2433,21 +2700,9 @@ button:focus-visible {
     grid-column: span 2;
   }
 
-  .ai-proof {
+
+  .sec-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .sec-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .sec-card-hero {
-    grid-column: span 2;
-    grid-row: auto;
-  }
-
-  .sec-card-hero p {
-    max-width: none;
   }
 
   .steps {
@@ -2583,15 +2838,15 @@ button:focus-visible {
   .ai,
   .tour,
   .security,
-  .how-sync,
   .faq {
     padding-bottom: 4.5rem;
   }
 
   .bento,
   .ai-grid,
-  .ai-proof,
-  .sec-grid,
+  .ai-proof-items,
+  .sec-list,
+  .tour-also ul,
   .footer-grid {
     grid-template-columns: 1fr;
   }
@@ -2599,13 +2854,8 @@ button:focus-visible {
   .bento-card-hero,
   .bento-card-wide,
   .ai-card-hero,
-  .ai-card-wide,
-  .sec-card-hero {
+  .ai-card-wide {
     grid-column: auto;
-  }
-
-  .tour-list {
-    max-height: 300px;
   }
 
   .download {
@@ -2638,23 +2888,17 @@ button:focus-visible {
   .download-content h2 { font-size: 1.65rem; }
 
   .bento-card,
-  .ai-card,
-  .sec-card {
+  .ai-card {
     padding: 1.5rem;
   }
 
   .bento-card-hero,
-  .ai-card-hero,
-  .sec-card-hero {
+  .ai-card-hero {
     padding: 1.75rem;
   }
 
   .bento-card-hero {
     padding-bottom: 0;
-  }
-
-  .tour-item {
-    padding: 0.7rem 0.75rem;
   }
 
   .backup-flow {
