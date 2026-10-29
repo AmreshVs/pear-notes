@@ -19,6 +19,7 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href={canonical} />
+    <meta name="google-site-verification" content="Vba5Lzle_r2TbR_KgpjBoPRAZiP8PGjdpvaMdJMchRI" />
     <meta name="description" content={description} />
     <meta name="theme-color" content={themeColor} />
     <link rel="icon" type="image/png" href={`${base}icon.png`} />
@@ -39,16 +40,40 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
     <meta name="twitter:image" content={ogImage} />
     <title>{title}</title>
 
+    <meta name="keywords" content="Pear Notes, PearNotes, private notes app, encrypted notes app, end-to-end encrypted notes, offline notes app, peer-to-peer notes sync, notes app without cloud, on-device AI notes, Pears, Hyperswarm" />
+    <meta property="og:locale" content="en_US" />
+
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'SoftwareApplication',
-      name: 'Pear Notes',
-      description,
-      applicationCategory: 'ProductivityApplication',
-      operatingSystem: 'Android, iOS, Windows, macOS, Linux',
-      url: new URL(base, Astro.site).href,
-      image: ogImage.href,
-      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          '@id': new URL(base, Astro.site).href + '#website',
+          name: 'Pear Notes',
+          alternateName: ['PearNotes', 'Pear Notes app'],
+          url: new URL(base, Astro.site).href,
+        },
+        {
+          '@type': 'SoftwareApplication',
+          name: 'Pear Notes',
+          alternateName: ['PearNotes', 'Pear Notes app'],
+          description,
+          applicationCategory: 'ProductivityApplication',
+          operatingSystem: 'Android, iOS, Windows, macOS, Linux',
+          url: new URL(base, Astro.site).href,
+          image: ogImage.href,
+          sameAs: ['https://github.com/AmreshVs/pear-notes'],
+          downloadUrl: 'https://github.com/AmreshVs/pear-notes/releases/latest',
+          featureList: [
+            'End-to-end encrypted notes',
+            'Peer-to-peer sync with no server',
+            'Offline-first',
+            'On-device AI: voice typing, summaries, translation',
+            'Biometric note locking',
+          ],
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        },
+      ],
     })} />
 
     <!-- Anonymous analytics: Google Analytics 4, no cookies, no ad features. Skipped entirely
