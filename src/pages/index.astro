@@ -739,7 +739,7 @@ const faqs = [
         <p id="download-lead">Pear Notes is available on Android, iOS, Windows, macOS, and Linux. Your notes stay yours — encrypted on-device, synced peer-to-peer, and never uploaded — not even for AI.</p>
 
         <!-- Primary CTA: swapped to the visitor's platform by the script below. Defaults to Google Play without JS. -->
-        <a id="download-primary" href={PLAY_STORE} target="_blank" rel="noopener noreferrer" class="btn-primary btn-primary-lg">Get it on Google Play</a>
+        <a id="download-primary" href={PLAY_STORE} data-track-download="android" target="_blank" rel="noopener noreferrer" class="btn-primary btn-primary-lg">Get it on Google Play</a>
         <p class="download-note" id="download-detected" hidden></p>
 
         <button type="button" class="download-toggle" id="download-toggle" aria-expanded="false" aria-controls="download-all">
@@ -759,9 +759,9 @@ const faqs = [
                 {pl.href ? (
                   <div class="download-option-links">
                     {pl.extra ? pl.extra.map((x) => (
-                      <a href={x.href} target="_blank" rel="noopener noreferrer">{x.label}</a>
+                      <a href={x.href} data-track-download={pl.id} data-track-label={x.label} target="_blank" rel="noopener noreferrer">{x.label}</a>
                     )) : (
-                      <a href={pl.href} target="_blank" rel="noopener noreferrer">Download</a>
+                      <a href={pl.href} data-track-download={pl.id} data-track-label="Download" target="_blank" rel="noopener noreferrer">Download</a>
                     )}
                   </div>
                 ) : (
@@ -805,6 +805,7 @@ const faqs = [
         if (match.href) {
           primary.textContent = match.cta;
           primary.setAttribute('href', match.href);
+          primary.setAttribute('data-track-download', match.id);
           if (note) { note.textContent = 'Detected: ' + match.name; note.hidden = false; }
         } else {
           // Not released yet: keep the CTA useful by pointing at what is available.

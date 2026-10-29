@@ -51,23 +51,141 @@ const ogImage = new URL(`${base}og-image.png`, Astro.site);
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     })} />
 
-    <!-- Google Analytics (Anonymous/Traffic Only) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X24NHKRC5E"></script>
+    <!-- Anonymous analytics: Google Analytics 4, no cookies, no ad features. Skipped entirely
+         for visitors who send Do Not Track or Global Privacy Control, and on local dev. -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      const w = window as any;
+      const optedOut =
+        navigator.doNotTrack === '1' ||
+        w.doNotTrack === '1' ||
+        w.globalPrivacyControl === true ||
+        (navigator as any).globalPrivacyControl === true;
+      const local = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
 
-      // Disable advertising features to respect privacy
-      gtag('set', 'allow_ad_personalization_signals', false);
-      
-      gtag('config', 'G-X24NHKRC5E', {
-        'anonymize_ip': true
-      });
+      w.dataLayer = w.dataLayer || [];
+      if (optedOut || local) {
+        w.gtag = function () {};
+      } else {
+        w.gtag = function () { w.dataLayer.push(arguments); };
+        const tag = document.createElement('script');
+        tag.async = true;
+        tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-X24NHKRC5E';
+        document.head.appendChild(tag);
+
+        w.gtag('js', new Date());
+        w.gtag('config', 'G-X24NHKRC5E', {
+          client_storage: 'none',
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false,
+        });
+      }
     </script>
   </head>
   <body>
     <slot />
+    <script>
+      // Click and section analytics. Events carry only what the site itself defines (which
+      // button, which section, which platform); never page text typed by a visitor, never a
+      // query string, never an identifier.
+      const track = (name: string, params: Record<string, string | number | boolean> = {}) => {
+        try { (window as any).gtag?.('event', name, params); } catch {}
+      };
+
+      const STORES: Record<string, string> = {
+        'play.google.com': 'google_play',
+        'apps.apple.com': 'app_store',
+        'apps.microsoft.com': 'microsoft_store',
+        'github.com': 'github_release',
+      };
+
+      // Where on the page a click happened, so "Get Pear Notes" in the hero can be told
+      // apart from the one in the header or the phone bar.
+      const placementOf = (el: Element): string => {
+        if (el.closest('.header')) return 'header';
+        if (el.closest('.footer')) return 'footer';
+        if (el.closest('.mobile-cta')) return 'mobile_bar';
+        if (el.closest('#download-all')) return 'download_other_platforms';
+        return el.closest('section[id]')?.id ?? 'page';
+      };
+
+      document.addEventListener('click', (event) => {
+        const target = event.target as Element | null;
+        if (!target?.closest) return;
+
+        const link = target.closest<HTMLAnchorElement>('a[href]');
+        if (link) {
+          const placement = placementOf(link);
+          const url = new URL(link.href, location.href);
+          const dl = link.closest<HTMLElement>('[data-track-download]');
+          if (dl) {
+            track('download_click', {
+              platform: dl.dataset.trackDownload ?? 'unknown',
+              store: STORES[url.hostname] ?? url.hostname,
+              label: dl.dataset.trackLabel ?? 'primary',
+              placement,
+            });
+          } else if (url.origin !== location.origin) {
+            track('outbound_click', { link_domain: url.hostname, link_path: url.pathname, placement });
+          } else if (url.hash === '#download') {
+            track('cta_click', { cta: (link.textContent ?? '').trim().slice(0, 40), placement });
+          } else {
+            const root = import.meta.env.BASE_URL.replace(/\/$/, '');
+            track('nav_click', { link: (url.pathname + url.hash).slice(root.length) || '/', placement });
+          }
+          return;
+        }
+
+        const toggle = target.closest('#download-toggle');
+        if (toggle) {
+          // aria-expanded still holds the state from before this click.
+          track('download_toggle', { action: toggle.getAttribute('aria-expanded') === 'true' ? 'close' : 'open' });
+          return;
+        }
+
+        const device = target.closest<HTMLElement>('[data-tour-device]');
+        if (device) { track('tour_device', { device: device.dataset.tourDevice ?? '' }); return; }
+
+        const pick = target.closest<HTMLElement>('[data-tour-pick]');
+        if (pick) {
+          track('tour_feature', {
+            device: pick.dataset.tourPick ?? '',
+            feature: pick.querySelector('.tour-item-title')?.textContent?.trim() ?? '',
+          });
+          return;
+        }
+
+        const summary = target.closest('.faq-item > summary');
+        if (summary && !(summary.parentElement as HTMLDetailsElement).open) {
+          track('faq_open', { question: (summary.textContent ?? '').trim().replace(/\s+/g, ' ').slice(0, 100) });
+          return;
+        }
+
+        const film = target.closest<HTMLElement>('[data-hero-film-sound],[data-hero-film-skip],[data-hero-film-replay]');
+        if (film) {
+          const action = film.hasAttribute('data-hero-film-sound') ? 'sound'
+            : film.hasAttribute('data-hero-film-skip') ? 'skip' : 'replay';
+          track('hero_film', { action });
+        }
+        // Capture phase: runs before the page's own handlers change the state read above
+        // (FAQ open/closed, download list expanded).
+      }, true);
+
+      // Funnel depth: each section the visitor reaches, reported once per page view.
+      const seen = new Set<string>();
+      const sectionViews = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const id = entry.target.id;
+            if (!entry.isIntersecting || seen.has(id)) return;
+            seen.add(id);
+            sectionViews.unobserve(entry.target);
+            track('section_view', { section: id });
+          });
+        },
+        { threshold: 0.4 }
+      );
+      document.querySelectorAll('section[id]').forEach((s) => sectionViews.observe(s));
+    </script>
     <script>
       const header = document.querySelector('.header');
       const menuBtn = document.querySelector('.mobile-menu-btn');
