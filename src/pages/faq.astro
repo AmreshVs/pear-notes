@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
+import { CORE_REPO, SECURITY_URL } from '../data/source';
+
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
 const groups = [
@@ -65,6 +67,26 @@ const groups = [
       {
         q: 'Can Pear Notes read my notes?',
         a: "No — and not as a promise, as an architecture. Notes are encrypted on your device with keys that never leave your devices, and they travel only over direct device-to-device channels. There is no point in the system where we could read them even if we wanted to.",
+      },
+    ],
+  },
+  {
+    label: 'Source code',
+    items: [
+      {
+        q: 'Is Pear Notes open source?',
+        a: "It's source available, which is not quite the same. The code for the apps and the shared engine is public under the PolyForm Strict 1.0.0 license: you can read and study every line for non-commercial purposes, but you can't modify it, redistribute it, or ship it as another app. We publish it so anyone can check how their notes are stored, encrypted, and synced.",
+        link: { href: `${base}source/`, label: 'About the source code' },
+      },
+      {
+        q: 'Can I check your privacy claims myself?',
+        a: "Yes, and you should. The vault encryption, pairing, attachment encryption, locked notes, and backups all live in the pear-notes-core repository. Our source code page links each claim on this site to the file that carries it out.",
+        link: { href: CORE_REPO, label: 'Open pear-notes-core on GitHub' },
+      },
+      {
+        q: 'Can I contribute or report a bug?',
+        a: "Pull requests aren't accepted, but bug reports and feedback are welcome through the contact page. If you find a security issue, report it privately through the repository's Security tab or by email, as SECURITY.md describes, rather than in a public issue.",
+        link: { href: SECURITY_URL, label: 'How to report a security issue' },
       },
     ],
   },
@@ -173,7 +195,12 @@ const faqSchema = {
                   {item.q}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                 </summary>
-                <div class="faq-answer"><p>{item.a}</p></div>
+                <div class="faq-answer">
+                  <p>{item.a}</p>
+                  {item.link && (
+                    <p><a href={item.link.href} {...(item.link.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{item.link.label} →</a></p>
+                  )}
+                </div>
               </details>
             ))}
           </div>

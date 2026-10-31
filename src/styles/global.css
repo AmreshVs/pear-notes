@@ -411,6 +411,7 @@ button:focus-visible {
 .hero-copy > *:nth-child(2) { animation-delay: 0.12s; }
 .hero-copy > *:nth-child(3) { animation-delay: 0.19s; }
 .hero-copy > *:nth-child(4) { animation-delay: 0.26s; }
+.hero-copy > *:nth-child(5) { animation-delay: 0.33s; }
 
 @keyframes hero-item-rise {
   from { opacity: 0; transform: translateY(18px); }
@@ -1954,6 +1955,63 @@ button:focus-visible {
   color: var(--text-tertiary);
 }
 
+/* Points to the public source, where each security claim can be checked. */
+.verify {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
+}
+
+.verify h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.verify p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.verify .btn-secondary {
+  flex-shrink: 0;
+  padding: 0.7rem 1.4rem;
+  font-size: 0.875rem;
+}
+
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.hero-trust a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: var(--accent-gold);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.nav-source {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 /* ─── Mobile download bar ───
    Phones only. The header never pins on phones (see .header), so once the hero's
    button scrolls away there is no way to download until the end of the page. This bar
@@ -2076,6 +2134,18 @@ button:focus-visible {
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.75;
+}
+
+.faq-item .faq-answer p + p {
+  margin-top: -0.625rem;
+}
+
+.faq-answer a,
+.footer-copy a {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
 }
 
 .faq-more-link {
@@ -2479,6 +2549,10 @@ button:focus-visible {
   color: var(--accent-gold);
 }
 
+.legal a strong {
+  color: inherit;
+}
+
 /* ─── Animations ─── */
 
 .fade-in {
@@ -2534,7 +2608,8 @@ button:focus-visible {
   }
 
   .hero-actions,
-  .hero-platforms {
+  .hero-platforms,
+  .hero-trust {
     justify-content: center;
   }
 
@@ -2807,6 +2882,12 @@ button:focus-visible {
   .btn-primary,
   .btn-secondary {
     width: 100%;
+  }
+
+  .verify {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.5rem;
   }
 
   .hero-platforms {

@@ -1,4 +1,6 @@
 ---
+import { LICENSE_NAME, LICENSE_URL } from '../data/source';
+
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const year = new Date().getFullYear();
 ---
@@ -28,6 +30,7 @@ const year = new Date().getFullYear();
       <nav class="footer-col" aria-label="Resources">
         <h4>Resources</h4>
         <ul>
+          <li><a href={`${base}source/`}>Source code</a></li>
           <li><a href="https://docs.pears.com/" target="_blank" rel="noopener noreferrer">Pear Docs</a></li>
           <li><a href="https://heartit.tech/category/p2p-systems/" target="_blank" rel="noopener noreferrer">P2P from scratch</a></li>
           <li><a href={`${base}contact/`}>Contact and feedback</a></li>
@@ -42,7 +45,7 @@ const year = new Date().getFullYear();
       </nav>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">&copy; {year} Pear Notes. All rights reserved.</p>
+      <p class="footer-copy">&copy; {year} Pear Notes. Source available under the <a href={LICENSE_URL} target="_blank" rel="noopener noreferrer">{LICENSE_NAME}</a> license.</p>
     </div>
   </div>
 </footer>

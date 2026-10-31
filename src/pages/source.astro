@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { repos, claims, LICENSE_NAME, LICENSE_URL, SECURITY_URL, TRADEMARK_URL } from '../data/source';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<Layout title="Source Code — Pear Notes" description="The Pear Notes source code is public under the PolyForm Strict 1.0.0 license, so anyone can read and audit how notes are encrypted, stored, and synced.">
+  <div class="dot-grid"></div>
+  <Header />
+
+  <section class="legal container">
+    <h1>Source code</h1>
+    <p class="last-updated">Source available under {LICENSE_NAME}</p>
+
+    <p>
+      Pear Notes asks you to trust it with your notes, so its code is public. You can read
+      exactly how notes are encrypted and how your devices pair and sync,
+      instead of taking our word for it.
+    </p>
+
+    <h2>The repositories</h2>
+    <ul>
+      {repos.map(r => (
+        <li><a href={r.href} target="_blank" rel="noopener noreferrer"><strong>{r.name}</strong></a> — {r.body}</li>
+      ))}
+    </ul>
+
+    <h2>Check the claims</h2>
+    <p>Each privacy claim on this site, and the file in pear-notes-core that carries it out:</p>
+    <ul>
+      {claims.map(c => (
+        <li>{c.claim}: <a href={c.href} target="_blank" rel="noopener noreferrer"><code>{c.path}</code></a></li>
+      ))}
+    </ul>
+
+    <h2>What the license allows</h2>
+    <p>
+      The code is licensed under the <a href={LICENSE_URL} target="_blank" rel="noopener noreferrer">{LICENSE_NAME}</a>
+      license. It is source available, not open source:
+    </p>
+    <ul>
+      <li><strong>You may</strong> read, study, and audit the code for non-commercial purposes, and write about what you find.</li>
+      <li><strong>You may not</strong> modify it, redistribute it, or publish it as an app.</li>
+    </ul>
+    <p>
+      The Pear Notes name, logo, icon, and store artwork are not covered by the code license.
+      See the <a href={TRADEMARK_URL} target="_blank" rel="noopener noreferrer">trademark policy</a>.
+    </p>
+
+    <h2>Reporting a security issue</h2>
+    <p>
+      If you find a way to read, change, or delete someone's notes without their key, bypass a
+      note lock, or break pairing, please report it privately using the repository's
+      <strong>Report a vulnerability</strong> button or by email, as
+      <a href={SECURITY_URL} target="_blank" rel="noopener noreferrer">SECURITY.md</a> describes.
+      Please don't open a public issue for a vulnerability.
+    </p>
+
+    <h2>Contributions</h2>
+    <p>
+      Pull requests aren't accepted. Bug reports and feature ideas are welcome on the
+      <a href={`${base}contact/`}>contact page</a>.
+    </p>
+  </section>
+
+  <Footer />
+</Layout>

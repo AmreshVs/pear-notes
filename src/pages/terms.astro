@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { LICENSE_NAME, LICENSE_URL, TRADEMARK_URL } from '../data/source';
 ---
 
 <Layout title="Terms of Service — Pear Notes" description="Pear Notes Terms of Service. Read the terms and conditions for using the Pear Notes application.">
@@ -10,7 +11,7 @@ import Footer from '../components/Footer.astro';
 
   <section class="legal container">
     <h1>Terms of Service</h1>
-    <p class="last-updated">Last updated: September 20, 2026</p>
+    <p class="last-updated">Last updated: October 31, 2026</p>
 
     <p>
       These Terms of Service ("Terms") govern your use of the Pear Notes application
@@ -84,6 +85,16 @@ import Footer from '../components/Footer.astro';
       is the intellectual property of Pear Notes and its developer. You are granted
       a limited, non-exclusive, non-transferable license to use the app for personal
       purposes in accordance with these Terms.
+    </p>
+    <p>
+      The app's source code is published so you can read and audit it. The code is
+      licensed separately under the
+      <a href={LICENSE_URL} target="_blank" rel="noopener noreferrer">{LICENSE_NAME}</a>
+      license, and that license, not these Terms, governs what you may do with the code:
+      it permits reading and studying it for non-commercial purposes, and does not permit
+      modifying it, redistributing it, or publishing it as an app. Publishing the code
+      grants no rights to the Pear Notes name, logo, icon, or store artwork, which are
+      covered by the <a href={TRADEMARK_URL} target="_blank" rel="noopener noreferrer">trademark policy</a>.
     </p>
 
     <h2>5. Disclaimers</h2>
